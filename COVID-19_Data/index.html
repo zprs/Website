@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
 
     <title>COVID-19 Data</title> 
@@ -8,10 +8,7 @@
     <meta name="theme-color" content="#FFFFFF"/>
     <meta name="Description" content="A tool for graphing the Johns Hopkins's COVID 19 Dataset">
 
-    <script src="https://code.jquery.com/jquery-3.5.0.min.js"></script>
-    
-    <script src="scripts/Chartjs/Chart.js"></script>
-    <script src="scripts/PapaParse/papaparse.js"></script>
+   
     <link href="styles/treeView.css" rel="stylesheet" />
 
     <link href="https://fonts.googleapis.com/css?family=Open+Sans&display=swap" rel="stylesheet">
@@ -32,14 +29,15 @@
         <div id="charts">
             <canvas id="myChart"></canvas>
             <canvas id="myBarChart"></canvas>
-            <p class="sliderLabel">Clip Cases</p>
+            <label for="clipCheck" class="sliderLabel">Clip Cases</label>
             <input type="checkbox" id="clipCheck" checked="true" class="graphCheckbox" onclick="toggleClipping()">
+            <label for="clipSlider" style="display: none;">clipping slider</label>
             <input type="range" min="0" max="100" value="0" id="clipSlider" class="slider">
             <p class="sliderValue" id="clipSliderValue">0</p>
             <br>
-            <p class="sliderLabel">Normalize Data</p>
+            <label for="normalizeCheck" class="sliderLabel">Normalize Data</label>
             <input type="checkbox" id="normalizeCheck" checked="true" class="graphCheckbox" onclick="switchNormalize()">
-
+            <label for="normalizeSlider" style="display: none;">normalize slider</label>
             <input type="range" min="0" max="100" value="0" id="normalizeSlider" class="slider">
             <p class="sliderValue" id="normalizeSliderValue">0</p>
         </div>
@@ -53,5 +51,8 @@
         <div id="tree"></div>
     </div>
 </body>
+    <script src="scripts/Chartjs/Chart.js"></script>
+    <script src="scripts/PapaParse/papaparse.js"></script>
+    <script src="https://code.jquery.com/jquery-3.5.0.min.js"></script>
     <script src="script.js"></script>
 </html>
