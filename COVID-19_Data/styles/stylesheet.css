@@ -97,17 +97,16 @@ button:active {
 }
 
 .graphCheckbox{
-    width: 1.5vh;
-    height: 1.5vh;
+    width: 20px;
+    height: 20px;
     margin-left: 3vh;
     margin-bottom: 0;
     display: inline-block;
 }
 
 .sliderLabel{
-    
     display: inline-block;
-    font-size: 2vh;
+    font-size: 20px;
     font-family: 'Open Sans', sans-serif;
     margin-bottom: 0;
     padding-right: 0;
