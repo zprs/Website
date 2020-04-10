@@ -18,7 +18,7 @@
 {
     cursor: pointer;
     box-shadow: 0px 5px 20px #00000044;
-    transition:  box-shadow .05s, padding .05s;
+    transition:  box-shadow .05s;
 }
 
 #buttons 

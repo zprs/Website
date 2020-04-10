@@ -814,6 +814,21 @@ function findClosestCountryName(name)
     return closestCountryName;   
 }
 
+//Sidebar Navigation
+function openNav() {
+  document.getElementById("treeContainer").style.width = "80%";
+}
+function closeNav() {
+  document.getElementById("treeContainer").style.width = "0";
+}
+
+$(window).resize(function(){
+  if($( window ).width()  >= 750)
+    document.getElementById("treeContainer").style.width = "20%";
+  else
+    document.getElementById("treeContainer").style.width = "0"
+});
+
 // Utility Functions ------------------------
 
 Object.size = function(obj) {
