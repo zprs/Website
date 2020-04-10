@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+    <title>COVID-19 Data</title> 
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#FFFFFF"/>
+    <meta name="Description" content="A tool for graphing the Johns Hopkins's COVID 19 Dataset">
+
+    <script src="https://code.jquery.com/jquery-3.5.0.min.js"></script>
+    
+    <script src="scripts/Chartjs/Chart.js"></script>
+    <script src="scripts/PapaParse/papaparse.js"></script>
+    <link href="styles/treeView.css" rel="stylesheet" />
+
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans&display=swap" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="styles/stylesheet.css">
+
+    <link rel="manifest" href="/manifest.json">
+</head>   
+<body>    
+    <div id="chartContainer">
+
+        <h1 id="header">COVID-19 Data</h1>
+
+        <button class="tabs active" onclick="clickTab(event, 'line')">Total Cases</button>
+        <button class="tabs" onclick="clickTab(event, 'logline')">Log<sub>10</sub> Total Cases</button>
+        <button class="tabs" onclick="clickTab(event, 'bar')">Cases Per Day</button>
+        <button class="tabs" onclick="clickTab(event, 'logbar')">Log<sub>10</sub> Cases Per Day</button>
+
+        <div id="charts">
+            <canvas id="myChart"></canvas>
+            <canvas id="myBarChart"></canvas>
+            <p class="sliderLabel">Clip Cases</p>
+            <input type="checkbox" id="clipCheck" checked="true" class="graphCheckbox" onclick="toggleClipping()">
+            <input type="range" min="0" max="100" value="0" id="clipSlider" class="slider">
+            <p class="sliderValue" id="clipSliderValue">0</p>
+            <br>
+            <p class="sliderLabel">Normalize Data</p>
+            <input type="checkbox" id="normalizeCheck" checked="true" class="graphCheckbox" onclick="switchNormalize()">
+
+            <input type="range" min="0" max="100" value="0" id="normalizeSlider" class="slider">
+            <p class="sliderValue" id="normalizeSliderValue">0</p>
+        </div>
+        
+    <h2 id="error">Only 5 regions can be graphed at once</h2>
+    </div>
+
+    
+    <div id="treeContainer">
+        <button id="clearSelection" onclick="clearTree()">Clear Selection</button>
+        <div id="tree"></div>
+    </div>
+</body>
+    <script src="script.js"></script>
+</html>

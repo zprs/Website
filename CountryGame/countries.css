@@ -1,0 +1,108 @@
+html {
+    height: 100%;
+    overflow: hidden;
+}
+
+body {
+    height: 100%;
+    margin: 0;
+}
+
+#mapscore{
+    bottom: 0;
+    width: 100%;
+    position: absolute;
+    font-family: 'Inconsolata', monospace;
+    background-color: #d8d8d8;
+    padding-top: 1vh;
+    padding-bottom: 1vh;
+    color: #808080;
+    font-size: 2vh;
+    text-align: center;
+}
+
+#mapscore *{
+    display: inline;
+    font-family: 'Work Sans', sans-serif;
+}
+
+#numAttempted{
+    color: #608ba7;
+}
+
+#numCorrect{
+    color: #60a76a;
+}
+
+#numWrong{
+    color: #a76060;
+}
+#percent{
+    color: #8b60a7;
+}
+#left{
+    color: #c24e88;
+}
+#map-canvas {
+    margin-top: 12vh;
+    width: 80%;
+    height: 60%;
+    left: 10%;
+    border-radius: 10px;
+}
+#findCountryBox{
+    font-family: 'Work Sans', sans-serif;
+    font-size: 2vh;
+    width: 40%;
+    margin-left: 30%;
+    margin-top: 2vh;
+    padding-top: 1vh;
+    padding-bottom: 1vh;
+    border-radius: 10px;
+    box-shadow: 0 0 8px #b6b6b6;
+    overflow: hidden;
+    display: block;
+}
+
+#findTitle{
+    font-family: 'Inconsolata', monospace;
+    font-size: 2vh;
+
+    color: #8b8b8b;
+    text-align: center;
+    margin-top: 2vh;
+}
+
+#countryName{
+    text-align: center;
+    color: #404040;
+}
+
+#correctDisplay{
+    font-family: 'Work Sans', sans-serif;
+    text-align: center;
+    font-size: 5vh;
+    margin-top: 2vh;
+    width: 100%;
+    color: #ce6565;
+}
+#correction{
+    font-family: 'Work Sans', sans-serif;
+    text-align: center;
+    font-size: 2vh;
+    
+    margin-top: -5vh;
+    color: #ce6565;
+}
+
+.header{
+    top: 0;
+    position: absolute;
+    font-family: 'Work Sans', sans-serif;
+    font-size: 5vh;
+    width: 100%;
+    color: #404040;
+    margin-top: 4vh;
+    text-align: center;
+  
+}
