@@ -15,9 +15,9 @@
 
     <link rel="manifest" href="manifest.json">
 
-    <script data-ad-client="ca-pub-8311935788123693" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+    <!-- <script data-ad-client="ca-pub-8311935788123693" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script> -->
 </head>   
-<body>    
+<body style="display: none">    
     <div id="chartContainer">
 
         <h1 id="header">COVID-19 Data</h1>
@@ -43,12 +43,12 @@
             <p class="sliderValue" id="normalizeSliderValue">0</p>
         </div>
         
-        <h2 id="error">Only 5 regions can be graphed at once</h2>
+        <h2 style="display: none" id="error">Only 5 regions can be graphed at once</h2>
     </div>
-
+<!-- 
     <div id="adContainer">
         <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-        <!-- COVID-19_Bottom -->
+
         <ins class="adsbygoogle"
             style="display:block"
             data-ad-client="ca-pub-8311935788123693"
@@ -58,7 +58,7 @@
         <script>
             (adsbygoogle = window.adsbygoogle || []).push({});
         </script>
-    </div>
+    </div> -->
     
     <div id="treeContainer">
         <button id="clearSelection" onclick="clearTree()">Clear Selection</button>

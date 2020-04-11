@@ -57,9 +57,8 @@ var myTree;
 var chart;
 var barChart;
 
-var graphColors = ["#b5eeff50", "#F2667150","#F2D23050","#18D9A250","#f566ff50"];
-var graphColorsBar = ["#b5eeff", "#F26671","#F2D230","#18D9A2","#f566ff"];
-
+var graphColors = ["#457482", "#F26671","#F2D230","#18D9A2","#905194","#b5eeff"];
+var barGraphAlpha = "80";
 var lastSelectedValues = [];
 var maxSelections = 5;
 
@@ -73,7 +72,7 @@ var isGraphLog = false;
 var graphType = "line";
 
 $(document).ready(function(){
-
+  $('body').show();
   setGraphControlsEnabled(false);
 
   var USTreeDataIndex = 0;
@@ -244,7 +243,12 @@ $(document).ready(function(){
                 beginAtZero: true
             }
           }]
-      }
+      },
+      elements: {
+        line: {
+            tension: .15 // disables bezier curves
+        }
+    }
     } 
   });
 
@@ -262,7 +266,12 @@ $(document).ready(function(){
             }
           }]
       }
-    }
+    },
+    elements: {
+      line: {
+          tension: .0 // disables bezier curves
+      }
+  }
   });
 
 });
@@ -591,38 +600,36 @@ function changeGraphType(isLog, type){
   {
     $("#myChart").show();
     $("#myBarChart").hide();
-
-    selectedCountryNames.forEach(name => {
-
-      newPlotData = {country: name, values: [], labels: []};
-
-      newPlotData.labels = Object.keys(dataConfirmedOrdered[name]);
-      newPlotData.values = Object.values(dataConfirmedOrdered[name]);
-
-      plotData.push(newPlotData);
-    });
   }
   else
   {
     $("#myChart").hide();
     $("#myBarChart").show();
+  }
 
-    selectedCountryNames.forEach(name => {
-      newPlotData = {country: name, values: [0], labels: []};
+  selectedCountryNames.forEach(name => {
 
-      newPlotData.labels = Object.keys(dataConfirmedOrdered[name]);
-      var values = Object.values(dataConfirmedOrdered[name]);
+    var labels = Object.keys(dataConfirmedOrdered[name]);
+    var values = Object.values(dataConfirmedOrdered[name]);
+
+    newPlotData = {country: name, labels:labels, data: []};
+
+    //get cases per day instead of normal total cases
+    if(!type == "line")
+    {
       var previousValue = values[0];
 
       for (let i = 1; i < values.length; i++) {
         var value = values[i];
-        newPlotData.values.push(value - previousValue);
+        newPlotData.data.push(value - previousValue);
         previousValue = value;
       }
+    }
+    else
+      newPlotData.values = values;
 
-      plotData.push(newPlotData);
-    });
-  }
+    plotData.push(newPlotData);
+  });
 
   plot(plotData, type, isLog);
 }
@@ -651,10 +658,16 @@ function clickTab(evt, tabName) {
 }
 // ------------------------------------------------------------------
 
+var lineWidth = 5;
+
 //graphData format: [{values:[], labels:[]}, ...]
 function plot(graphData, type, isLog) {
   var datasets = [];
   var maxValue = 0;
+
+  if (graphData.length == 0)
+    return;
+
 
   if(normalizeData)
   {
@@ -669,6 +682,7 @@ function plot(graphData, type, isLog) {
         if(val >= normalizeDataTo)
         {
           graphData[i].values.splice(0, x);
+          graphData[i].normalizedTo = x;
           wasClipped = true;
           break;
         }
@@ -680,19 +694,29 @@ function plot(graphData, type, isLog) {
   }
 
   var futhrestLeftNonZero = graphData[0].values.length;
+  var isLineGraph = graphType == "line"
 
   for (let i = 0; i < graphData.length; i++) {
     const data = graphData[i];
 
-    var colors = graphType == "line"
-      ? graphColors
-      : graphColorsBar
-
-    datasets.push({
+    var newData = {
       label: 'Confirmed Cases: ' + data.country,
       data: data.values,
-      backgroundColor: colors[i]
-    })
+      normalizedTo: data.normalizedTo
+    }
+
+    if(!isLineGraph)
+    {
+      newData.backgroundColor = graphColors[i] + barGraphAlpha;
+    }
+    else
+    {
+      newData.borderColor = graphColors[i];
+      newData.fill = false;
+      newData.borderWidth = lineWidth;
+    }
+
+    datasets.push(newData)
 
     for (let x = 0; x < data.values.length; x++) {
       const val = data.values[x];
@@ -741,19 +765,72 @@ function plot(graphData, type, isLog) {
   if(normalizeData && selectedCountryNames.length > 1)
     dateInterval = 0;
 
-  //setting lables to every 5 & setting graph log scale
-  for(var i = 0; i < graphData[0].labels.length; i++)
+  if(!isLineGraph)
   {
-    if(i % dateInterval != 0)
-      graphData[0].labels[i] = "";
+    //add moving average
+    var averageInterval = 5;
+    averageDatasets = [];
+
+    for(let i = 0; i < datasets.length; i++)
+    {
+      var averageData = [];
+      var total = 0;
+      var interval = 0;
+      var dates =[];
+
+      for(var x = 0; x < datasets[i].data.length; x++)
+      {
+        total += datasets[i].data[x];
+        interval++;
+
+        if(x % averageInterval == 0 || x == datasets[i].data.length - 1)
+        {
+          average = x == 0
+            ? total
+            : total / interval  
+            
+          averageData.push({x: graphData[i].labels[x], y: average});
+          total = 0;
+          interval = 0
+          dates.push(graphData[i].labels[x]);
+        }
+      }  
+      
+      averageDatasets.push({label: datasets[i].label + " average", data: averageData, type: "line", borderWidth: lineWidth, fill: false, borderColor: graphColors[i], isAverage: true, dates: dates});
+    }
+  
+    datasets = datasets.concat(averageDatasets);
   }
 
+  //Set data tooltips
+  setChart.options.tooltips.callbacks = {title: function(tooltipItems, data)
+  {
+    var label = tooltipItems[0].label;
+    if(data.datasets[tooltipItems[0].datasetIndex].isAverage)
+      label = data.datasets[tooltipItems[0].datasetIndex].dates[tooltipItems[0].index];
+    else if(normalizeData)
+    {
+      var normalizedTo = data.datasets[tooltipItems[0].datasetIndex].normalizedTo;
+      label =  data.labels[normalizedTo + tooltipItems[0].index];
+    }
+    
+    return 'Date: ' + label;
+  }};
+  
+  setChart.options.legend.display = !normalizeData;
   setChart.data.labels = graphData[0].labels;
   setChart.data.datasets = datasets;
   setChart.update();
 
   setChart.options.scales = {
-    yAxes: yAxes
+    yAxes: yAxes,
+    xAxes: [{
+      ticks: {
+          autoSkip: true,
+          maxTicksLimit: 10,
+          display: !normalizeData || (normalizeData && datasets.length <= 1)
+      }
+    }]
   };
   setChart.update();
   // setChart.type = type;
