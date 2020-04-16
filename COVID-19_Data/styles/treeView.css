@@ -19,11 +19,13 @@
     color: black;
     display: inline-block;
     margin-right: 6px;
+    margin-left: 15px;
   }
   
   .check-box::before {
     content: "\2611"; 
     color: dodgerblue;
+    width: 10px;
   }
   
   .nested {
@@ -33,3 +35,34 @@
   .activeTree {
     display: block;
   }
+
+  .caret {
+    cursor: pointer;
+    -webkit-user-select: none; /* Safari 3.1+ */
+    -moz-user-select: none; /* Firefox 2+ */
+    -ms-user-select: none; /* IE 10+ */
+    user-select: none;
+  }
+  
+  .caret::before {
+    margin-left: 0px;
+    width: 10px;
+    margin-right: 5px;
+    content: "\25B6";
+    color: rgb(100, 100, 100);
+    display: inline-block;
+    font-size: 10px;
+    z-index: -1;
+
+  }
+  
+  .caret-down::before {
+    -ms-transform: rotate(90deg); /* IE 9 */
+    -webkit-transform: rotate(90deg); /* Safari */
+  }
+
+
+.withCaret::before
+{
+  margin-left: 0px;
+}

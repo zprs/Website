@@ -62,7 +62,7 @@ var barGraphAlpha = "80";
 var lastSelectedValues = [];
 var maxSelections = 5;
 
-var phantomSelections = [];
+var caretSelections = [];
 var selections = [];
 
 var usDataComplete = false;
@@ -246,7 +246,7 @@ $(document).ready(function(){
       },
       elements: {
         line: {
-            tension: .15 // disables bezier curves
+            tension: 0 // disables bezier curves
         }
     }
     } 
@@ -265,12 +265,12 @@ $(document).ready(function(){
                 beginAtZero: true
             }
           }]
-      }
+      },
+      elements: {
+        line: {
+            tension: 0 // disables bezier curves
+        }
     },
-    elements: {
-      line: {
-          tension: .0 // disables bezier curves
-      }
   }
   });
 
@@ -298,7 +298,7 @@ function createSortedTree(name)
 
   var selectionData = [];
 
-  selections.forEach(selection => {
+  selectedCountryNames.forEach(selection => {
     selectionData.push({text:selection.name})
   });
 
@@ -344,10 +344,10 @@ function treeHTMLMaker (treeData, identifier, level){
     var spanClass = "box";
     var selected = false;
 
-    for (let x = 0; x < selections.length; x++) {
-      const selection = selections[x];
+    for (let x = 0; x < selectedCountryNames.length; x++) {
+      const selection = selectedCountryNames[x];
      
-      if(selection.name == treeData[i].text)
+      if(selection == treeData[i].text)
       {
         selected = true;
         break;
@@ -357,11 +357,22 @@ function treeHTMLMaker (treeData, identifier, level){
     if(selected)
       spanClass += " check-box"
 
-    html += "<li id=\"" + level + i + "\"><span class=\"" + spanClass +"\">" + treeData[i].text + "</span>"
-    
+
     const countryChildren = treeData[i].children;
 
-    if(countryChildren != null && countryChildren.length > 1)
+    var hasChildren = (countryChildren != null && countryChildren.length > 1);
+
+    html += "<li id=\"" + level + i + "\">";
+
+    if(hasChildren)
+    {
+      html += "<span class=\" caret \"></span>";
+      spanClass += " withCaret";
+    }
+    
+    html += "<span class=\"" + spanClass +"\">" + treeData[i].text + "</span>";
+    
+    if(hasChildren)
       html += treeHTMLMaker(countryChildren, "class=\"nested\"", level + i + "-") + "</li>";
   }
 
@@ -371,103 +382,39 @@ function treeHTMLMaker (treeData, identifier, level){
 
 // Tree functions ------------------
 function setupTreeFunctions() {
-  var toggler = document.getElementsByClassName("box");
+  var boxToggler = document.getElementsByClassName("box");
+  var caretToggler = document.getElementsByClassName("caret");
   var i;
 
-  for (i = 0; i < toggler.length; i++) {
-    toggler[i].addEventListener("click", function() {
-
+  for (i = 0; i < caretToggler.length; i++) {
+    caretToggler[i].addEventListener("click", function() {
       var children = this.parentElement.querySelector(".nested");
+      children.classList.toggle("activeTree");
+      this.classList.toggle("caret-down");
+    });
+  }
 
-      if(children)
-        children.classList.toggle("activeTree");
+  for (i = 0; i < boxToggler.length; i++) {
+    boxToggler[i].addEventListener("click", function() {
 
       this.classList.toggle("check-box");
 
       var selectionName = this.innerHTML;
-      var wasSelected = findInListByName(selectionName, selections) || findInListByName(selectionName, phantomSelections);
-      var isTopLevel = this.parentElement.parentElement.id == "myUL";
-        
-      var parent = isTopLevel
-      ? null
-      : findInListByName(this.parentElement.parentElement.parentElement.querySelector("span").innerHTML, selections);
-
-      var phantomParent = isTopLevel
-      ? null
-      : findInListByName(this.parentElement.parentElement.parentElement.querySelector("span").innerHTML, phantomSelections);
-
-      if(wasSelected == null) //this has just been checked
-      {
-
-        if(parent != null && phantomParent == null) //If there is a parent and it is not already in the storage array, add it to the storage array
-        {
-          phantomSelections.push(parent);
-          phantomParent = phantomSelections[phantomSelections.length - 1];
-          
-          removeFromListByName(parent.name, selections);
-        }
-
-        var newSelection = addSelection(selectionName, [], phantomParent, this.parentElement.id);
-
-        if(phantomParent != null)
-          phantomParent.children.push(newSelection);
-
-      }
-      else //wasSelected has just been unchecked
-      {
-        removeChildSelections(wasSelected);
-
-        if(phantomParent != null) //if the selection is not top level and there will be no siblings currently selected -> select parent
-        {
-          removeFromListByName(wasSelected.name, phantomParent.children);
-
-          if(phantomParent.children.length == 0)
-          {
-            //Move from phantomSelections to selections
-
-            selections.push(phantomParent); 
-            removeFromListByName(phantomParent.name, phantomSelections);
-          }
-        }
-
-        removeFromListByName(wasSelected.name, selections);
-        removeFromListByName(wasSelected.name, phantomSelections);
-      }
+      var wasSelected = findInListByName(selectionName, selectedCountryNames);
+      
+      if(wasSelected == null)             // has just been checked
+        selectedCountryNames.push(selectionName);
+      else                                // has just been unchecked
+        removeFromListByName(selectionName, selectedCountryNames);
 
       //we are currently using searchbox, reload the tree to update selections
       if($("#searchBar").val() != "")
         createSortedTree($("#searchBar").val());
 
         
-      updateSelections();
+      updateGraph();
     });
   }
-}
-
-function removeChildSelections(obj){
-
-  obj.children.forEach(child => {
-
-    if(obj.children.length > 0)
-      removeChildSelections(child)
-
-    var element = document.getElementById(child.elementID);
-    var childrenElements = element.querySelector("ul");
-    var spanElement = element.querySelector("span");
-
-    if(childrenElements != null)
-      childrenElements.classList.remove("activeTree");
-
-    spanElement.classList.remove("check-box");
-
-    var isPhantom = findInListByName(child.name, phantomSelections) != null;
-    if (isPhantom) removeFromListByName(child.name, phantomSelections);
-    
-    var isSelected = findInListByName(child.name, selections) != null;
-    if (isSelected) removeFromListByName(child.name, selections);
-
-  });
-
 }
 
 function removeFromListByName(name, listRef){
@@ -489,26 +436,21 @@ function findInListByName(name, listRef)
   }
 }
 
-function addSelection(name, children, parentRef, elementID)
-{
-  selections.push({name: name, children: children, parentRef: parentRef, elementID: elementID});
-  return selections[selections.length - 1];
-}
-
 function clearTree()
 {
   var allBoxes = $("li").map(function() {
     var childrenElements = this.querySelector("ul");
-    var spanElement = this.querySelector("span");
+    var boxElement = this.querySelector(".box");
 
     if(childrenElements != null)
       childrenElements.classList.remove("activeTree");
 
-    spanElement.classList.remove("check-box");
+    if(boxElement != null)
+      boxElement.classList.remove("check-box");
 }).get();
 
-  selections = [];
-  updateSelections();
+  selectedCountryNames = [];
+  updateGraph();
 }
 // -------------------------------------------------------------------
 
@@ -580,17 +522,6 @@ function orderPlace(objRef)
 }
 
 // Graph Functionality -----------------------------------------------
-function updateSelections(){
-
-  selectedCountryNames = [];
-
-  selections.forEach(selection => {
-    selectedCountryNames.push(selection.name);
-  });
-
-  updateGraph();
-
-}
 
 function setGraphControlsEnabled(enabled)
 {
@@ -675,16 +606,16 @@ function changeGraphType(isLog, type){
     var labels = Object.keys(dataConfirmedOrdered[name]);
     var values = Object.values(dataConfirmedOrdered[name]);
 
-    newPlotData = {country: name, labels:labels, data: []};
+    newPlotData = {country: name, labels:labels, values: []};
 
-    //get cases per day instead of normal total cases
-    if(!type == "line")
+    //get cases per day instead of total cases
+    if(type != "line")
     {
       var previousValue = values[0];
 
       for (let i = 1; i < values.length; i++) {
         var value = values[i];
-        newPlotData.data.push(value - previousValue);
+        newPlotData.values.push(value - previousValue);
         previousValue = value;
       }
     }
