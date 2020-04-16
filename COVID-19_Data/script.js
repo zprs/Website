@@ -75,11 +75,9 @@ $(document).ready(function(){
   $('body').show();
   setGraphControlsEnabled(false);
 
-  var USTreeDataIndex = 0;
-
   jQuery.get('https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/csse_covid_19_time_series/time_series_covid19_confirmed_global.csv', function(data) {
     confirmedRaw = data;
-
+    
     Papa.parse(confirmedRaw, {
       delimiter: ",",
       header: true,
@@ -139,10 +137,6 @@ $(document).ready(function(){
             }
           }
 
-          //Getting the index of the United States in order to populate it later
-          if(countryName == "US")
-            USTreeDataIndex = treeData.length;
-
           //Pushing the data to the global variable "treeData" so we can add to it later with the United States data
           treeData.push(countryTreeData);
         }
@@ -162,6 +156,20 @@ $(document).ready(function(){
       dynamicTyping: true,
       complete: function(results) {
         dataConfirmedUS = results.data;
+
+        var USTreeDataIndex = 0;
+
+        for (let i = 0; i < treeData.length; i++) {
+          const name = treeData[i].text;
+          if(name == "US")
+          {
+            USTreeDataIndex = i;
+            break;
+          }
+        }
+
+        if(treeData[USTreeDataIndex] == null)
+          treeData[USTreeDataIndex] = {id: 0, text: "United States", children: []};
 
         //Adds the elements of the tree for the children of US: States and US Territories. These are added to improve the orginization of the tree
         treeData[USTreeDataIndex]["children"].push({id: USTreeDataIndex + "-" + 0, text: "States", children: []})
@@ -292,27 +300,39 @@ $( "#searchBar" ).keyup(function() {
 
 });
 
-function createSortedTree(name)
+function updateSelectionsTree()
 {
-  sortedTreeData = closestNames(name).slice(0, returnEntries);
+  if(selectedCountryNames.length == 0)
+    $("#selectionsTree").hide();
+  else
+    $("#selectionsTree").show();
 
   var selectionData = [];
 
   selectedCountryNames.forEach(selection => {
-    selectionData.push({text:selection.name})
+    selectionData.push({text:selection})
   });
 
-  var selectionHtml = treeHTMLMaker(selectionData, "id=\"myUL\"", "treeItem-", true);
+  var selectionHtml = treeHTMLMaker(selectionData, "id=\"myUL\"", "treeItem-");
+  
+  $("#selectionsTree").html(selectionHtml);
+  setupTreeFunctions(document.getElementById("selectionsTree"));
+}
+
+function createSortedTree(name)
+{
+  sortedTreeData = closestNames(name).slice(0, returnEntries);
+
   var html = treeHTMLMaker(sortedTreeData, "id=\"myUL\"", "treeItem-");
 
-  $("#sortedTree").html(selectionHtml + html);
+  $("#sortedTree").html(html);
 
   $("#tree").hide();
   $("#sortedTree").show();
 
-  setupTreeFunctions();
+  updateSelectionsTree();
+  setupTreeFunctions(document.getElementById("sortedTree"));
 }
-
 
 // Tree Creation ------------------------------------------------------
 function attemptCreateTree()
@@ -324,7 +344,7 @@ function attemptCreateTree()
   }
 }
 
-function createTree(id)
+function createTree()
 {
   var html = treeHTMLMaker(treeData, "id=\"myUL\"", "treeItem-");
   $("#tree").html(html);
@@ -332,7 +352,8 @@ function createTree(id)
   $("#tree").show();
   $("#sortedTree").hide();
 
-  setupTreeFunctions();
+  updateSelectionsTree();
+  setupTreeFunctions(document.getElementById("tree"));
 }
 
 function treeHTMLMaker (treeData, identifier, level){
@@ -359,7 +380,6 @@ function treeHTMLMaker (treeData, identifier, level){
 
 
     const countryChildren = treeData[i].children;
-
     var hasChildren = (countryChildren != null && countryChildren.length > 1);
 
     html += "<li id=\"" + level + i + "\">";
@@ -381,9 +401,9 @@ function treeHTMLMaker (treeData, identifier, level){
 }
 
 // Tree functions ------------------
-function setupTreeFunctions() {
-  var boxToggler = document.getElementsByClassName("box");
-  var caretToggler = document.getElementsByClassName("caret");
+function setupTreeFunctions(treeDOMObject) {
+  var boxToggler = treeDOMObject.getElementsByClassName("box");
+  var caretToggler = treeDOMObject.getElementsByClassName("caret");
   var i;
 
   for (i = 0; i < caretToggler.length; i++) {
@@ -400,18 +420,19 @@ function setupTreeFunctions() {
       this.classList.toggle("check-box");
 
       var selectionName = this.innerHTML;
-      var wasSelected = findInListByName(selectionName, selectedCountryNames);
+      var wasSelected = selectedCountryNames.indexOf(selectionName);
       
-      if(wasSelected == null)             // has just been checked
+      if(wasSelected == -1)             // has just been checked
         selectedCountryNames.push(selectionName);
       else                                // has just been unchecked
-        removeFromListByName(selectionName, selectedCountryNames);
+        selectedCountryNames.splice(selectedCountryNames.indexOf(selectionName), 1);
 
       //we are currently using searchbox, reload the tree to update selections
       if($("#searchBar").val() != "")
         createSortedTree($("#searchBar").val());
-
         
+      updateSelectionsTree();
+      createTree();
       updateGraph();
     });
   }
@@ -421,7 +442,7 @@ function removeFromListByName(name, listRef){
   for (let i = listRef.length - 1; i >= 0; i--) {
     const selection = listRef[i];
     
-    if(selection.name == name)
+    if(selection == name)
       listRef.splice(i, 1);
   }
 }
@@ -431,7 +452,7 @@ function findInListByName(name, listRef)
   for (let i = 0; i < listRef.length; i++) {
     const selection = listRef[i];
     
-    if(selection.name == name)
+    if(selection == name)
       return selection;
   }
 }
@@ -451,6 +472,7 @@ function clearTree()
 
   selectedCountryNames = [];
   updateGraph();
+  updateSelectionsTree();
 }
 // -------------------------------------------------------------------
 
