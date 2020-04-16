@@ -749,10 +749,10 @@ function plot(graphData, type, isLog) {
 
   if(clipData)
   {
-    graphData[0].labels = graphData[0].labels.slice(futhrestLeftNonZero, graphData[0].labels.length);
-
-    for(let i = 0; i < datasets.length; i++)
+  
+    for(let i = 0; i < graphData.length; i++)
     {
+      graphData[i].labels = graphData[i].labels.slice(futhrestLeftNonZero, graphData[i].labels.length);
       datasets[i].data = datasets[i].data.slice(futhrestLeftNonZero, datasets[i].data.length);
     }
   }
@@ -775,24 +775,18 @@ function plot(graphData, type, isLog) {
   else if(type == "bar")
     setChart = barChart;
 
-  var dateInterval = 5;
-
-  //removes dates from x axis if the user chooses to normalize the data and there are more than one countries being represented
-  if(normalizeData && selectedCountryNames.length > 1)
-    dateInterval = 0;
-
   if(!isLineGraph)
   {
     //add moving average
     var averageInterval = 5;
     averageDatasets = [];
 
-    for(let i = 0; i < datasets.length; i++)
+    for(let i = 0; i < graphData.length; i++)
     {
       var averageData = [];
       var total = 0;
       var interval = 0;
-      var dates =[];
+      var dates = [];
 
       for(var x = 0; x < datasets[i].data.length; x++)
       {
@@ -801,7 +795,7 @@ function plot(graphData, type, isLog) {
 
         if(x % averageInterval == 0 || x == datasets[i].data.length - 1)
         {
-          average = x == 0
+          var average = x == 0
             ? total
             : total / interval  
             
