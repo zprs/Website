@@ -276,6 +276,43 @@ $(document).ready(function(){
 
 });
 
+var returnEntries = 50;
+
+//Sorted Tree Creation
+
+$( "#searchBar" ).keyup(function() {
+
+  if(this.value != "")
+    createSortedTree(this.value);
+  else
+  {
+    $("#sortedTree").hide();
+    $("#tree").show();
+  }
+
+});
+
+function createSortedTree(name)
+{
+  sortedTreeData = closestNames(name).slice(0, returnEntries);
+
+  var selectionData = [];
+
+  selections.forEach(selection => {
+    selectionData.push({text:selection.name})
+  });
+
+  var selectionHtml = treeHTMLMaker(selectionData, "id=\"myUL\"", "treeItem-", true);
+  var html = treeHTMLMaker(sortedTreeData, "id=\"myUL\"", "treeItem-");
+
+  $("#sortedTree").html(selectionHtml + html);
+
+  $("#tree").hide();
+  $("#sortedTree").show();
+
+  setupTreeFunctions();
+}
+
 
 // Tree Creation ------------------------------------------------------
 function attemptCreateTree()
@@ -287,10 +324,14 @@ function attemptCreateTree()
   }
 }
 
-function createTree()
+function createTree(id)
 {
   var html = treeHTMLMaker(treeData, "id=\"myUL\"", "treeItem-");
   $("#tree").html(html);
+
+  $("#tree").show();
+  $("#sortedTree").hide();
+
   setupTreeFunctions();
 }
 
@@ -299,7 +340,24 @@ function treeHTMLMaker (treeData, identifier, level){
   html = "<ul " + identifier + ">";
 
   for (let i = 0; i < treeData.length; i++) {
-    html += "<li id=\"" + level + i + "\"><span class=\"box\">" + treeData[i].text + "</span>"
+
+    var spanClass = "box";
+    var selected = false;
+
+    for (let x = 0; x < selections.length; x++) {
+      const selection = selections[x];
+     
+      if(selection.name == treeData[i].text)
+      {
+        selected = true;
+        break;
+      }
+    }
+
+    if(selected)
+      spanClass += " check-box"
+
+    html += "<li id=\"" + level + i + "\"><span class=\"" + spanClass +"\">" + treeData[i].text + "</span>"
     
     const countryChildren = treeData[i].children;
 
@@ -312,13 +370,13 @@ function treeHTMLMaker (treeData, identifier, level){
 }
 
 // Tree functions ------------------
-
 function setupTreeFunctions() {
   var toggler = document.getElementsByClassName("box");
   var i;
 
   for (i = 0; i < toggler.length; i++) {
     toggler[i].addEventListener("click", function() {
+
       var children = this.parentElement.querySelector(".nested");
 
       if(children)
@@ -376,6 +434,11 @@ function setupTreeFunctions() {
         removeFromListByName(wasSelected.name, phantomSelections);
       }
 
+      //we are currently using searchbox, reload the tree to update selections
+      if($("#searchBar").val() != "")
+        createSortedTree($("#searchBar").val());
+
+        
       updateSelections();
     });
   }
@@ -873,22 +936,27 @@ function levenshteinDistance (a, b){
   return matrix[b.length][a.length];
 };
 
-function findClosestCountryName(name)
+function closestNames(name)
 {
-    var shortestDistance =  levenshteinDistance(countries[0], name);
-    var closestCountryName = countries[0];
+    var nameValues = [];
+    var names = Object.keys(dataConfirmedOrdered);
 
-    for (let i = 1; i < numberOfCountries; i++) {
-        var distance = levenshteinDistance(countries[i], name);
+    var sortedList = [];
 
-        if(distance < shortestDistance)
-        {
-            shortestDistance = distance
-            closestCountryName = countries[i];
-        }
+    for (let i = 1; i < names.length; i++) {
+        var distance = levenshteinDistance(names[i], name);
+        nameValues.push([names[i], distance]);
     }
 
-    return closestCountryName;   
+    nameValues.sort(function(a, b) {
+        return a[1] - b[1];
+    });
+
+    nameValues.forEach(function(item){
+      sortedList.push({text: item[0]})
+    })
+
+    return sortedList;   
 }
 
 //Sidebar Navigation
