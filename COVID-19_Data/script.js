@@ -431,10 +431,26 @@ function setupTreeFunctions(treeDOMObject) {
       if($("#searchBar").val() != "")
         createSortedTree($("#searchBar").val());
         
+      if(treeDOMObject.id = "selectionsTree")
+
+        
+      removeAllUnwantedSelections();
       updateSelectionsTree();
-      createTree();
       updateGraph();
     });
+  }
+}
+
+function removeAllUnwantedSelections()
+{
+  checkboxes = document.getElementsByClassName("check-box");
+
+  for (let i = 0; i < checkboxes.length; i++) {
+    const element = checkboxes[i];
+    
+    if(!selectedCountryNames.includes(element.innerHTML))
+      element.classList.toggle("check-box");
+
   }
 }
 
