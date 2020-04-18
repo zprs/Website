@@ -22,25 +22,44 @@
 
         <h1 id="header">COVID-19 Data</h1>
 
-        <button class="tabs active" onclick="clickTab(event, 'line')">Total Cases</button>
-        <button class="tabs" onclick="clickTab(event, 'logline')">Log<sub>10</sub> Total Cases</button>
-        <button class="tabs" onclick="clickTab(event, 'bar')">Cases Per Day</button>
-        <button class="tabs" onclick="clickTab(event, 'logbar')">Log<sub>10</sub> Cases Per Day</button>
+        <button id="lineTab" class="tabs activeTab" onclick="clickTab(event, 'line')">Total Cases<sub>&nbsp</sub></button>
+        <button id="logLineTab" class="tabs" onclick="clickTab(event, 'logline')">Log<sub>10</sub> Total Cases</button>
+        <button id="barTab" class="tabs" onclick="clickTab(event, 'bar')">Cases Per Day<sub>&nbsp</sub></button>
+        <button id="logBarTab" class="tabs" onclick="clickTab(event, 'logbar')">Log<sub>10</sub> Cases Per Day</button>
 
-        <div id="charts">
+        <div class="rightContainer" id="charts">
             <canvas id="myChart"></canvas>
             <canvas id="myBarChart"></canvas>
-            <label for="clipCheck" class="sliderLabel">Clip Cases</label>
+            <label for="clipCheck" class="sliderLabel">Stretch plot to start at <p class="sliderValue" id="clipSliderValue">0</p> cases for greatest curve</label>
             <input type="checkbox" id="clipCheck" checked="true" class="graphCheckbox" onclick="toggleClipping()">
             <label for="clipSlider" style="display: none;">clipping slider</label>
             <input type="range" min="0" max="100" value="0" id="clipSlider" class="slider">
-            <p class="sliderValue" id="clipSliderValue">0</p>
             <br>
-            <label for="normalizeCheck" class="sliderLabel">Normalize Data</label>
+            <label for="normalizeCheck" class="sliderLabel">Shift plot to start at <p class="sliderValue" id="normalizeSliderValue">0</p> cases for all curves</label>
             <input type="checkbox" id="normalizeCheck" checked="true" class="graphCheckbox" onclick="switchNormalize()">
             <label for="normalizeSlider" style="display: none;">normalize slider</label>
             <input type="range" min="0" max="100" value="0" id="normalizeSlider" class="slider">
-            <p class="sliderValue" id="normalizeSliderValue">0</p>
+            
+            <div id="closestCurveDiv">
+                <p style="width: 100%; border-bottom: 1px solid #dedede; margin-top: 3vh"></p>
+            
+                <button id="findClosestCurveButton" onclick="findClosestCurves()">
+                    Find Closest Curves
+                </button>
+    
+                </br>
+    
+                <p id="extraDays">Select curves with  <input id="extraDaysInput" type="number" style="width: 5em; font-size: .75em;" value="10"> or more additional days than target curve after being normalized</p>
+                <span id="fccbDescriptor">Finds the 10 countries with the closest graph, based on average distance between corosponding data points based on a Log<sub>10</sub> scale.</span>
+            </div>
+            
+        </div>
+
+        <div class="rightContainer" id="closestCurvesContainer" style="display: none;">
+
+            <p id="closestCurvesTitle">Closest Curves:</p>
+            <ul id="closestCurvesList">
+            </ul>
         </div>
         
         <h2 style="display: none" id="error">Only 5 regions can be graphed at once</h2>

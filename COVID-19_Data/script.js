@@ -14,7 +14,7 @@ var normalizeCheck = document.getElementById("normalizeCheck");
 var normalizeSlider = document.getElementById("normalizeSlider");
 var normalizeSliderValue = document.getElementById("normalizeSliderValue");
 
-var normalizeData = true;
+var normalizeDataCheck = true;
 var normalizeDataTo = 0;
 
 Chart.defaults.global.animation.duration = 0;
@@ -22,17 +22,24 @@ Chart.defaults.global.animation.duration = 0;
 lowClipSlider.oninput = function() {
   if(selectedCountryNames.length == 0)
     return;
-  sliderValue.innerHTML = this.value;
-  choppingNumber = this.value;
-
+  
+  setLowClipTo(this.value);
   updateGraph();
 }
 
 normalizeSlider.oninput = function() {
-  normalizeSliderValue.innerHTML = this.value;
-  normalizeDataTo = this.value;
-
+  setNormalizeDataTo(this.value);
   updateGraph();
+}
+
+function setLowClipTo(num){
+  sliderValue.innerHTML = num;
+  choppingNumber = num;
+}
+
+function setNormalizeDataTo(num){
+  normalizeSliderValue.innerHTML = num;
+  normalizeDataTo = num;
 }
 
 $("#myBarChart").hide();
@@ -70,6 +77,7 @@ var countryDataComplete = false;
 
 var isGraphLog = false;
 var graphType = "line";
+var lineWidth = 5;
 
 $(document).ready(function(){
   $('body').show();
@@ -303,7 +311,10 @@ $( "#searchBar" ).keyup(function() {
 function updateSelectionsTree()
 {
   if(selectedCountryNames.length == 0)
+  { 
     $("#selectionsTree").hide();
+    return;
+  }
   else
     $("#selectionsTree").show();
 
@@ -313,7 +324,7 @@ function updateSelectionsTree()
     selectionData.push({text:selection})
   });
 
-  var selectionHtml = treeHTMLMaker(selectionData, "id=\"myUL\"", "treeItem-");
+  var selectionHtml = treeHTMLMaker(selectionData, "id=\"myUL\"", "treeItem-", {});
   
   $("#selectionsTree").html(selectionHtml);
   setupTreeFunctions(document.getElementById("selectionsTree"));
@@ -322,8 +333,7 @@ function updateSelectionsTree()
 function createSortedTree(name)
 {
   sortedTreeData = closestNames(name).slice(0, returnEntries);
-
-  var html = treeHTMLMaker(sortedTreeData, "id=\"myUL\"", "treeItem-");
+  var html = treeHTMLMaker(sortedTreeData, "id=\"myUL\"", "treeItem-", {});
 
   $("#sortedTree").html(html);
 
@@ -344,19 +354,21 @@ function attemptCreateTree()
   }
 }
 
+var storedTreeIds = {};
+
 function createTree()
 {
-  var html = treeHTMLMaker(treeData, "id=\"myUL\"", "treeItem-");
+  var html = treeHTMLMaker(treeData, "id=\"myUL\"", "treeItem-", storedTreeIds);
   $("#tree").html(html);
 
   $("#tree").show();
   $("#sortedTree").hide();
 
-  updateSelectionsTree();
+  updateTreeSelections();
   setupTreeFunctions(document.getElementById("tree"));
 }
 
-function treeHTMLMaker (treeData, identifier, level){
+function treeHTMLMaker (treeData, identifier, level, idsStorageRef){
 
   html = "<ul " + identifier + ">";
 
@@ -364,6 +376,8 @@ function treeHTMLMaker (treeData, identifier, level){
 
     var spanClass = "box";
     var selected = false;
+
+    
 
     for (let x = 0; x < selectedCountryNames.length; x++) {
       const selection = selectedCountryNames[x];
@@ -378,11 +392,13 @@ function treeHTMLMaker (treeData, identifier, level){
     if(selected)
       spanClass += " check-box"
 
-
     const countryChildren = treeData[i].children;
     var hasChildren = (countryChildren != null && countryChildren.length > 1);
 
-    html += "<li id=\"" + level + i + "\">";
+    var id = level + i;
+    idsStorageRef[treeData[i].text] = id;
+
+    html += "<li id=\"" + id + "\">";
 
     if(hasChildren)
     {
@@ -393,7 +409,7 @@ function treeHTMLMaker (treeData, identifier, level){
     html += "<span class=\"" + spanClass +"\">" + treeData[i].text + "</span>";
     
     if(hasChildren)
-      html += treeHTMLMaker(countryChildren, "class=\"nested\"", level + i + "-") + "</li>";
+      html += treeHTMLMaker(countryChildren, "class=\"nested\"", level + i + "-", idsStorageRef) + "</li>";
   }
 
   html += "</ul>";
@@ -423,72 +439,101 @@ function setupTreeFunctions(treeDOMObject) {
       var wasSelected = selectedCountryNames.indexOf(selectionName);
       
       if(wasSelected == -1)             // has just been checked
-        selectedCountryNames.push(selectionName);
+        addSelection(selectionName);
       else                                // has just been unchecked
-        selectedCountryNames.splice(selectedCountryNames.indexOf(selectionName), 1);
+        removeSelection(selectionName);
 
-      //we are currently using searchbox, reload the tree to update selections
+      //if we are currently using searchbox, reload the tree to update selections
       if($("#searchBar").val() != "")
         createSortedTree($("#searchBar").val());
-        
-      if(treeDOMObject.id = "selectionsTree")
-
-        
-      removeAllUnwantedSelections();
-      updateSelectionsTree();
+      
       updateGraph();
     });
   }
 }
 
-function removeAllUnwantedSelections()
-{
-  checkboxes = document.getElementsByClassName("check-box");
+function updateTreeSelections(){
+  var boxes = document.getElementsByClassName("box");
 
-  for (let i = 0; i < checkboxes.length; i++) {
-    const element = checkboxes[i];
-    
-    if(!selectedCountryNames.includes(element.innerHTML))
-      element.classList.toggle("check-box");
+  for (let i = 0; i < boxes.length; i++) {
+    const box = boxes[i];
+    var name = box.innerHTML;
 
+    var withCaret = "";
+
+    if(box.classList.contains("withCaret"))
+      withCaret = " withCaret"
+
+    if(selectedCountryNames.includes(name))
+      box.classList = "box check-box" + withCaret;
+    else
+      box.classList = "box" + withCaret;
   }
+
+  updateSelectionsTree();
 }
 
-function removeFromListByName(name, listRef){
-  for (let i = listRef.length - 1; i >= 0; i--) {
-    const selection = listRef[i];
-    
-    if(selection == name)
-      listRef.splice(i, 1);
-  }
+function setSelectedCountryNames(names){
+  selectedCountryNames = names;
+  updateTreeSelections();
 }
 
-function findInListByName(name, listRef)
-{
-  for (let i = 0; i < listRef.length; i++) {
-    const selection = listRef[i];
-    
-    if(selection == name)
-      return selection;
+function addSelection(name){
+  selectedCountryNames.push(name);
+  updateSelectionsTree();
+
+  var box = document.getElementById("tree").querySelector("#" + storedTreeIds[name]).querySelector(".box");
+  var withCaret = "";
+
+  if(box.classList.contains("withCaret"))
+    withCaret = " withCaret"
+
+  box.classList = "box check-box" + withCaret;
+}
+
+function removeSelection(name){
+  if(!selectedCountryNames.includes(name))
+  {
+    console.log("Name tried to be removed that is not selected");
+    updateSelectionsTree();
+    return;
   }
+
+  selectedCountryNames.splice(selectedCountryNames.indexOf(name), 1);
+  
+  var box = document.getElementById("tree").querySelector("#" + storedTreeIds[name]).querySelector(".box");
+
+  var withCaret = "";
+
+  if(name == currentCloseTarget)
+    clearCloseCurvesList();
+
+  if(box.classList.contains("withCaret"))
+    withCaret = " withCaret"
+
+  box.classList = "box" + withCaret;
+
+
+  setLowClipTo(0);
+  setNormalizeDataTo(0);
+  
+  updateSelectionsTree();
+}
+
+function clearCloseCurvesList()
+{
+  $("#closestCurvesContainer").hide();
+  $("#closestCurvesList").html("");
+  currentCloseTarget = "";
 }
 
 function clearTree()
 {
-  var allBoxes = $("li").map(function() {
-    var childrenElements = this.querySelector("ul");
-    var boxElement = this.querySelector(".box");
-
-    if(childrenElements != null)
-      childrenElements.classList.remove("activeTree");
-
-    if(boxElement != null)
-      boxElement.classList.remove("check-box");
-}).get();
-
-  selectedCountryNames = [];
+  setSelectedCountryNames([]);
   updateGraph();
-  updateSelectionsTree();
+  setLowClipTo(0);
+  setNormalizeDataTo(0);
+  clearCloseCurvesList();
 }
 // -------------------------------------------------------------------
 
@@ -541,7 +586,6 @@ function addUpChildData(obj)
 
 function orderPlace(objRef)
 {
-
   var obj = $.extend(true,{},objRef);
 
   delete obj["UID"];
@@ -560,7 +604,6 @@ function orderPlace(objRef)
 }
 
 // Graph Functionality -----------------------------------------------
-
 function setGraphControlsEnabled(enabled)
 {
   clipCheck.disabled = !enabled;
@@ -585,7 +628,7 @@ function updateGraph()
 }
 
 function switchNormalize(){
-  normalizeData = normalizeCheck.checked;
+  normalizeDataCheck = normalizeCheck.checked;
 
   var slider = $("#normalizeSlider");
   var value = $("#normalizeSliderValue");
@@ -644,7 +687,7 @@ function changeGraphType(isLog, type){
     var labels = Object.keys(dataConfirmedOrdered[name]);
     var values = Object.values(dataConfirmedOrdered[name]);
 
-    newPlotData = {country: name, labels:labels, values: []};
+    newPlotData = {country: name, labels: labels, values: []};
 
     //get cases per day instead of total cases
     if(type != "line")
@@ -686,11 +729,10 @@ function clickTab(evt, tabName) {
   isGraphLog = isLog;
   graphType = type;
 
-  changeGraphType(isLog, type)
+  changeGraphType(isGraphLog, graphType);
+  updateGraph();
 }
 // ------------------------------------------------------------------
-
-var lineWidth = 5;
 
 //graphData format: [{values:[], labels:[]}, ...]
 function plot(graphData, type, isLog) {
@@ -699,29 +741,16 @@ function plot(graphData, type, isLog) {
 
   if (graphData.length == 0)
     return;
-
-
-  if(normalizeData)
+    
+  if(normalizeDataCheck)
   {
     for (let i = 0; i < graphData.length; i++) {
       const data = graphData[i];
+
+      newNormalizedData =  normalizeData(data.values); 
+      data.values = newNormalizedData.values;
+      data.normalizedTo = newNormalizedData.normalizedTo;
       
-      var wasClipped = false;
-
-      for (let x = 0; x < data.values.length; x++) {
-        const val = data.values[x];
-
-        if(val >= normalizeDataTo)
-        {
-          graphData[i].values.splice(0, x);
-          graphData[i].normalizedTo = x;
-          wasClipped = true;
-          break;
-        }
-      }
-
-      if(!wasClipped)
-        graphData[i].values = [];
     }
   }
 
@@ -797,7 +826,7 @@ function plot(graphData, type, isLog) {
     var averageInterval = 5;
     averageDatasets = [];
 
-    for(let i = 0; i < graphData.length; i++)
+    for(let i = 0; i < datasets.length; i++)
     {
       var averageData = [];
       var total = 0;
@@ -818,7 +847,7 @@ function plot(graphData, type, isLog) {
           averageData.push({x: graphData[i].labels[x], y: average});
           total = 0;
           interval = 0
-          dates.push(graphData[i].labels[x]);
+          dates.push(graphData[i].labels[x + datasets[i].normalizedTo]);
         }
       }  
       
@@ -831,19 +860,19 @@ function plot(graphData, type, isLog) {
   //Set data tooltips
   setChart.options.tooltips.callbacks = {title: function(tooltipItems, data)
   {
-    var label = tooltipItems[0].label;
-    if(data.datasets[tooltipItems[0].datasetIndex].isAverage)
-      label = data.datasets[tooltipItems[0].datasetIndex].dates[tooltipItems[0].index];
-    else if(normalizeData)
+    var toolTip = tooltipItems[0]
+    var label = toolTip.label;
+
+    if(data.datasets[toolTip.datasetIndex].isAverage)
+      label = data.datasets[toolTip.datasetIndex].dates[toolTip.index];
+    else if(normalizeDataCheck)
     {
-      var normalizedTo = data.datasets[tooltipItems[0].datasetIndex].normalizedTo;
-      label =  data.labels[normalizedTo + tooltipItems[0].index];
+      label = data.labels[data.datasets[toolTip.datasetIndex].normalizedTo + toolTip.index];
     }
     
     return 'Date: ' + label;
   }};
   
-  setChart.options.legend.display = !normalizeData;
   setChart.data.labels = graphData[0].labels;
   setChart.data.datasets = datasets;
   setChart.update();
@@ -854,14 +883,163 @@ function plot(graphData, type, isLog) {
       ticks: {
           autoSkip: true,
           maxTicksLimit: 10,
-          display: !normalizeData || (normalizeData && datasets.length <= 1)
+          display: !normalizeDataCheck || (normalizeDataCheck && datasets.length <= 1)
       }
     }]
   };
+
   setChart.update();
-  // setChart.type = type;
-  // setChart.update();
 }
+
+function normalizeData(data){
+  var wasClipped = false;
+
+  var normalizedTo = 0;
+
+  for (let x = 0; x < data.length; x++) {
+    const val = data[x];
+
+    if(val >= normalizeDataTo)
+    {
+      data.splice(0, x);
+      normalizedTo = x;
+      wasClipped = true;
+      break;
+    }
+  }
+
+  if(!wasClipped)
+    data = [];
+
+  return {values: data, normalizedTo: normalizedTo};
+}
+
+//Finding Closest Curves ---------------------------------------------
+
+
+var currentCloseTarget = "";
+
+function findClosestCurves()
+{
+  if(selectedCountryNames.length > 1)
+  {
+    alert("Please select only one curve at a time to use this function.")
+    return;
+  }
+  else if(selectedCountryNames.length == 0)
+  {
+    alert("Please select a curve to use this function.")
+    return;
+  }
+
+  var selectedCountryName = selectedCountryNames[0];
+
+  var placeNames = Object.keys(dataConfirmedOrdered);
+  var normalizedValues = Object.values(dataConfirmedOrdered).map(arr => normalizeData(Object.values(arr).values));
+  
+  var normalizedDataConfirmed = placeNames.reduce((a, key, i) => Object.assign(a, { [key]: normalizedValues[i] }), {});
+  var targetData = normalizedDataConfirmed[selectedCountryName];
+  
+  var targetLength = targetData.length + parseInt($("#extraDaysInput").val());
+
+  for (let i = placeNames.length - 1; i >= 0; i--) {
+    var placeData = normalizedDataConfirmed[placeNames[i]];
+
+    if((placeData.length < targetLength) && (placeNames[i] != selectedCountryName))
+      delete normalizedDataConfirmed[placeNames[i]];
+  }
+
+  placesLogData = logAllData(normalizedDataConfirmed);  
+  var logTargetData = placesLogData[selectedCountryName];
+  var dataValues = Object.values(placesLogData);
+  var newDataNames = Object.keys(placesLogData);
+
+  if(dataValues.length <= 1)
+  {
+    alert("There were 0 countries with " + $("#extraDaysInput").val() + " or more additional days than target curve after being normalized. Either decrease the additional days or increase the 'Shift plot to start at # for all curves' slider.");
+    return;
+  }
+
+  //add up the differences for each point to see which has the least difference. ignore all of the values that are outside the target data's domain
+  dataValues = dataValues.map(val => val.map((x, i) => i < logTargetData.length ? Math.abs(logTargetData[i] - x): 0));
+  dataValues = dataValues.map(val => val.reduce((n, x, i) => i < logTargetData.length ? n + x: n));
+
+  var sortedDataValues = [];
+
+  for (let i = 0; i < dataValues.length; i++) {
+    sortedDataValues.push([dataValues[i], newDataNames[i]]);
+  }
+
+  sortedDataValues.sort(function(a, b) {
+      return a[0] - b[0];
+  });
+
+  //The second country because the first one is identical to the target country so it will have the smallest value of 0
+  var closestCountryName = sortedDataValues[1][1];
+  addSelection(closestCountryName);
+
+  isGraphLog = true;
+  graphType = "line";
+
+  changeGraphType(isGraphLog, graphType);
+  updateGraph();
+
+  $("#logLineTab").addClass("activeTab");
+
+  $("#lineTab").removeClass("activeTab");
+  $("#barTab").removeClass("activeTab");
+  $("#logBarTab").removeClass("activeTab");
+
+  populateClosestCurvesList(selectedCountryName, sortedDataValues);
+  currentCloseTarget = selectedCountryName;
+}
+
+var maxCloseCountriesShown = 10;
+
+function populateClosestCurvesList(targetCountry, listOfCountries){
+
+  var htmlBuilder = "";
+
+  for (let i = 1; i < listOfCountries.length && i < maxCloseCountriesShown; i++) {
+
+    var countryName = listOfCountries[i][1];
+
+    var param1 =  "'" + targetCountry.toString() + "'";
+    var param2 =  "'" + countryName.toString() + "'";
+
+    htmlBuilder += "<li class=\"closestCurveItem\" onclick=\"clickCloseCurve(" + param1  + "," + param2+ ")\">";
+    htmlBuilder += countryName;
+    htmlBuilder += "</li>";
+  }
+  $("#closestCurvesList").html(htmlBuilder);
+  $("#closestCurvesContainer").show();
+}
+
+function clickCloseCurve(targetCountry, other) {
+  setSelectedCountryNames([targetCountry, other]);
+  updateGraph();
+}
+
+
+
+
+function logAllData(data)
+{
+  var dataValues = Object.values(data);
+  var placeNames = Object.keys(data);
+
+  var holderArr = dataValues.map(x => Object.values(x).map(y => y == 0 ? 0 : Math.log10(y)));
+  var holderObject = {};
+
+  for (let i = 0; i < placeNames.length; i++) {
+    const name = placeNames[i];
+    holderObject[name] = holderArr[i];
+  }
+
+  return holderObject;
+}
+
+var placesLogData = {};
 
 //Search Functions ---------------------------
 
