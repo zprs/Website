@@ -935,7 +935,7 @@ function findClosestCurves()
   var selectedCountryName = selectedCountryNames[0];
 
   var placeNames = Object.keys(dataConfirmedOrdered);
-  var normalizedValues = Object.values(dataConfirmedOrdered).map(arr => normalizeData(Object.values(arr).values));
+  var normalizedValues = Object.values(dataConfirmedOrdered).map(arr => normalizeData(Object.values(arr)).values);
   
   var normalizedDataConfirmed = placeNames.reduce((a, key, i) => Object.assign(a, { [key]: normalizedValues[i] }), {});
   var targetData = normalizedDataConfirmed[selectedCountryName];
