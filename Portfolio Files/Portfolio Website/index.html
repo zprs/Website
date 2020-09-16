@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Game Development Portfolio</title>
+
+        <link rel="stylesheet" href="styles/mainStyles.css">
+
+        <link rel="stylesheet" href="styles/colorCurves.css">
+
+        <link rel="stylesheet" href="styles/svgSwitcherStyles.css">
+        <link rel="stylesheet" href="styles/pixlArtSliders.css">
+        <link rel="stylesheet" href="styles/mouseSlideshow.css">
+        <link rel="stylesheet" href="styles/webWindowStyles.css">
+
+
+        <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@300&display=swap" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@800&display=swap" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css2?family=Courier+Prime&display=swap" rel="stylesheet">
+
+
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <script src="http://code.jquery.com/ui/1.10.3/jquery-ui.min.js"></script>
+    </head>
+    <body>
+
+        <svg style="width: 100%; height: 100vh; position: absolute; top: 0" xmlns="http://www.w3.org/2000/svg">
+            <path style="width: 100%; position: absolute; top: 20px" id="curvePath1" fill="#0099ff" fill-opacity=".5"></path>
+        </svg>
+    
+        <svg style="width: 100%; height: 100vh; position: absolute; top: 120px" xmlns="http://www.w3.org/2000/svg">
+            <path style="width: 100%;" id="curvePath2" fill="#ffe733" fill-opacity=".5"></path>
+        </svg>
+    
+        <svg style="width: 100%; height: 100vh; position: absolute; top: 350px" xmlns="http://www.w3.org/2000/svg">
+            <path style="width: 100%;" id="curvePath3" fill="#ff3300" fill-opacity=".5"></path>
+        </svg>
+    
+        <svg style="width: 150px; height: 100vh; position: absolute; top: 0; right: 0px;" xmlns="http://www.w3.org/2000/svg">
+            <path style="width: 100%;" id="curvePath1R" fill="#0099ff" fill-opacity=".5"></path>
+        </svg>
+    
+        <svg style="width: 150px; height: 100vh; position: absolute; top: 120; right: 0px;" xmlns="http://www.w3.org/2000/svg">
+            <path style="width: 100%;" id="curvePath2R" fill="#ffe733" fill-opacity=".5"></path>
+        </svg>
+    
+        <svg style="width: 150px; height: 100vh; position: absolute; top: 350px; right: 0px;" xmlns="http://www.w3.org/2000/svg">
+            <path style="width: 100%;" id="curvePath3R" fill="#ff3300" fill-opacity=".5"></path>
+        </svg>
+        
+
+        <div id="title">
+            <h1 id="header">Zachary Richards</h1>
+            <h2 id="subHeader">Game Development Portfolio</h2>
+        </div>
+
+        
+        <img class="imgHeader" src="images/games.png">
+
+        <div id="gamesContainer">
+            <input class="slideShowSwitchers" type="button" value="<" onclick="nextGame(true)">
+            <div id="unityGames">
+
+                <video width="100%" height="100%" controls>
+                    <source src="videos/Unity Stick Fighting Game.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+                </video>
+                
+                <video width="100%" height="100%" controls>
+                    <source src="videos/unityGames.m4v" type="video/mp4">
+                Your browser does not support the video tag.
+                </video>
+
+            </div> 
+            <input class="slideShowSwitchers" type="button" value=">" onclick="nextGame(true)">
+        </div>
+
+        <div id="gameCaptions" class="websiteCaption">
+            <div>
+                <h2 class="websiteTitle">Sticks</h2>
+                <p class="websiteDescription">Planned to launch on Steam. All of the 3D models were created in Blender, and the visual effects and shaders were made in Unity. Cross network multiplayer is done using the Steamworks API. Reducing latency to an acceptable range while keeping the game synced between the clients has been a major accomplishment of this project.</p>
+            </div>
+            <div style="display: none;">
+                <h2 class="websiteTitle">Other Games Developed Using Unity</h2>
+                <p class="websiteDescription">For the past five years, I have been designing and developing games in Unity. Over this time, I have taught myself to program, design three-dimensional models, create digital art, and market and distribute the games I create.</p>
+            </div>
+        </div>
+
+        <img class="imgHeader" src="VectorArt/vectorart.svg">
+
+        <div id="svgSelector">
+            <div id="svgArrows">
+                <input class="slideShowSwitchers" style="margin-right: 40vw" type="button" value="<" onclick="nextSVG(false)">
+                <input class="slideShowSwitchers" style="margin-left: 40vw" type="button" value=">" onclick="nextSVG(true)">
+            </div>
+            <div class="svgSelectorContainer"></div>
+        </div>
+
+        <img class="imgHeader" src="images/PixelArtTitle.png">
+
+        <div id="pixelArtSliders">
+            <div class="slider" id="pixelArtSlider">
+                <img class="pixelImage" src="images/SMALL_BONSAI_5.png">
+                <img class="pixelImage" src="images/BIG_BONSAI_3.png">
+                <img class="pixelImage" src="images/BIG_BONSAI_2.png">
+                <img class="pixelImage" src="images/SMALL_BONSAI_2.png">
+                <img class="pixelImage" src="images/BIG_BONSAI_B1.png">
+                <img class="pixelImage" src="images/SMALL_BONSAI_6.png">
+                <img class="pixelImage" src="images/BIG_BONSAI_B2.png">
+                <img class="pixelImage" src="images/SMALL_BONSAI_7.png">
+            </div>
+    
+            <div class="slider" id="pixelArtSlider1">
+                <img class="pixelImage" src="images/scroll.png">
+                <img class="pixelImage" src="images/bomb.png">
+                <img class="pixelImage" src="images/Potion.png">
+                <img class="pixelImage" src="images/wizard.png">
+    
+                <img class="pixelImage" src="images/Chest.png">
+                <img class="pixelImage" src="images/TrafficCone.png">
+                <img class="pixelImage" src="images/grapes.png">
+            </div>
+        </div>
+
+        <!-- <img class="imgHeader" src="images/3D.png">
+
+        <div class="slideShow">
+            <input class="slideShowSwitchers" type="button" value="<" onclick="next(true)">
+            <div id="playbackDiv">
+                <img id="movieImage0" class="movieImages" src='testVideo/0001.png'>
+                <img id="movieImage1" class="movieImages" src='BIG_BONSAI_B1.png'>
+            </div>
+            <input class="slideShowSwitchers" type="button" value=">" onclick="next()">
+        </div> -->
+
+        <h1 id="webDevTitle"> &lt;h1&gt; Web Development &lt;/h1&gt;</h1>
+
+        <div id="webDesignDiv">
+            <input class="slideShowSwitchers" type="button" value="<" onclick="nextWebsite(false )">
+    
+            <div id="webWindow">
+                <div id="taskBar">
+                    <div id="navigationIcons">
+                        <div class="navIcon" style="background-color: rgb(255, 101, 101); margin-left: 2vh;"></div>
+                        <div class="navIcon" style="background-color: rgb(255, 200, 82);"></div>
+                        <div class="navIcon" style="background-color: rgb(93, 201, 67);"></div>
+                    </div>
+                </div>
+    
+                <img id="websiteStatic" src=images/static.gif>
+                <iframe id="webWindowContent" src="http://space-base.io"></iframe>
+            </div>
+    
+            <input class="slideShowSwitchers" type="button" value=">" onclick="nextWebsite(true)">
+        </div>
+
+        <div id="websiteCaptions" class="websiteCaption">
+            <div>
+                <h2 class="websiteTitle">Space-Base.io</h2>
+                <p class="websiteDescription">I designed, developed and deployed multiplayer, web-based game using Node.js, Socket.io, and HTML 5 Canvas. I configured AWS ECS to host a cluster of server instances in Docker containers along with creating an automated build and zero downtime deployment pipeline from GitHub to AWS. Traffic monitoring and revenue generation are done through Google Analytics, and Google Adsense respectively. This game took over a year to produce and has almost 200,000 pageviews since it’s initial release in October of 2018.</p>
+            </div>
+            <div style="display: none;">
+                <h2 class="websiteTitle">Tetris 66</h2>
+                <p class="websiteDescription">This is a replica of the multiplayer battle royale style Tetris game called Tetris 99. I did not have a Nintendo Switch, the platform that the game was exclusive to, so in order to play it, I recreated it as a web application. The communication between clients in this game is done via a hosted Node.js server which manages information sent through WebSockets. All of the visuals are created with HTML, CSS, and HTML Canvas.</p>
+            </div>
+            <div style="display: none;">
+                <h2 class="websiteTitle">COVID-19 Case Tracker</h2>
+                <p class="websiteDescription">This is an online data representation and prediction tool I wrote to interface with a COVID-19 dataset provided by Johns Hopkins University. It shows track the confirmed cases in a region over time and compares this data with other regions. My program also suggests to the user possible future outcomes by using the data from other regions. With a region selected, the user is able to click a button that finds similar curves to this region on a log base 10 scale. With this tool, it is possible to find the closest graph of cases and predict where a region may end in the future. </p>
+            </div>
+        </div>
+
+        <h1>Other Experience</h1>
+        <h2>Tools</h2>
+
+        <div class="logoHolder">
+            <div class="appLogo"> 
+                <img class="logoIcon" src="logos/blender.svg">
+                <span style="color:rgb(255, 150, 51)" class="logoCaption">Blender</span>
+            </div>
+            <div class="appLogo"> 
+                <img class="logoIcon" src="logos/unity.svg">
+                <span style="color:rgb(47, 47, 66)" class="logoCaption">Unity</span>
+            </div>
+            <div class="appLogo"> 
+                <img class="logoIcon" src="logos/substancepainter.svg">
+                <span style="color:rgb(204, 29, 29)" class="logoCaption">Substance Painter</span>
+            </div>
+            <div class="appLogo"> 
+                <img class="logoIcon" src="logos/aesprite.svg">
+                <span style="color:rgb(117, 117, 117)" class="logoCaption">Aesprite</span>
+            </div>
+            <div class="appLogo"> 
+                <img class="logoIcon" src="logos/affinityDesigner.png">
+                <span style="color:rgb(12, 95, 143)" class="logoCaption">Affinity Designer</span>
+            </div>
+            <div class="appLogo"> 
+                <img class="logoIcon" src="logos/godot.svg">
+                <span style="color:rgb(101, 165, 207)" class="logoCaption">Godot</span>
+            </div>
+            <div class="appLogo"> 
+                <img class="logoIcon" src="logos/github.png">
+                <span style="color:rgb(0, 0, 0)" class="logoCaption">GitHub</span>
+            </div>
+            <div class="appLogo"> 
+                <img class="logoIcon" src="logos/wordpress.png">
+                <span style="color:rgb(29, 113, 161)" class="logoCaption">WordPress</span>
+            </div>
+        </div>
+
+        <h2>Languages and Libraries</h2>
+
+        <div class="logoHolder">
+            <div class="appLogo"> 
+                <img class="logoIcon" src="logos/csharp.svg">
+                <span style="color:rgb(146, 51, 255)" class="logoCaption">C#</span>
+            </div>
+            <div class="appLogo"> 
+                <img class="logoIcon" src="logos/java.svg">
+                <span style="color:rgb(255, 51, 51)" class="logoCaption">Java</span>
+            </div>
+            <div class="appLogo"> 
+                <img class="logoIcon" src="logos/javascript.svg">
+                <span style="color:rgb(179, 161, 6)" class="logoCaption">JavaScript</span>
+            </div>
+            <div class="appLogo"> 
+                <img class="logoIcon" src="logos/html5.svg">
+                <span style="color:rgb(230, 95, 33)" class="logoCaption">HTML 5</span>
+            </div>
+            <div class="appLogo"> 
+                <img class="logoIcon" src="logos/css.svg">
+                <span style="color:rgb(51, 88, 255)" class="logoCaption">CSS 3</span>
+            </div>
+            <div class="appLogo"> 
+                <img class="logoIcon" src="logos/jquery.svg">
+                <span style="color:rgb(0, 0, 0)" class="logoCaption">jQuery</span>
+            </div>
+            <div class="appLogo"> 
+                <img class="logoIcon" src="logos/npm.svg">
+                <span style="color:rgb(235, 72, 72)" class="logoCaption">NPM</span>
+            </div>
+            <div class="appLogo"> 
+                <img class="logoIcon" src="logos/socketio.svg">
+                <span style="color:rgb(0, 0, 0)" class="logoCaption">Socket.IO</span>
+            </div>
+        </div>
+
+        <h2>Experience Deploying Games On</h2>
+
+        <div class="logoHolder">
+
+            <div class="appLogo"> 
+                <img class="logoIcon" src="logos/steam.png">
+                <span style="color:rgb(36, 52, 105)" class="logoCaption">Steam</span>
+            </div>
+            <div class="appLogo"> 
+                <img class="logoIcon" src="logos/aws.webp">
+                <span style="color:rgb(54, 57, 73)" class="logoCaption">Amazon Web Services</span>
+            </div>
+            <div class="appLogo"> 
+                <img class="logoIcon" src="logos/digitalOcean.svg">
+                <span style="color:rgb(56, 125, 255)" class="logoCaption">Digital Ocean</span>
+            </div>
+            
+        </div>
+
+        <h1 style="margin-top: -15vh">Contact</h1>
+
+        <img src="images/zach.svg" id="profilePicture">
+
+        <h2 style="font-size: 1.5em;">me@zacharyrichards.com</h2>
+
+        <div class="logoHolder" style="margin-bottom: 0px">
+            <div class="appLogo"> 
+                <a style="font-size: 1.5em; color: rgb(54, 134, 209)" href="https://www.linkedin.com/in/zachary-richards-34b2a2171">
+                    <img class="logoIcon" src="logos/linkedIn.webp">
+                </a>
+                <span style="color:rgb(36, 52, 105)" class="logoCaption">LinkedIn</span>
+            </div>
+        </div>
+
+    </body>
+
+    <script type="text/javascript" src="scripts/colorCurves.js"></script>
+    <script type="text/javascript" src="scripts/svgSelector.js"></script>
+    <script type="text/javascript" src="scripts/pixelArtSliders.js"></script>
+    <script type="text/javascript" src="scripts/mouseVideoPlayback.js"></script>
+    <script type="text/javascript" src="scripts/websiteSwitcher.js"></script>
+    <script type="text/javascript" src="scripts/main.js"></script>
+</html>

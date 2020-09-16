@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Web Window</title>
+        <link rel="stylesheet" href="styles.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <script src="http://code.jquery.com/ui/1.10.3/jquery-ui.min.js"></script>
+    </head>
+    <body>
+        <div id="svgSelector">
+            <div id="svgArrows">
+                <input class="slideShowSwitchers" style="margin-right: 40vw" type="button" value="<" onclick="nextSVG(false)">
+                <input class="slideShowSwitchers" style="margin-left: 40vw" type="button" value=">" onclick="nextSVG(true)">
+            </div>
+            <div class="svgSelectorContainer"></div>
+        </div>
+    </body>
+    <script type="text/javascript" src="svgSelector.js"></script>
+</html>

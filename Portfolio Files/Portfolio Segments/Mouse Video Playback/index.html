@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Mouse Controlled Video Playback</title>
+        <link rel="stylesheet" href="mouseSlideshow.css">
+        <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.11.1/jquery-ui.min.js"></script>
+
+
+    </head>
+    <body>
+
+        <div class="slideShow">
+            <input class="slideShowSwitchers" type="button" value="<" onclick="next(true)">
+            <div id="playbackDiv">
+                <img id="movieImage0" class="movieImages" src='testVideo/0001.png'>
+                <img id="movieImage1" class="movieImages" src='BIG_BONSAI_B1.png'>
+            </div>
+            <input class="slideShowSwitchers" type="button" value=">" onclick="next()">
+        </div>
+
+    </body>
+
+    <script type="text/javascript" src="mouseVideoPlayback.js"></script>
+</html>
