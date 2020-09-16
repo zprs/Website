@@ -10,6 +10,7 @@ body
 {
     width: 100vw;
     overflow-x: none;
+    position: relative
 }
 
 h1 {
