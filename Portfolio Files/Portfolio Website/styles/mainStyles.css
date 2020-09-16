@@ -182,3 +182,9 @@ h2 {
     }
 }
   
+
+#spacebaseimg{
+    height: 100%;
+    margin: auto;
+    background-position: center;
+}

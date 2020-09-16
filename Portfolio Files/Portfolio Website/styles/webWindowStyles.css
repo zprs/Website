@@ -47,11 +47,18 @@
     filter: brightness(55%);
 }
 
-#webWindowContent{
+
+#webContent
+{
     border: none;
     padding-top: 7vh;
     width: 100%;
     height: calc(100% - 7vh);
+}
+
+#webWindowContent{
+    width: 100%;
+    height: 100%;
 }
 
 #websiteStatic

@@ -20,6 +20,7 @@ function resizeend() {
 
         spawnSvgSelector();
         createSliders();
+        centerSpaceBaseImage();
     }               
 }
 
@@ -32,14 +33,13 @@ function createSliders()
     var slider2 = createSlider($("#pixelArtSlider1"), false);
     
     sliders = [slider1, slider2];
-    console.log("slidersCreated");
 }
 
 var gameIndex = 0; 
 
 function nextGame(direction)
 {
-    gameIndex = nextContent("unityGames", "gameCaptions", gameIndex, 2, direction)
+    gameIndex = nextContent("unityGames", "gameCaptions", gameIndex, 2, direction);
 }
 
 function nextContent(contentParentId, captionParentId, currentIndex, numberOfItems, next){
@@ -79,4 +79,17 @@ function enableChild(id, index)
 $(document).ready(() => {
     spawnSvgSelector();
     createSliders();
+    centerSpaceBaseImage();
 });
+
+
+function centerSpaceBaseImage()
+{
+    $("#webContent>img").each(function(i, img) {
+        $(img).css({
+            position: "relative",
+            left: ($(img).parent().width() - $(img).width()) / 2
+        });
+    });
+
+}
