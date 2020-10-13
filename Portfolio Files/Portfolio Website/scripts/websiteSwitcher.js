@@ -2,7 +2,7 @@ var websiteIndex = 0;
 
 function nextWebsite(direction){
     
-    // centerSpaceBaseImage();
+    centerSpaceBaseImage();
 
     $("#websiteStatic").show();
     websiteIndex = nextContent("webContent", "websiteCaptions", websiteIndex, 3, direction);
