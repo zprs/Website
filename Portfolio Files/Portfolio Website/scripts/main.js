@@ -5,6 +5,8 @@ var delta = 200;
 $(window).resize(function() {
     destroySVgSelector();
 
+    $("#unityGames").height($("#unityGames").width() * 108 / 192);
+
     rtime = new Date();
     if (timeout === false) {
         timeout = true;
@@ -39,7 +41,13 @@ var gameIndex = 0;
 
 function nextGame(direction)
 {
-    gameIndex = nextContent("unityGames", "gameCaptions", gameIndex, 2, direction);
+    // if(gameIndex == 0)
+    //     $("#unityGames").width($("#unityGames").width() / 0.7296875);
+
+    gameIndex = nextContent("unityGames", "gameCaptions", gameIndex, 3, direction);
+
+    // if(gameIndex == 0)
+    //     $("#unityGames").width($("#unityGames").width() * 0.7296875);
 }
 
 function nextContent(contentParentId, captionParentId, currentIndex, numberOfItems, next){
@@ -80,6 +88,9 @@ $(document).ready(() => {
     spawnSvgSelector();
     createSliders();
     centerSpaceBaseImage();
+
+    $(window).resize();
+    // $("#unityGames").width($("#unityGames").width() * 0.7296875);
 });
 
 
@@ -88,7 +99,7 @@ function centerSpaceBaseImage()
     $("#webContent>img").each(function(i, img) {
         $(img).css({
             position: "relative",
-            left: ($(img).parent().width() - $(img).width()) / 2
+            left: ($(img).parent().parent().width() - $(img).width()) / 2
         });
     });
 

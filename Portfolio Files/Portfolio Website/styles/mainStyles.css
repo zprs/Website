@@ -42,9 +42,9 @@ h2 {
 }
 
 .imgHeader{
-    width: 50vw;
-    padding-left: 25vw;
-    padding-right: 25vw;
+    width: 50%;
+    padding-left: 25%;
+    padding-right: 25%;
 
     padding-top: 10vh;
     padding-bottom: 10vh;
@@ -58,7 +58,7 @@ h2 {
 
 #header{
     font-family: 'Open Sans', sans-serif;
-    font-size: calc(7vw);
+    font-size: 900%;
     color: white;
     -webkit-text-stroke: 3px rgb(54, 54, 54);
     text-shadow: 4px 4px #6d8da78f;
@@ -67,53 +67,55 @@ h2 {
 
 #subHeader{
     font-weight: 600;
-    font-size: 3.5vw;
-}
-
-#gamesContainer
-{
-    width: fit-content;
-    margin: auto;
-    vertical-align: center;
+    font-size: 400%;
 }
 
 #unityGames
 {
-    width: calc(35vw * 192 / 108);
-    height: 35vw;
+    width: calc(35% * 192 / 108);
     border-radius: 8px;
     box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.452);
     overflow: hidden;
+    background-color: black;
 
     position: relative;
     display: inline-block;
     vertical-align: middle;
 }
 
-#webDesignDiv{
-    width: fit-content;
+#gamesContainer
+{
+    width: 100%;
     margin: auto;
     vertical-align: center;
+    text-align: center;
+}
+
+#webDesignDiv{
+    width: 100%;
+    margin: auto;
+    vertical-align: center;
+    text-align: center;
 }
 
 
 #webDevTitle{
     font-family: 'Courier Prime', monospace;
-    font-size: 5vw;
+    font-size: 500%;
 }
 
 .websiteCaption
 {
     font-family: 'Raleway', sans-serif;
-    width: 65vw;
-    margin-left: 17.5vw;
+    width: 60%;
+    margin-left: 20%;
     text-align: left;
 }
 
 .websiteTitle
 {
     margin-top: 5vh;
-    font-size: 30px;
+    font-size: 400%;
     color: black;
     font-weight: 600;
     text-align: left;
@@ -121,6 +123,7 @@ h2 {
 
 .websiteDescription
 {
+    font-size: 200%;
     color: rgb(104, 104, 104);
     font-weight: 300;
 }
@@ -132,14 +135,14 @@ h2 {
     border-radius: calc(25vh + 10px);
     border: 10px solid white;
     box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.404);
-    margin-left: calc(50vw - 25vh - 10px );
+    margin-left: calc(50% - 25vh - 10px );
     margin-bottom: 5vh;
 }
 
 .logoHolder
 {
-    width: 70vw;
-    margin-left: 15vw;
+    width: 70%;
+    margin-left: 15%;
     text-align: center;
     margin-top: 5vh;
     margin-bottom: 10vh;
@@ -183,22 +186,45 @@ h2 {
     font-family: 'Raleway', sans-serif;
 }
 
-@media screen and (min-width: 992px) {
-    .imgHeader {
-        width: 500px;
-
-        padding-left: calc(50vw - 250px);
-        padding-right: calc(50vw - 250px);
-    }
-    #webDevTitle
-    {
-        font-size: 2.5em;
-    }
+.constrainedWidth
+{
+    font-size: 1vw;
+    width: 100%;
 }
-  
 
 #spacebaseimg{
     height: 100%;
     margin: auto;
     background-position: center;
+}
+
+span
+{
+    font-size: 200%;
+}
+
+@media screen and (min-width: 900px) {
+
+    /* #webWindow
+    {
+        width: 100%;
+    } */
+
+    /* .imgHeader {
+        width: 500px;
+
+        padding-left: calc(50vw - 250px);
+        padding-right: calc(50vw - 250px);
+    } */
+    #webDevTitle
+    {
+        font-size: 5em;
+    }
+    .constrainedWidth
+    {
+        /* background-color: #2b2b2b67; */
+        font-size: 8px;
+        width: 900px;
+        margin-left: calc(100vw / 2 - 450px);
+    }
 }

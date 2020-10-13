@@ -3,13 +3,13 @@
     <head>
         <title>Game Development Portfolio</title>
 
-        <link rel="stylesheet" href="styles/mainStyles.css">
-
+        
         <link rel="stylesheet" href="styles/svgSwitcherStyles.css">
         <link rel="stylesheet" href="styles/pixlArtSliders.css">
         <link rel="stylesheet" href="styles/mouseSlideshow.css">
         <link rel="stylesheet" href="styles/webWindowStyles.css">
-
+        <link rel="stylesheet" href="styles/mainStyles.css">
+        
 
         <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@300&display=swap" rel="stylesheet">
         <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@800&display=swap" rel="stylesheet">
@@ -21,6 +21,7 @@
     </head>
     <body>
     <div id="siteWrapper">
+
         <svg style="width: 100%; height: 100vh; position: absolute; top: 0" xmlns="http://www.w3.org/2000/svg">
             <path style="width: 100%; position: absolute; top: 20px" id="curvePath1" fill="#0099ff" fill-opacity=".5"></path>
         </svg>
@@ -46,17 +47,24 @@
         </svg>
         
 
-        <div id="title">
-            <h1 id="header">Zachary Richards</h1>
-            <h2 id="subHeader">Game Development Portfolio</h2>
-        </div>
+        <div class="constrainedWidth">
 
+            <div id="title">
+                <h1 id="header">Zachary Richards</h1>
+                <h2 id="subHeader">Game Development Portfolio</h2>
+            </div>
+        
         
         <img class="imgHeader" src="images/games.png">
 
         <div id="gamesContainer">
             <input class="slideShowSwitchers" type="button" value="<" onclick="nextGame(true)">
             <div id="unityGames">
+
+                <video width="100%" height="100%" controls>
+                    <source src="videos/Ludum Dare 47 Game Jam Submission.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+                </video>
 
                 <video width="100%" height="100%" controls>
                     <source src="videos/Unity Stick Fighting Game.mp4" type="video/mp4">
@@ -74,6 +82,12 @@
 
         <div id="gameCaptions" class="websiteCaption">
             <div>
+                <h2 class="websiteTitle">Ludum Dare 47 Game Entry</h2>
+                <p class="websiteDescription">This is my entry to the Ludum Dare 47 2020 game jam. I had 72 hours to create a game from scratch with the theme of, "stuck in a loop". I created all of the assets, code, and visual effects durring the 72 hours.
+                    If you are interested, <a href="https://ldjam.com/events/ludum-dare/47/convolooption">here</a> is the link to the Ludum Dare game page and <a href="https://zpr.itch.io/convolooption">here</a> is a link to play it for free online on itch.io
+                </p>
+            </div>
+            <div style="display: none;">
                 <h2 class="websiteTitle">Sticks</h2>
                 <p class="websiteDescription">Planned to launch on Steam. All of the 3D models were created in Blender, and the visual effects and shaders were made in Unity. Cross network multiplayer is done using the Steamworks API. Reducing latency to an acceptable range while keeping the game synced between the clients has been a major accomplishment of this project.</p>
             </div>
@@ -83,7 +97,10 @@
             </div>
         </div>
 
+        
         <img class="imgHeader" src="VectorArt/vectorart.svg">
+        
+        </div>
 
         <div id="svgSelector">
             <div id="svgArrows">
@@ -93,7 +110,9 @@
             <div class="svgSelectorContainer"></div>
         </div>
 
-        <img class="imgHeader" src="images/PixelArtTitle.png">
+        <div class="constrainedWidth">
+            <img class="imgHeader" src="images/PixelArtTitle.png">
+        </div>
 
         <div id="pixelArtSliders">
             <div class="slider" id="pixelArtSlider">
@@ -118,6 +137,8 @@
                 <img class="pixelImage" src="images/grapes.png">
             </div>
         </div>
+
+        <div class="constrainedWidth">
 
         <!-- <img class="imgHeader" src="images/3D.png">
 
@@ -158,15 +179,15 @@
 
         <div id="websiteCaptions" class="websiteCaption">
             <div>
-                <h2 class="websiteTitle">Space-Base.io</h2>
+                <h2 class="websiteTitle"><a href="http://space-base.io">Space-Base.io</a></h2>
                 <p class="websiteDescription">I designed, developed and deployed multiplayer, web-based game using Node.js, Socket.io, and HTML 5 Canvas. I configured AWS ECS to host a cluster of server instances in Docker containers along with creating an automated build and zero downtime deployment pipeline from GitHub to AWS. Traffic monitoring and revenue generation are done through Google Analytics, and Google Adsense respectively. This game took over a year to produce and has almost 200,000 pageviews since it’s initial release in October of 2018.</p>
             </div>
             <div style="display: none;">
-                <h2 class="websiteTitle">Tetris 66</h2>
+                <h2 class="websiteTitle"><a href="https://zprs-tetris99.glitch.me">Tetris 66</a></h2>
                 <p class="websiteDescription">This is a replica of the multiplayer battle royale style Tetris game called Tetris 99. I did not have a Nintendo Switch, the platform that the game was exclusive to, so in order to play it, I recreated it as a web application. The communication between clients in this game is done via a hosted Node.js server which manages information sent through WebSockets. All of the visuals are created with HTML, CSS, and HTML Canvas.</p>
             </div>
             <div style="display: none;">
-                <h2 class="websiteTitle">COVID-19 Case Tracker</h2>
+                <h2 class="websiteTitle"><a href="https://zacharyrichards.com/COVID-19_Data/index.html">COVID-19 Case Tracker</a></h2>
                 <p class="websiteDescription">This is an online data representation and prediction tool I wrote to interface with a COVID-19 dataset provided by Johns Hopkins University. It shows track the confirmed cases in a region over time and compares this data with other regions. My program also suggests to the user possible future outcomes by using the data from other regions. With a region selected, the user is able to click a button that finds similar curves to this region on a log base 10 scale. With this tool, it is possible to find the closest graph of cases and predict where a region may end in the future. </p>
             </div>
         </div>
@@ -217,7 +238,7 @@
 
         <div class="logoHolder">
             <div class="appLogo"> 
-                <img class="logoIcon" src="logos/csharp.svg">
+                <img class="logoIcon" src="logos/csharp.jpg">
                 <span style="color:rgb(146, 51, 255)" class="logoCaption">C#</span>
             </div>
             <div class="appLogo"> 
@@ -273,7 +294,7 @@
 
         <img src="images/zach.svg" id="profilePicture">
 
-        <h2 style="font-size: 1.5em;">me@zacharyrichards.com</h2>
+        <h2 style="font-size: 4em;">me@zacharyrichards.com</h2>
 
         <div class="logoHolder" style="margin-bottom: 0px">
             <div class="appLogo"> 
@@ -282,6 +303,7 @@
                 </a>
                 <span style="color:rgb(36, 52, 105)" class="logoCaption">LinkedIn</span>
             </div>
+        </div>
         </div>
     </div>
     </body>

@@ -9,6 +9,9 @@ function destroySVgSelector() {
 
 function spawnSvgSelector()
 {
+    svgPositions = [];
+    svgScales = [];
+
     var imagesOnScreen = 3;
 
     var slidesHTML = "";
