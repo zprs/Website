@@ -1,19 +1,7 @@
 
   {
   "short_name": "Zachary Richards",
-  "name": "Zachary Richards's Personal Website",
-  "icons": [
-    {
-      "src": "/images/icon-192.png",
-      "type": "image/png",
-      "sizes": "192x192"
-    },
-    {
-      "src": "/images/icon-512.png",
-      "type": "image/png",
-      "sizes": "512x512"
-    }
-  ],
+  "name": "Zachary Richards's Online Game Development Portfolio",
   "background_color": "#FFFFFF",
   "display": "standalone",
   "scope": "/maps/",
