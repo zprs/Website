@@ -54,7 +54,7 @@
     height: calc(100% - 7vh);
 }
 
-#webWindowContent{
+.webWindowContent{
     width: 100%;
     height: 100%;
 }

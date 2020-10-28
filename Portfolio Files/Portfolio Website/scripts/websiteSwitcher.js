@@ -10,6 +10,6 @@ function nextWebsite(direction){
     setTimeout(() => $("#websiteStatic").hide(), 150);
 }
 
-$('#webWindowContent').on("load", function() {
+$('.webWindowContent').on("load", function() {
     setTimeout(() => $("#websiteStatic").hide(), 150);
 });

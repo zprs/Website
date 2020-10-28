@@ -97,8 +97,16 @@ $(document).ready(() => {
     $("#header").css("text-shadow", "4px 4px " + randomColors[ Math.floor(Math.random() * randomColors.length)] + "a6");
     $("#subHeader").css("opacity", 1);
     // $("#unityGames").width($("#unityGames").width() * 0.7296875);
+
+
+    setTimeout(function(){ loadIframes(); }, 500);
 });
 
+function loadIframes()
+{
+    $("#covidVisualization").attr('src', "https://zacharyrichards.com/COVID-19_Data/index.html");
+    $("#tetris99Iframe").attr('src', "https://zprs-tetris99.glitch.me");
+}
 
 function centerSpaceBaseImage()
 {
