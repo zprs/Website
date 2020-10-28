@@ -37,8 +37,8 @@ h2 {
     font-weight: 300;
     width: 100%;
     text-align: center;
-    font-size: 2.5vh;
-    color: #7a7a7a;
+    font-size: 3.5vh;
+    color: #5a5a5a;
 }
 
 .imgHeader{
@@ -130,7 +130,7 @@ h2 {
 
 .websiteDescription
 {
-    font-size: 200%;
+    font-size: 250%;
     color: rgb(104, 104, 104);
     font-weight: 300;
 }
@@ -213,8 +213,8 @@ span
 #scrollDown
 {
     margin-top: -20%;
-    margin-left: 45%;
-    width: 10%;
+    margin-left: calc(50% - (5vh + 2.5vw) / 2);
+    width: calc(5vh + 2.5vw);
     opacity: .1;
 
     animation: fade 4s linear infinite;
