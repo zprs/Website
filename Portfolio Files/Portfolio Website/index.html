@@ -1,28 +1,38 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
     <head>
         <title>Game Development Portfolio</title>
 
-        
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="Description" content="Zachary Richards's game development portfolio.">
+
+        <link rel="manifest" href="manifest.json">
+        <link rel="apple-touch-icon" href="../../images/icon-192.PNG">
+
         <link rel="stylesheet" href="styles/svgSwitcherStyles.css">
         <link rel="stylesheet" href="styles/pixlArtSliders.css">
         <link rel="stylesheet" href="styles/mouseSlideshow.css">
         <link rel="stylesheet" href="styles/webWindowStyles.css">
         <link rel="stylesheet" href="styles/mainStyles.css">
         
-
         <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@300&display=swap" rel="stylesheet">
-        <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@800&display=swap" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;800&display=swap" rel="stylesheet">
         <link href="https://fonts.googleapis.com/css2?family=Courier+Prime&display=swap" rel="stylesheet">
 
+        <script defer src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <script defer src="https://code.jquery.com/ui/1.10.3/jquery-ui.min.js"></script>
 
-        <script src="https://code.jquery.com/ui/1.10.3/jquery-ui.min.js"></script>
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <!-- <script defer type="text/javascript" src="scripts/colorCurves.js"></script> -->
+        <script defer type="text/javascript" src="scripts/svgSelector.js"></script>
+        <script defer type="text/javascript" src="scripts/pixelArtSliders.js"></script>
+        <script defer type="text/javascript" src="scripts/mouseVideoPlayback.js"></script>
+        <script defer type="text/javascript" src="scripts/main.js"></script>
+        <script defer type="text/javascript" src="scripts/websiteSwitcher.js"></script>
     </head>
     <body>
     <div id="siteWrapper">
 
-        <svg style="width: 100%; height: 100vh; position: absolute; top: 0" xmlns="http://www.w3.org/2000/svg">
+        <!-- <svg style="width: 100%; height: 100vh; position: absolute; top: 0" xmlns="http://www.w3.org/2000/svg">
             <path style="width: 100%; position: absolute; top: 20px" id="curvePath1" fill="#0099ff" fill-opacity=".5"></path>
         </svg>
     
@@ -44,18 +54,18 @@
     
         <svg style="width: 150px; height: 100vh; position: absolute; top: 350px; right: 0px;" xmlns="http://www.w3.org/2000/svg">
             <path style="width: 100%;" id="curvePath3R" fill="#ff3300" fill-opacity=".5"></path>
-        </svg>
-        
+        </svg> -->
 
         <div class="constrainedWidth">
 
-            <div id="title">
-                <h1 id="header">Zachary Richards</h1>
-                <h2 id="subHeader">Game Development Portfolio</h2>
-            </div>
+        <div id="title">
+            <h1 id="header">Zachary Richards</h1>
+            <h2 id="subHeader">Game Development Portfolio</h2>
+        </div>
+
+        <img id="scrollDown" src="images/mouseScroll.png" alt="mouse scroll down">
         
-        
-        <img class="imgHeader" src="images/games.png">
+        <img class="imgHeader" src="images/games.png" alt="pixel art games header">
 
         <div id="gamesContainer">
             <input class="slideShowSwitchers" type="button" value="<" onclick="nextGame(true)">
@@ -96,9 +106,8 @@
                 <p class="websiteDescription">For the past five years, I have been designing and developing games in Unity. Over this time, I have taught myself to program, design three-dimensional models, create digital art, and market and distribute the games I create.</p>
             </div>
         </div>
-
         
-        <img class="imgHeader" src="VectorArt/vectorart.svg">
+        <img class="imgHeader" src="VectorArt/vectorart.svg" alt="vector art header">
         
         </div>
 
@@ -111,30 +120,30 @@
         </div>
 
         <div class="constrainedWidth">
-            <img class="imgHeader" src="images/PixelArtTitle.png">
+            <img class="imgHeader" src="images/PixelArtTitle.png" alt="pixel art header">
         </div>
 
         <div id="pixelArtSliders">
             <div class="slider" id="pixelArtSlider">
-                <img class="pixelImage" src="images/SMALL_BONSAI_5.png">
-                <img class="pixelImage" src="images/BIG_BONSAI_3.png">
-                <img class="pixelImage" src="images/BIG_BONSAI_2.png">
-                <img class="pixelImage" src="images/SMALL_BONSAI_2.png">
-                <img class="pixelImage" src="images/BIG_BONSAI_B1.png">
-                <img class="pixelImage" src="images/SMALL_BONSAI_6.png">
-                <img class="pixelImage" src="images/BIG_BONSAI_B2.png">
-                <img class="pixelImage" src="images/SMALL_BONSAI_7.png">
+                <img class="pixelImage" src="images/SMALL_BONSAI_5.png" alt="small pixel art bonsai 5">
+                <img class="pixelImage" src="images/BIG_BONSAI_3.png" alt="large pixel art bonsai 3">
+                <img class="pixelImage" src="images/BIG_BONSAI_2.png" alt="large pixel art bonsai 2">
+                <img class="pixelImage" src="images/SMALL_BONSAI_2.png" alt="small pixel art bonsai 2">
+                <img class="pixelImage" src="images/BIG_BONSAI_B1.png" alt="large pixel art bonsai blue 1">
+                <img class="pixelImage" src="images/SMALL_BONSAI_6.png" alt="small pixel art bonsai 6">
+                <img class="pixelImage" src="images/BIG_BONSAI_B2.png" alt="large pixel art bonsai blue 2">
+                <img class="pixelImage" src="images/SMALL_BONSAI_7.png" alt="small pixel art bonsai 7">
             </div>
     
             <div class="slider" id="pixelArtSlider1">
-                <img class="pixelImage" src="images/scroll.png">
-                <img class="pixelImage" src="images/bomb.png">
-                <img class="pixelImage" src="images/Potion.png">
-                <img class="pixelImage" src="images/wizard.png">
+                <img class="pixelImage" src="images/scroll.png" alt="pixel art scroll">
+                <img class="pixelImage" src="images/bomb.png" alt="pixel art bomb">
+                <img class="pixelImage" src="images/Potion.png" alt="pixel art potion">
+                <img class="pixelImage" src="images/wizard.png" alt="pixel art wizard">
     
-                <img class="pixelImage" src="images/Chest.png">
-                <img class="pixelImage" src="images/TrafficCone.png">
-                <img class="pixelImage" src="images/grapes.png">
+                <img class="pixelImage" src="images/Chest.png" alt="pixel art chest">
+                <img class="pixelImage" src="images/TrafficCone.png" alt="pixel art traffic cone">
+                <img class="pixelImage" src="images/grapes.png" alt="pixel art grapes">
             </div>
         </div>
 
@@ -165,12 +174,14 @@
                     </div>
                 </div>
     
-                <img id="websiteStatic" src="images/static.gif">
+                <video id="websiteStatic" autoplay loop muted playsinline>
+                    <source src="images/static.webm" type="video/webm">
+                </video>
 
                 <div id="webContent">
-                    <img id="spacebaseimg" src="images/space-base.io.png">
-                    <iframe id="webWindowContent" src="https://zprs-tetris99.glitch.me"></iframe>
-                    <iframe id="webWindowContent" src="https://zacharyrichards.com/COVID-19_Data/index.html"></iframe>
+                    <img id="spacebaseimg" src="images/space-base.io.png"  alt="space-base.io screenshot">
+                    <iframe title="tetris99 web remake" id="webWindowContent" src="https://zprs-tetris99.glitch.me" frameBorder="0"></iframe>
+                    <iframe title="covid 19 data visualization" id="webWindowContent" src="https://zacharyrichards.com/COVID-19_Data/index.html" frameBorder="0"></iframe>
                 </div>
             </div>
     
@@ -197,39 +208,39 @@
 
         <div class="logoHolder">
             <div class="appLogo"> 
-                <img class="logoIcon" src="logos/blender.svg">
+                <img class="logoIcon" src="logos/blender.svg" alt="Blender logo">
                 <span style="color:rgb(255, 150, 51)" class="logoCaption">Blender</span>
             </div>
             <div class="appLogo"> 
-                <img class="logoIcon" src="logos/unity.svg">
+                <img class="logoIcon" src="logos/unity.svg" alt="Unity logo">
                 <span style="color:rgb(47, 47, 66)" class="logoCaption">Unity</span>
             </div>
             <div class="appLogo"> 
-                <img class="logoIcon" src="logos/steamvr.jpg">
+                <img class="logoIcon" src="logos/steamvr.jpg" alt="Steam VR logo">
                 <span style="color:rgb(47, 47, 66)" class="logoCaption">Steam VR</span>
             </div>
             <div class="appLogo"> 
-                <img class="logoIcon" src="logos/substancepainter.svg">
+                <img class="logoIcon" src="logos/substancepainter.svg" alt="Substance Painter logo">
                 <span style="color:rgb(204, 29, 29)" class="logoCaption">Substance Painter</span>
             </div>
             <div class="appLogo"> 
-                <img class="logoIcon" src="logos/aesprite.svg">
+                <img class="logoIcon" src="logos/aesprite.svg" alt="Aesprite logo">
                 <span style="color:rgb(117, 117, 117)" class="logoCaption">Aesprite</span>
             </div>
             <div class="appLogo"> 
-                <img class="logoIcon" src="logos/affinityDesigner.png">
+                <img class="logoIcon" src="logos/affinityDesigner.png" alt="affinity designer logo">
                 <span style="color:rgb(12, 95, 143)" class="logoCaption">Affinity Designer</span>
             </div>
             <div class="appLogo"> 
-                <img class="logoIcon" src="logos/godot.svg">
+                <img class="logoIcon" src="logos/godot.svg" alt="Godot logo">
                 <span style="color:rgb(101, 165, 207)" class="logoCaption">Godot</span>
             </div>
             <div class="appLogo"> 
-                <img class="logoIcon" src="logos/github.png">
+                <img class="logoIcon" src="logos/github.png" alt="GitHub logo">
                 <span style="color:rgb(0, 0, 0)" class="logoCaption">GitHub</span>
             </div>
             <div class="appLogo"> 
-                <img class="logoIcon" src="logos/wordpress.png">
+                <img class="logoIcon" src="logos/wordpress.png" alt="WordPress logo">
                 <span style="color:rgb(29, 113, 161)" class="logoCaption">WordPress</span>
             </div>
         </div>
@@ -238,35 +249,35 @@
 
         <div class="logoHolder">
             <div class="appLogo"> 
-                <img class="logoIcon" src="logos/csharp.jpg">
+                <img class="logoIcon" src="logos/csharp.jpg" alt="C# logo">
                 <span style="color:rgb(146, 51, 255)" class="logoCaption">C#</span>
             </div>
             <div class="appLogo"> 
-                <img class="logoIcon" src="logos/java.svg">
+                <img class="logoIcon" src="logos/java.svg" alt="Java logo">
                 <span style="color:rgb(255, 51, 51)" class="logoCaption">Java</span>
             </div>
             <div class="appLogo"> 
-                <img class="logoIcon" src="logos/javascript.svg">
+                <img class="logoIcon" src="logos/javascript.svg" alt="JavaScript logo">
                 <span style="color:rgb(179, 161, 6)" class="logoCaption">JavaScript</span>
             </div>
             <div class="appLogo"> 
-                <img class="logoIcon" src="logos/html5.svg">
+                <img class="logoIcon" src="logos/html5.svg" alt="HTML 5 logo">
                 <span style="color:rgb(230, 95, 33)" class="logoCaption">HTML 5</span>
             </div>
             <div class="appLogo"> 
-                <img class="logoIcon" src="logos/css.svg">
+                <img class="logoIcon" src="logos/css.svg" alt="CSS 6 logo">
                 <span style="color:rgb(51, 88, 255)" class="logoCaption">CSS 3</span>
             </div>
             <div class="appLogo"> 
-                <img class="logoIcon" src="logos/jquery.svg">
+                <img class="logoIcon" src="logos/jquery.svg" alt="Jquery logo">
                 <span style="color:rgb(0, 0, 0)" class="logoCaption">jQuery</span>
             </div>
             <div class="appLogo"> 
-                <img class="logoIcon" src="logos/npm.svg">
+                <img class="logoIcon" src="logos/npm.svg" alt="NPM logo">
                 <span style="color:rgb(235, 72, 72)" class="logoCaption">NPM</span>
             </div>
             <div class="appLogo"> 
-                <img class="logoIcon" src="logos/socketio.svg">
+                <img class="logoIcon" src="logos/socketio.svg" alt="Socket.io logo">
                 <span style="color:rgb(0, 0, 0)" class="logoCaption">Socket.IO</span>
             </div>
         </div>
@@ -276,15 +287,15 @@
         <div class="logoHolder">
 
             <div class="appLogo"> 
-                <img class="logoIcon" src="logos/steam.png">
+                <img class="logoIcon" src="logos/steam.png" alt="Steam logo">
                 <span style="color:rgb(36, 52, 105)" class="logoCaption">Steam</span>
             </div>
             <div class="appLogo"> 
-                <img class="logoIcon" src="logos/aws.png">
+                <img class="logoIcon" src="logos/aws.png" alt="AWS logo">
                 <span style="color:rgb(54, 57, 73)" class="logoCaption">Amazon Web Services</span>
             </div>
             <div class="appLogo"> 
-                <img class="logoIcon" src="logos/digitalOcean.svg">
+                <img class="logoIcon" src="logos/digitalOcean.svg" alt="Digital Ocean logo">
                 <span style="color:rgb(56, 125, 255)" class="logoCaption">Digital Ocean</span>
             </div>
             
@@ -292,14 +303,14 @@
 
         <h1 style="margin-top: -15vh">Contact</h1>
 
-        <img src="images/zach.svg" id="profilePicture">
+        <img src="images/zach.svg" id="profilePicture" alt="vector art profile picture">
 
         <h2 style="font-size: 4em;">me@zacharyrichards.com</h2>
 
         <div class="logoHolder" style="margin-bottom: 0px">
             <div class="appLogo"> 
                 <a style="font-size: 1.5em; color: rgb(54, 134, 209)" href="https://www.linkedin.com/in/zachary-richards-34b2a2171">
-                    <img class="logoIcon" src="logos/linkedIn.png">
+                    <img class="logoIcon" src="logos/linkedIn.png" alt="LinkedIn logo">
                 </a>
                 <span style="color:rgb(36, 52, 105)" class="logoCaption">LinkedIn</span>
             </div>
@@ -307,11 +318,4 @@
         </div>
     </div>
     </body>
-
-    <script type="text/javascript" src="scripts/colorCurves.js"></script>
-    <script type="text/javascript" src="scripts/svgSelector.js"></script>
-    <script type="text/javascript" src="scripts/pixelArtSliders.js"></script>
-    <script type="text/javascript" src="scripts/mouseVideoPlayback.js"></script>
-    <script type="text/javascript" src="scripts/main.js"></script>
-    <script type="text/javascript" src="scripts/websiteSwitcher.js"></script>
 </html>

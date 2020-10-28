@@ -1,6 +1,7 @@
 var rtime;
 var timeout = false;
 var delta = 200;
+var randomColors = ["#ff3b3b", "#ffa43b", "#41ba56", "#39d0fa", "#3953fa", "#8939fa", "#d339fa", "#fa39a0"];
 
 $(window).resize(function() {
     destroySVgSelector();
@@ -84,12 +85,17 @@ function enableChild(id, index)
     }
 }
 
+
+
 $(document).ready(() => {
     spawnSvgSelector();
     createSliders();
     centerSpaceBaseImage();
 
     $(window).resize();
+
+    $("#header").css("text-shadow", "4px 4px " + randomColors[ Math.floor(Math.random() * randomColors.length)] + "a6");
+    $("#subHeader").css("opacity", 1);
     // $("#unityGames").width($("#unityGames").width() * 0.7296875);
 });
 
