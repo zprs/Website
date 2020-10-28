@@ -99,13 +99,13 @@ $(document).ready(() => {
     // $("#unityGames").width($("#unityGames").width() * 0.7296875);
 
 
-    setTimeout(function(){ loadIframes(); }, 500);
+    setTimeout(function(){ loadIframes(); }, 1500);
 });
 
 function loadIframes()
 {
     $("#covidVisualization").attr('src', "https://zacharyrichards.com/COVID-19_Data/index.html");
-    $("#tetris99Iframe").attr('src', "https://zprs-tetris99.glitch.me");
+    setTimeout(() => $("#tetris99Iframe").attr('src', "https://zprs-tetris99.glitch.me"), 1000);
 }
 
 function centerSpaceBaseImage()

@@ -4,6 +4,7 @@
         <title>Game Development Portfolio</title>
 
         <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff"/>
         <meta name="Description" content="Zachary Richards's game development portfolio.">
 
         <link rel="manifest" href="manifest.json">
@@ -20,7 +21,7 @@
         <link href="https://fonts.googleapis.com/css2?family=Courier+Prime&display=swap" rel="stylesheet">
 
         <script defer src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-        <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js" integrity="sha256-VazP97ZCwtekAsvgPBSUwPFKdrwD3unUfSGVYrahUqU=" crossorigin="anonymous"></script>
+        <script defer src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js" integrity="sha256-VazP97ZCwtekAsvgPBSUwPFKdrwD3unUfSGVYrahUqU=" crossorigin="anonymous"></script>
 
         <!-- <script defer type="text/javascript" src="scripts/colorCurves.js"></script> -->
         <script defer type="text/javascript" src="scripts/svgSelector.js"></script>
@@ -76,12 +77,12 @@
                 Your browser does not support the video tag.
                 </video>
 
-                <video width="100%" height="100%" controls>
+                <video width="100%" height="100%" controls preload="auto">
                     <source src="videos/Unity Stick Fighting Game.mp4" type="video/mp4">
                 Your browser does not support the video tag.
                 </video>
                 
-                <video width="100%" height="100%" controls>
+                <video width="100%" height="100%" controls preload="auto">
                     <source src="videos/unityGames.m4v" type="video/mp4">
                 Your browser does not support the video tag.
                 </video>
@@ -179,9 +180,9 @@
                 </video>
 
                 <div id="webContent">
-                    <img id="spacebaseimg" src="images/space-base.io.png"  alt="space-base.io screenshot">
-                    <iframe id="tetris99Iframe" title="tetris99 web remake" class="webWindowContent" src="about:blank" frameBorder="0"></iframe>
-                    <iframe id="covidVisualization" title="covid 19 data visualization" class="webWindowContent" src="about:blank" frameBorder="0"></iframe>
+                    <img id="spacebaseimg" src="images/space-baseio.jpg"  alt="space-base.io screenshot">
+                    <iframe id="tetris99Iframe" title="tetris99 web remake" class="webWindowContent" src="about:blank" frameBorder="0" loading="lazy"></iframe>
+                    <iframe id="covidVisualization" title="covid 19 data visualization" class="webWindowContent" src="about:blank" frameBorder="0" loading="lazy"></iframe>
                 </div>
             </div>
     
@@ -236,11 +237,11 @@
                 <span style="color:rgb(101, 165, 207)" class="logoCaption">Godot</span>
             </div>
             <div class="appLogo"> 
-                <img class="logoIcon" src="logos/github.png" alt="GitHub logo">
+                <img class="logoIcon" src="logos/github.jpg" alt="GitHub logo">
                 <span style="color:rgb(0, 0, 0)" class="logoCaption">GitHub</span>
             </div>
             <div class="appLogo"> 
-                <img class="logoIcon" src="logos/wordpress.png" alt="WordPress logo">
+                <img class="logoIcon" src="logos/wordpress.jpg" alt="WordPress logo">
                 <span style="color:rgb(29, 113, 161)" class="logoCaption">WordPress</span>
             </div>
         </div>
@@ -287,11 +288,11 @@
         <div class="logoHolder">
 
             <div class="appLogo"> 
-                <img class="logoIcon" src="logos/steam.png" alt="Steam logo">
+                <img class="logoIcon" src="logos/steam.jpg" alt="Steam logo">
                 <span style="color:rgb(36, 52, 105)" class="logoCaption">Steam</span>
             </div>
             <div class="appLogo"> 
-                <img class="logoIcon" src="logos/aws.png" alt="AWS logo">
+                <img class="logoIcon" src="logos/aws.jpg" alt="AWS logo">
                 <span style="color:rgb(54, 57, 73)" class="logoCaption">Amazon Web Services</span>
             </div>
             <div class="appLogo"> 
@@ -310,7 +311,7 @@
         <div class="logoHolder" style="margin-bottom: 0px">
             <div class="appLogo"> 
                 <a style="font-size: 1.5em; color: rgb(54, 134, 209)" href="https://www.linkedin.com/in/zachary-richards-34b2a2171">
-                    <img class="logoIcon" src="logos/linkedIn.png" alt="LinkedIn logo">
+                    <img class="logoIcon" src="logos/linkedIn.jpg" alt="LinkedIn logo">
                 </a>
                 <span style="color:rgb(36, 52, 105)" class="logoCaption">LinkedIn</span>
             </div>

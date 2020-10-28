@@ -17,7 +17,7 @@ function spawnSvgSelector()
     var slidesHTML = "";
 
     for (let i = 0; i < imagesOnScreen + 2; i++) {
-        slidesHTML += `<img class="svgSelectorImg" src="${svgLocations[i]}">`
+        slidesHTML += `<img class="svgSelectorImg" src="${svgLocations[i]}" alt="vector art image ${i}">`
     }
 
     $(".svgSelectorContainer").html(slidesHTML);
