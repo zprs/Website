@@ -1,4 +1,8 @@
-body,html {
+:root {
+    --accentColor: white;
+}
+
+body, html {
     overflow-x: hidden;
 }
 
@@ -29,7 +33,7 @@ h1 {
 
 svg
 {
-z-index: -1;
+    z-index: -1;
 }
 
 h2 {
@@ -46,8 +50,8 @@ h2 {
     padding-left: 25%;
     padding-right: 25%;
 
-    padding-top: 10vh;
-    padding-bottom: 10vh;
+    padding-top: 15vh;
+    padding-bottom: 5vh;
 }
 
 #title{
@@ -63,6 +67,7 @@ h2 {
     -webkit-text-stroke: 2px rgb(54, 54, 54);
     text-shadow: 0px 0px #ffffff;
     transition: text-shadow 1s;
+    margin-bottom: 0;
 }
 
 
@@ -92,7 +97,7 @@ h2 {
 
 #gamesContainer
 {
-    width: 100%;
+    width: 75vw;
     margin: auto;
     vertical-align: center;
     text-align: center;
@@ -105,18 +110,24 @@ h2 {
     text-align: center;
 }
 
-
 #webDevTitle{
     font-family: 'Courier Prime', monospace;
     font-size: 500%;
 }
 
-.websiteCaption
+.divCaption
 {
     font-family: 'Raleway', sans-serif;
     width: 60%;
     margin-left: 20%;
     text-align: left;
+    margin-top: 15vw;
+    /* text-shadow: 1px 1px 0px white; */
+}
+
+.websiteCaption
+{
+    margin-top: 5vw;
 }
 
 .websiteTitle
@@ -187,6 +198,7 @@ h2 {
 .logoCaption{
     display: inline-block;
     opacity: 0;
+    font-size: 3em;
     transform: translateY(-20px);
     transition: all .1s ease-in-out;
 
@@ -220,6 +232,15 @@ span
     animation: fade 4s linear infinite;
 }
 
+.testBox
+{
+    position: absolute;
+    display: inline-block;
+    width: 200px;
+    height: 200px;
+    background-color: teal;
+}
+
 @keyframes fade {
     50% { opacity: .5}
   }
@@ -248,4 +269,23 @@ span
         width: 900px;
         margin-left: calc(100vw / 2 - 450px);
     }
+
+    #gamesContainer
+    {
+        width: 675px;
+    }
+
+    #unityGames
+    {
+        height:  calc(278px);
+    }
 }
+
+@media screen and (max-width: 600px) {
+
+    .gameCaption
+    {
+        margin-top: -3vw !important;
+    }
+}
+

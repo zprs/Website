@@ -1,26 +1,13 @@
-// var svgLocations = ["VectorArt/bonsai.svg", "VectorArt/sword1.svg","VectorArt/Scroll.svg", "VectorArt/potion.svg","VectorArt/axe.svg"];
-
 var svgPositions = [];
 var svgScales = [];
 
-function destroySVgSelector() {
-    // $(".svgSelectorContainer").html("");
-}
-
-function spawnSvgSelector()
+function spawnVideoSelector()
 {
     svgPositions = [];
     svgScales = [];
 
     var imagesOnScreen = 3;
 
-    // var slidesHTML = "";
-
-    // for (let i = 0; i < imagesOnScreen + 2; i++) {
-    //     slidesHTML += `<img class="svgSelectorImg" src="${svgLocations[i]}" alt="vector art image ${i}">`
-    // }
-
-    // $(".svgSelectorContainer").html(slidesHTML);
 
     var svgSlides = $(".svgSelectorContainer").children();
 

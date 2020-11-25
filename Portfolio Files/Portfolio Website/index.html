@@ -7,11 +7,11 @@
         <meta name="theme-color" content="#ffffff"/>
         <meta name="Description" content="Zachary Richards's game development portfolio.">
 
-        <link rel="manifest" href="manifest.json">
+        <!-- <link rel="manifest" href="manifest.json"> -->
         <link rel="apple-touch-icon" href="../../images/icon-192.PNG">
 
         <link rel="stylesheet" href="styles/svgSwitcherStyles.css">
-        <link rel="stylesheet" href="styles/pixlArtSliders.css">
+        <link rel="stylesheet" href="styles/artSliders.css">
         <link rel="stylesheet" href="styles/mouseSlideshow.css">
         <link rel="stylesheet" href="styles/webWindowStyles.css">
         <link rel="stylesheet" href="styles/mainStyles.css">
@@ -23,37 +23,38 @@
         <script defer src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
         <script defer src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js" integrity="sha256-VazP97ZCwtekAsvgPBSUwPFKdrwD3unUfSGVYrahUqU=" crossorigin="anonymous"></script>
 
-        <!-- <script defer type="text/javascript" src="scripts/colorCurves.js"></script> -->
         <script defer type="text/javascript" src="scripts/svgSelector.js"></script>
-        <script defer type="text/javascript" src="scripts/pixelArtSliders.js"></script>
+        <script defer type="text/javascript" src="scripts/divSelector.js"></script>
+        <script defer type="text/javascript" src="scripts/artSliders.js"></script>
         <script defer type="text/javascript" src="scripts/mouseVideoPlayback.js"></script>
         <script defer type="text/javascript" src="scripts/main.js"></script>
         <script defer type="text/javascript" src="scripts/websiteSwitcher.js"></script>
+        <!-- <script defer type="text/javascript" src="scripts/colorCurves.js"></script> -->
     </head>
     <body>
     <div id="siteWrapper">
 
-        <!-- <svg style="width: 100%; height: 100vh; position: absolute; top: 0" xmlns="http://www.w3.org/2000/svg">
+        <!-- <svg style="width: 100%; height: 200vh; position: absolute; top: 100vh">
             <path style="width: 100%; position: absolute; top: 20px" id="curvePath1" fill="#0099ff" fill-opacity=".5"></path>
-        </svg>
+        </svg> -->
     
-        <svg style="width: 100%; height: 100vh; position: absolute; top: 120px" xmlns="http://www.w3.org/2000/svg">
+        <!-- <svg style="width: 100%; height: 100vh; position: absolute; top: 120px" xmlns="http://www.w3.org/2000/svg">
             <path style="width: 100%;" id="curvePath2" fill="#ffe733" fill-opacity=".5"></path>
-        </svg>
+        </svg> -->
     
-        <svg style="width: 100%; height: 100vh; position: absolute; top: 350px" xmlns="http://www.w3.org/2000/svg">
+        <!-- <svg style="width: 100%; height: 100vh; position: absolute; top: 150vh">
             <path style="width: 100%;" id="curvePath3" fill="#ff3300" fill-opacity=".5"></path>
-        </svg>
+        </svg> -->
     
-        <svg style="width: 150px; height: 100vh; position: absolute; top: 0; right: 0px;" xmlns="http://www.w3.org/2000/svg">
+        <!-- <svg style="width: 300px; height: 100vh; position: absolute; top: 150vh; right: 0px;">
             <path style="width: 100%;" id="curvePath1R" fill="#0099ff" fill-opacity=".5"></path>
-        </svg>
+        </svg> -->
     
-        <svg style="width: 150px; height: 100vh; position: absolute; top: 120; right: 0px;" xmlns="http://www.w3.org/2000/svg">
+        <!-- <svg style="width: 150px; height: 100vh; position: absolute; top: 120; right: 0px;" xmlns="http://www.w3.org/2000/svg">
             <path style="width: 100%;" id="curvePath2R" fill="#ffe733" fill-opacity=".5"></path>
-        </svg>
+        </svg> -->
     
-        <svg style="width: 150px; height: 100vh; position: absolute; top: 350px; right: 0px;" xmlns="http://www.w3.org/2000/svg">
+        <!-- <svg style="width: 150px; height: 100vh; position: absolute; top: 350px; right: 0px;" xmlns="http://www.w3.org/2000/svg">
             <path style="width: 100%;" id="curvePath3R" fill="#ff3300" fill-opacity=".5"></path>
         </svg> -->
 
@@ -65,84 +66,120 @@
         </div>
 
         <img id="scrollDown" src="images/mouseScroll.png" alt="mouse scroll down">
-        
         <img class="imgHeader" src="images/games.png" alt="pixel art games header">
 
-        <div id="gamesContainer">
-            <input class="slideShowSwitchers" type="button" value="<" onclick="nextGame(true)">
-            <div id="unityGames">
-
-                <video width="100%" height="100%" controls>
-                    <source src="videos/Ludum Dare 47 Game Jam Submission.mp4" type="video/mp4">
-                Your browser does not support the video tag.
-                </video>
-
-                <video width="100%" height="100%" controls preload="auto">
-                    <source src="videos/Unity Stick Fighting Game.mp4" type="video/mp4">
-                Your browser does not support the video tag.
-                </video>
-                
-                <video width="100%" height="100%" controls preload="auto">
-                    <source src="videos/unityGames.m4v" type="video/mp4">
-                Your browser does not support the video tag.
-                </video>
-
-            </div> 
-            <input class="slideShowSwitchers" type="button" value=">" onclick="nextGame(true)">
+        <!-- End Constrained Width -->
         </div>
 
-        <div id="gameCaptions" class="websiteCaption">
+        <div id="svgSelector">
+            <div id="svgArrows" style="z-index: 10;">
+                <input class="slideShowSwitchers switcherLeft" type="button" value="<" onclick="divSelectorLeft()">
+                <input class="slideShowSwitchers switcherRight" type="button" value=">" onclick="divSelectorRight()">
+            </div>
+            <div class="svgSelectorContainer">
+
+                <div class="svgSelectorImg" id="OneGame">
+                    <div id="gamesContainer">
+                        <div id="unityGames">
+                            <video width="100%" height="100%" controls preload="auto">
+                                <source src="videos/unityGames.m4v" type="video/mp4">
+                            Your browser does not support the video tag.
+                            </video>
+            
+                        </div> 
+                    </div>
+                </div>
+
+                <div class="svgSelectorImg" id="OneGame">
+                    <div id="gamesContainer">
+                        <div id="unityGames">
+                            <video width="100%" height="100%" controls>
+                                <source src="videos/Ludum Dare 47 Game Jam Submission.mp4" type="video/mp4">
+                            Your browser does not support the video tag.
+                            </video>
+                        </div> 
+                    </div>
+                </div>
+
+                <div class="svgSelectorImg" id="OneGame">
+                    <div id="gamesContainer">
+                        <div id="unityGames">
+                            <video width="100%" height="100%" controls preload="auto">
+                                <source src="videos/Unity Stick Fighting Game.mp4" type="video/mp4">
+                            Your browser does not support the video tag.
+                            </video>
+                        </div> 
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+
+        <div class="constrainedWidth">
+
+        <div id="gameCaptions" class="divCaption gameCaption">
+            
+            <div style="display: none;">
+                <h2 class="websiteTitle">Other Games Developed Using Unity</h2>
+                <p class="websiteDescription">For the past five years, I have been designing and developing games in Unity. Over this time, I have taught myself to program, design three-dimensional models, create digital art, and market and distribute the games I create.</p>
+            </div>
             <div>
                 <h2 class="websiteTitle">Ludum Dare 47 Game Entry</h2>
-                <p class="websiteDescription">In the Ludum Dare 47 2020 game jam we had 72 hours to create a game from scratch with the theme of, "stuck in a loop". I created all of the assets, code, and visual effects for <a href="https://zpr.itch.io/convolooption">my submission</a> durring the 72 hours.</p>
+                <p class="websiteDescription">In the Ludum Dare 47 2020 game jam we had 72 hours to create a game from scratch with the theme of, "stuck in a loop". I created all of the assets, code, and visual effects for <a href="https://zpr.itch.io/convolooption">my submission</a> during the 72 hours.</p>
             </div>
             <div style="display: none;">
                 <h2 class="websiteTitle">Sticks</h2>
                 <p class="websiteDescription">Planned to launch on Steam. All of the 3D models were created in Blender, and the visual effects and shaders were made in Unity. Cross network multiplayer is done using the Steamworks API. Reducing latency to an acceptable range while keeping the game synced between the clients was a major accomplishment of this project.</p>
             </div>
-            <div style="display: none;">
-                <h2 class="websiteTitle">Other Games Developed Using Unity</h2>
-                <p class="websiteDescription">For the past five years, I have been designing and developing games in Unity. Over this time, I have taught myself to program, design three-dimensional models, create digital art, and market and distribute the games I create.</p>
-            </div>
-        </div>
-        
-        <img class="imgHeader" src="VectorArt/vectorart.svg" alt="vector art header">
-        
-        </div>
+        </div>        
 
-        <div id="svgSelector">
+        <img class="imgHeader" id="vectorArtHeader" src="images/VectorArt/vectorart.svg" alt="vector art header">
+        <!-- <div id="svgSelector">
             <div id="svgArrows">
                 <input class="slideShowSwitchers" style="margin-right: 40vw" type="button" value="<" onclick="nextSVG(false)">
                 <input class="slideShowSwitchers" style="margin-left: 40vw" type="button" value=">" onclick="nextSVG(true)">
             </div>
             <div class="svgSelectorContainer"></div>
+        </div> -->
+
+        <!-- End Constrained Width -->
+        </div>
+
+        <div class="artSliders">
+            <div class="slider" id="svgArtSlider">
+                <img class="sliderImage" src="images/VectorArt/bonsai.svg" alt="bonsai svg">
+                <img class="sliderImage" src="images/VectorArt/sword1.svg" alt="large pixel art bonsai 3">
+                <img class="sliderImage" src="images/VectorArt/Scroll.svg" alt="large pixel art bonsai 2">
+                <img class="sliderImage" src="images/VectorArt/potion.svg" alt="small pixel art bonsai 2">
+                <img class="sliderImage" src="images/VectorArt/axe.svg" alt="large pixel art bonsai blue 1">
+            </div>
         </div>
 
         <div class="constrainedWidth">
             <img class="imgHeader" src="images/PixelArtTitle.png" alt="pixel art header">
         </div>
 
-        <div id="pixelArtSliders">
+        <div class="artSliders">
             <div class="slider" id="pixelArtSlider">
-                <img class="pixelImage" src="images/SMALL_BONSAI_5.png" alt="small pixel art bonsai 5">
-                <img class="pixelImage" src="images/BIG_BONSAI_3.png" alt="large pixel art bonsai 3">
-                <img class="pixelImage" src="images/BIG_BONSAI_2.png" alt="large pixel art bonsai 2">
-                <img class="pixelImage" src="images/SMALL_BONSAI_2.png" alt="small pixel art bonsai 2">
-                <img class="pixelImage" src="images/BIG_BONSAI_B1.png" alt="large pixel art bonsai blue 1">
-                <img class="pixelImage" src="images/SMALL_BONSAI_6.png" alt="small pixel art bonsai 6">
-                <img class="pixelImage" src="images/BIG_BONSAI_B2.png" alt="large pixel art bonsai blue 2">
-                <img class="pixelImage" src="images/SMALL_BONSAI_7.png" alt="small pixel art bonsai 7">
+                <img class="sliderImage" src="images/SMALL_BONSAI_5.png" alt="small pixel art bonsai 5">
+                <img class="sliderImage" src="images/BIG_BONSAI_3.png" alt="large pixel art bonsai 3">
+                <img class="sliderImage" src="images/BIG_BONSAI_2.png" alt="large pixel art bonsai 2">
+                <img class="sliderImage" src="images/SMALL_BONSAI_2.png" alt="small pixel art bonsai 2">
+                <img class="sliderImage" src="images/BIG_BONSAI_B1.png" alt="large pixel art bonsai blue 1">
+                <img class="sliderImage" src="images/SMALL_BONSAI_6.png" alt="small pixel art bonsai 6">
+                <img class="sliderImage" src="images/BIG_BONSAI_B2.png" alt="large pixel art bonsai blue 2">
+                <img class="sliderImage" src="images/SMALL_BONSAI_7.png" alt="small pixel art bonsai 7">
             </div>
     
             <div class="slider" id="pixelArtSlider1">
-                <img class="pixelImage" src="images/scroll.png" alt="pixel art scroll">
-                <img class="pixelImage" src="images/bomb.png" alt="pixel art bomb">
-                <img class="pixelImage" src="images/Potion.png" alt="pixel art potion">
-                <img class="pixelImage" src="images/wizard.png" alt="pixel art wizard">
+                <img class="sliderImage" src="images/scroll.png" alt="pixel art scroll">
+                <img class="sliderImage" src="images/bomb.png" alt="pixel art bomb">
+                <img class="sliderImage" src="images/Potion.png" alt="pixel art potion">
+                <img class="sliderImage" src="images/wizard.png" alt="pixel art wizard">
     
-                <img class="pixelImage" src="images/Chest.png" alt="pixel art chest">
-                <img class="pixelImage" src="images/TrafficCone.png" alt="pixel art traffic cone">
-                <img class="pixelImage" src="images/grapes.png" alt="pixel art grapes">
+                <img class="sliderImage" src="images/Chest.png" alt="pixel art chest">
+                <img class="sliderImage" src="images/TrafficCone.png" alt="pixel art traffic cone">
+                <img class="sliderImage" src="images/grapes.png" alt="pixel art grapes">
             </div>
         </div>
 
@@ -162,7 +199,7 @@
         <h1 id="webDevTitle"> &lt;h1&gt; Web Development &lt;/h1&gt;</h1>
 
         <div id="webDesignDiv">
-            <input class="slideShowSwitchers" type="button" value="<" onclick="nextWebsite(false )">
+            <input class="slideShowSwitchers webSwitcherLeft" type="button" value="<" onclick="nextWebsite(false )">
     
             <div id="webWindow">
                 <div id="taskBar">
@@ -184,12 +221,12 @@
                 </div>
             </div>
     
-            <input class="slideShowSwitchers" type="button" value=">" onclick="nextWebsite(true)">
+            <input class="slideShowSwitchers webSwitcherRight" type="button" value=">" onclick="nextWebsite(true)">
         </div>
 
-        <div id="websiteCaptions" class="websiteCaption">
+        <div id="websiteCaptions" class="divCaption websiteCaption">
             <div>
-                <h2 class="websiteTitle"><a href="http://space-base.io">Space-Base.io</a></h2>
+                <h2 class="websiteTitle">Space-Base.io</h2>
                 <p class="websiteDescription">I designed, developed and deployed multiplayer, web-based game using Node.js, Socket.io, and HTML 5 Canvas. I configured AWS ECS to host a cluster of server instances in Docker containers along with creating an automated build and zero downtime deployment pipeline from GitHub to AWS. Traffic monitoring and revenue generation are done through Google Analytics, and Google Adsense respectively. This game took over a year to produce and has almost 200,000 pageviews since it’s initial release in October of 2018.</p>
             </div>
             <div style="display: none;">

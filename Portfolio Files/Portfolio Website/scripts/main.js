@@ -1,11 +1,10 @@
 var rtime;
 var timeout = false;
 var delta = 200;
-var randomColors = ["#ff3b3b", "#ffa43b", "#41ba56", "#39d0fa", "#3953fa", "#8939fa", "#d339fa", "#fa39a0"];
+var randomColors = ["#ff8585", "#ffbe73", "#9bf27e", "#75efff", "#8a9fff", "#bc8cff", "#e994ff", "#ff8fbc"];
+var headerColor;
 
 $(window).resize(function() {
-    destroySVgSelector();
-
     $("#unityGames").height($("#unityGames").width() * 108 / 192);
 
     rtime = new Date();
@@ -13,6 +12,8 @@ $(window).resize(function() {
         timeout = true;
         setTimeout(resizeend, delta);
     }
+
+    divSelector.destroy();
 });
 
 function resizeend() {
@@ -21,12 +22,17 @@ function resizeend() {
     } else {
         timeout = false;
 
-        spawnSvgSelector();
         createSliders();
         centerSpaceBaseImage();
+        divSelector.spawn(true);
+        gameIndex = 1;
+
+        console.log("resize " + gameIndex);
+
+        //Reset the caption
+        enableChild("gameCaptions", gameIndex);
     }               
 }
-
 
 function createSliders()
 {
@@ -34,21 +40,9 @@ function createSliders()
     
     var slider1 = createSlider($("#pixelArtSlider"), true);
     var slider2 = createSlider($("#pixelArtSlider1"), false);
+    var slider3 = createSlider($("#svgArtSlider"), false, window.innerWidth / 4.5);
     
-    sliders = [slider1, slider2];
-}
-
-var gameIndex = 0; 
-
-function nextGame(direction)
-{
-    // if(gameIndex == 0)
-    //     $("#unityGames").width($("#unityGames").width() / 0.7296875);
-
-    gameIndex = nextContent("unityGames", "gameCaptions", gameIndex, 3, direction);
-
-    // if(gameIndex == 0)
-    //     $("#unityGames").width($("#unityGames").width() * 0.7296875);
+    sliders = [slider1, slider2, slider3];
 }
 
 function nextContent(contentParentId, captionParentId, currentIndex, numberOfItems, next){
@@ -85,19 +79,46 @@ function enableChild(id, index)
     }
 }
 
+var divSelector = new DivSelector(".svgSelectorContainer");
+
+var gameIndex = 0;
+
+function divSelectorRight()
+{
+    gameIndex = divSelector.nextDiv(true);
+    enableChild("gameCaptions", gameIndex);
+
+    console.log(gameIndex);
+}
+
+function divSelectorLeft()
+{
+    gameIndex = divSelector.nextDiv(false);
+    enableChild("gameCaptions", gameIndex);
+}
 
 
 $(document).ready(() => {
-    spawnSvgSelector();
+    gameIndex = divSelector.spawn();
+
+    //Reset the caption
+    enableChild("gameCaptions", gameIndex);
+
     createSliders();
     centerSpaceBaseImage();
-
+    
     $(window).resize();
 
-    $("#header").css("text-shadow", "4px 4px " + randomColors[ Math.floor(Math.random() * randomColors.length)] + "a6");
-    $("#subHeader").css("opacity", 1);
-    // $("#unityGames").width($("#unityGames").width() * 0.7296875);
+    headerColor = randomColors[ Math.floor(Math.random() * randomColors.length)], 60;
 
+    let root = document.documentElement;
+    
+    root.style.setProperty('--accentColor', headerColor);
+
+    $("#header").css("text-shadow", "4px 4px " + headerColor);
+    $("#subHeader").css("opacity", 1);
+
+    // spawSVGCurves();
 
     setTimeout(function(){ loadIframes(); }, 1500);
 });

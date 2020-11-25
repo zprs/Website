@@ -1,16 +1,14 @@
 .svgSelectorImg { 
-    width: 150px;
-    height: 150px;
     position: absolute;
     left: 0;
 
-    transition: left .5s, transform .5s;
+    transition: left .5s, transform .5s, opacity .5s;
 }
 
 .slideShowSwitchers:hover
 {
     color: rgb(255, 255, 255);
-    background-color: rgb(68, 155, 255);
+    background-color: var(--accentColor);
     transform: scale(1.2,1.2);
 }
 
@@ -24,22 +22,24 @@
 .slideShowSwitchers
 {
     display: inline-block;
-    width: 40px;
-    height: 40px;
-    border-radius: 25px;
+    min-width: 40px;
+    width: 60px;
+    height: 60px;
+    border-radius: 50px;
     border: none;
-    margin-top: 8px;
+    margin-top: 25px;
+    margin: 50px;
     box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.418);
 
     background-color: white;
 
     font-weight: bold;
     color: rgb(73, 73, 73);
-    font-size: 15px;
+    font-size: 4vh;
     transition: all .1s ease-in-out;
 
     position: relative;
-    order: 2;
+    z-index: 10;
 }
 
 #svgArrows{
@@ -60,4 +60,66 @@
     width: 100%;
     margin-top: 30px;
     height: 200px;
+}
+
+@media screen and (min-width: 800px) {
+    .switcherLeft
+    {
+        margin-top: 15vw !important;
+        margin-right: 30vw !important;
+    }
+
+    .switcherRight
+    {
+        margin-top: 15vw !important;
+        margin-left: 30vw !important;
+    }
+}
+
+@media screen and (min-width: 1200px) {
+    .switcherLeft
+    {
+        margin-top: 10vw !important;
+        margin-right: 25vw !important;
+    }
+
+    .switcherRight
+    {
+        margin-top: 10vw !important;
+        margin-left: 25vw !important;
+    }
+}
+
+.switcherLeft
+{
+    margin-right: 35vw;
+}
+
+.switcherRight
+{
+    margin-left: 35vw;
+}
+
+.webSwitcherLeft
+{
+    margin-left: 0vw;
+    margin-right: 2vw;
+}
+
+.webSwitcherRight
+{
+    margin-left: 2vw;
+    margin-right: 0vw;
+}
+
+@media screen and (max-width: 600px) {
+    .webSwitcherLeft
+    {
+        width: 50px;
+    }
+    
+    .webSwitcherRight
+    {
+       width: 50px;
+    }
 }

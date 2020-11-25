@@ -113,27 +113,24 @@ function generateSVG(obj)
   return svg;
 }
 
-let path1 = generateSVGPath(7, 0, 0, 200, window.innerHeight, false, true, 30);
-let path2 = generateSVGPath(4, 0, 0, 200, window.innerHeight, false, true, 30);
-let path3 = generateSVGPath(6, 0, 0, 150, window.innerHeight, false, true, 30);
+function spawSVGCurves()
+{
+  let path1 = generateSVGPath(3, 0, 0, 200, window.innerHeight, false, true, 30);
+  let path1R = generateSVGPath(2, 300, 300, 300, window.innerHeight, false, false, 30);
+  
+  document.getElementById("curvePath1").setAttribute("d", path1.svg);
+  document.getElementById("curvePath1").setAttribute("fill", headerColor);
+  
+  document.getElementById("curvePath1R").setAttribute("d", path1R.svg);
+  document.getElementById("curvePath1R").setAttribute("fill", headerColor);
+  
+  var paths = [];
+  
+  paths.push(path1);
+  paths.push(path1R);
 
-let path1R = generateSVGPath(7, 150, 150, 150, window.innerHeight, false, false, 30);
-let path2R = generateSVGPath(4, 150, 150, 150, window.innerHeight, false, false, 30);
-let path3R = generateSVGPath(8, 150, 150, 150, window.innerHeight, false, false, 30);
-
-document.getElementById("curvePath1").setAttribute("d", path1.svg);
-document.getElementById("curvePath2").setAttribute("d", path2.svg);
-document.getElementById("curvePath3").setAttribute("d", path3.svg);
-
-document.getElementById("curvePath1R").setAttribute("d", path1R.svg);
-document.getElementById("curvePath2R").setAttribute("d", path2R.svg);
-document.getElementById("curvePath3R").setAttribute("d", path3R.svg);
-
-var paths = [];
-
-paths.push(path1);
-paths.push(path2);
-paths.push(path3);
+  //requestAnimationFrame(update);
+}
 
 let intensity = 1.1;
 let t = 0;
@@ -185,5 +182,3 @@ var checkScrollSpeed = (function(settings){
       return delta;
     };
 })();
-
-requestAnimationFrame(update);

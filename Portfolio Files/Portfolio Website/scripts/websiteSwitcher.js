@@ -6,6 +6,10 @@ function nextWebsite(direction){
     websiteIndex = nextContent("webContent", "websiteCaptions", websiteIndex, 3, direction);
     $(".slideShowSwitchers").prop('disabled', true);
     
+    //Space Base Image
+    if(websiteIndex == 0)
+        centerSpaceBaseImage();
+
     setTimeout(() => $(".slideShowSwitchers").prop('disabled', false), 500);
     setTimeout(() => $("#websiteStatic").hide(), 150);
 }
@@ -13,3 +17,4 @@ function nextWebsite(direction){
 $('.webWindowContent').on("load", function() {
     setTimeout(() => $("#websiteStatic").hide(), 150);
 });
+

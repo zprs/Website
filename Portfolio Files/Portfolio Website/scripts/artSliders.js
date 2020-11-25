@@ -27,9 +27,10 @@ function stopSliders()
     });
 }
 
+function createSlider(div, rightToLeft, padding = false){
 
-function createSlider(div, rightToLeft){
-    var padding = window.innerWidth / 10;
+    if(!padding)
+        padding = window.innerWidth / 10;
 
     let direction = rightToLeft ? -1 : 1;
     var velocity = direction * 1 / 20;
