@@ -4,37 +4,75 @@ var chartctx = chartCanvas.getContext('2d');
 var barChartCanvas = document.getElementById('myBarChart')
 var barChartctx = barChartCanvas.getContext('2d');
 
-var clipCheck = document.getElementById("clipCheck");
-var lowClipSlider = document.getElementById("clipSlider");
-var sliderValue = document.getElementById("clipSliderValue");
-var clipData = true;
-var choppingNumber = 0;
+var startClipDate;
+var endClipDate;
 
 var normalizeCheck = document.getElementById("normalizeCheck");
-var normalizeSlider = document.getElementById("normalizeSlider");
 var normalizeSliderValue = document.getElementById("normalizeSliderValue");
 
 var normalizeDataCheck = true;
 var normalizeDataTo = 0;
 
+let maxValue = 0;
+let minValue = 0;
+
+let maxNumberOfPointsOnGraph = 150;
+
+let minValueChangeToMin = true;
+
 Chart.defaults.global.animation.duration = 0;
 
-lowClipSlider.oninput = function() {
-  if(selectedCountryNames.length == 0)
-    return;
-  
-  setLowClipTo(this.value);
-  updateGraph();
-}
+$(document).ready(() =>
+{
 
-normalizeSlider.oninput = function() {
-  setNormalizeDataTo(this.value);
-  updateGraph();
-}
 
-function setLowClipTo(num){
-  sliderValue.innerHTML = num;
-  choppingNumber = num;
+  // $("#slider-range").rangeslider({
+    
+  // });
+
+  startClipDate = new Date('2020.01.23');
+  endClipDate = new Date();
+
+
+  $("#normalizeSlider").slider({
+    min: 0,
+    max: 0,
+    step: 1,
+    slide: function (event, ui) {
+      setNormalizeDataTo(ui.value);
+      updateGraph();
+    },
+  });
+
+
+  $("#slider-range").slider({
+      range: true,
+      min: startClipDate.getTime(),
+      max: endClipDate.getTime(),
+      step: 86400,
+      values: [startClipDate.getTime(), endClipDate.getTime()],
+      slide: function (event, ui) {
+        startClipDate = new Date(ui.values[0]);
+        endClipDate = new Date(ui.values[1]);
+        $("#dateRangeDisplay").html((startClipDate.toDateString()) + " - " + endClipDate.toDateString());
+      },
+      change: function (event, ui) {
+        minValueChangeToMin = true;
+        updateGraph();
+      },
+      classes: {
+        "ui-rangeslider-sliders": "slider"
+      }
+  });
+
+  $("#dateRangeDisplay").html((startClipDate.toDateString()) + " - " + endClipDate.toDateString());
+});
+
+function setClipSliderEndDate(date)
+{
+  $("#slider-range").values = [startClipDate.getTime(), date.getTime()],
+  endClipDate = date;
+  $("#dateRangeDisplay").html((startClipDate.toDateString()) + " - " + date.toDateString());
 }
 
 function setNormalizeDataTo(num){
@@ -153,6 +191,16 @@ $(document).ready(function(){
         attemptCreateTree();
       }
     });
+
+    let allDates = Object.keys(dataConfirmedOrdered[Object.keys(dataConfirmedOrdered)[0]]);
+
+    
+    console.log(allDates[allDates.length - 1]);
+
+    endClipDate = new Date(parseDate(allDates[allDates.length - 1]));
+    setClipSliderEndDate(endClipDate);
+    console.log(endClipDate);
+    
   });
 
   jQuery.get('https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/csse_covid_19_time_series/time_series_covid19_confirmed_US.csv', function(data) {
@@ -513,10 +561,7 @@ function removeSelection(name){
 
   box.classList = "box" + withCaret;
 
-
-  setLowClipTo(0);
   setNormalizeDataTo(0);
-  
   updateSelectionsTree();
 }
 
@@ -531,7 +576,6 @@ function clearTree()
 {
   setSelectedCountryNames([]);
   updateGraph();
-  setLowClipTo(0);
   setNormalizeDataTo(0);
   clearCloseCurvesList();
 }
@@ -606,11 +650,9 @@ function orderPlace(objRef)
 // Graph Functionality -----------------------------------------------
 function setGraphControlsEnabled(enabled)
 {
-  clipCheck.disabled = !enabled;
-  lowClipSlider.disabled = !enabled;
-
+  $("#slider-range").prop( "disabled", !enabled );
   normalizeCheck.disabled = !enabled;
-  normalizeSlider.disabled = !enabled
+  $("#normalizeSlider").prop( "disabled", !enabled );
 }
 
 function updateGraph()
@@ -634,26 +676,6 @@ function switchNormalize(){
   var value = $("#normalizeSliderValue");
 
   if(normalizeCheck.checked)
-  {    
-    slider.show();
-    value.show();
-  }
-  else
-  {
-    slider.hide();
-    value.hide();
-  }
-
-  updateGraph();
-}
-
-function toggleClipping(){
-  clipData = clipCheck.checked;
-
-  var slider = $("#clipSlider");
-  var value = $("#clipSliderValue");
-
-  if(clipCheck.checked)
   {    
     slider.show();
     value.show();
@@ -737,25 +759,110 @@ function clickTab(evt, tabName) {
 //graphData format: [{values:[], labels:[]}, ...]
 function plot(graphData, type, isLog) {
   var datasets = [];
-  var maxValue = 0;
 
   if (graphData.length == 0)
     return;
+
+  //Clip data to date range ---------------------
+  let firstData = graphData[0];
+  let startClipDayIndex = 0;
+  let endClipDayIndex = firstData.labels.length;
+
+  for (let i = 0; i < firstData.labels.length; i++) {
+    let parsedDate = parseDate(firstData.labels[i]);
     
+    if(parsedDate <= startClipDate.getTime())
+      startClipDayIndex = i;
+
+    if(parsedDate > endClipDate.getTime())
+    {
+      endClipDayIndex = i;
+      break;
+    }
+  }
+
+  for (let i = 0; i < graphData.length; i++) {
+    const data = graphData[i];
+    // Clip the data based the start and end clip dates -----
+    data.labels = data.labels.slice(startClipDayIndex, endClipDayIndex);
+    data.values = data.values.slice(startClipDayIndex, endClipDayIndex);
+  }
+
+  //Find max and min values
+  updateMinAndMaxValues(graphData);
+
+  let percentageMax = 0.8;
+
+  if($('#normalizeSlider').slider("option", "value") < minValue || minValueChangeToMin)
+  {
+    setNormalizeDataTo(Math.floor(minValue));
+    minValueChangeToMin = false;
+  }
+  else if($('#normalizeSlider').slider("option", "value") > maxValue * percentageMax)
+    setNormalizeDataTo(Math.floor(maxValue * percentageMax));
+
+  $('#normalizeSlider').slider("option", "min", Math.floor(minValue));
+  $('#normalizeSlider').slider("option", "max", Math.floor(maxValue));
+
+  $('#normalizeSlider').slider("value", $('#normalizeSlider').slider("value"));
+
   if(normalizeDataCheck)
   {
     for (let i = 0; i < graphData.length; i++) {
       const data = graphData[i];
-
-      newNormalizedData =  normalizeData(data.values); 
+      
+      newNormalizedData = normalizeData(data.values); 
       data.values = newNormalizedData.values;
       data.normalizedTo = newNormalizedData.normalizedTo;
-      
     }
   }
 
   var futhrestLeftNonZero = graphData[0].values.length;
   var isLineGraph = graphType == "line"
+
+  // Edit the number of datapoints on the graph
+  for(let i = 0; i < graphData.length; i++)
+  {
+    let gdata = graphData[i];
+
+    let percentagePoints = 1;
+
+    if(normalizeDataCheck && gdata.labels.length > 0)
+    {
+      // Make the number of points relative to how much of the graph is used
+      let firstDate = parseDate(gdata.labels[gdata.normalizedTo]);
+      let lastDate = parseDate(gdata.labels[gdata.labels.length - 1]);
+
+      let dateDiff = lastDate - firstDate;
+      let totalDateDiff = endClipDate.getTime() - startClipDate.getTime();
+
+      percentagePoints = dateDiff / totalDateDiff;
+    }
+
+    //Cut down on on the number of points to this desired number of points
+    var numberOfAllowedDataPoints = normalizeDataCheck ? Math.round(maxNumberOfPointsOnGraph * percentagePoints) : maxNumberOfPointsOnGraph;
+    var numberOfDataPointsRemoved = 0;
+
+    if(gdata.values.length > numberOfAllowedDataPoints)
+    {
+      var numberOfPoints = gdata.values.length;
+      var removeInterval = numberOfPoints / (numberOfPoints - numberOfAllowedDataPoints);
+      
+      for(let r = numberOfPoints - 2; r > 0; r -= removeInterval)
+      {
+        let removalIndex = Math.round(r);
+
+        gdata.values.splice(removalIndex, 1);
+        gdata.labels.splice(removalIndex, 1);
+
+        numberOfDataPointsRemoved++;
+      }
+    }
+
+    console.log("removed " + numberOfDataPointsRemoved + "/" + numberOfPoints + " data points. Resulted in " + gdata.values.length + " data points left.");
+  }
+
+  // Add datasets to graph --------
 
   for (let i = 0; i < graphData.length; i++) {
     const data = graphData[i];
@@ -777,30 +884,10 @@ function plot(graphData, type, isLog) {
       newData.borderWidth = lineWidth;
     }
 
-    datasets.push(newData)
-
-    for (let x = 0; x < data.values.length; x++) {
-      const val = data.values[x];
-      if(val > maxValue)
-        maxValue = val;
-
-      if(val > choppingNumber && x < futhrestLeftNonZero)
-        futhrestLeftNonZero = x;
-    }
+    datasets.push(newData);
   }
 
-  lowClipSlider.max = Math.round(maxValue * .8);
-  normalizeSlider.max = Math.round(maxValue * .8);
-
-  if(clipData)
-  {
-  
-    for(let i = 0; i < graphData.length; i++)
-    {
-      graphData[i].labels = graphData[i].labels.slice(futhrestLeftNonZero, graphData[i].labels.length);
-      datasets[i].data = datasets[i].data.slice(futhrestLeftNonZero, datasets[i].data.length);
-    }
-  }
+  console.log(minValue + ", " + maxValue)
 
   yAxes = [{
     ticks: {
@@ -823,7 +910,7 @@ function plot(graphData, type, isLog) {
   if(!isLineGraph)
   {
     //add moving average
-    var averageInterval = 5;
+    var averageInterval = 3;
     averageDatasets = [];
 
     for(let i = 0; i < datasets.length; i++)
@@ -842,7 +929,7 @@ function plot(graphData, type, isLog) {
         {
           var average = x == 0
             ? total
-            : total / interval  
+            : Math.round(total / interval * 10) / 10  
             
           averageData.push({x: graphData[i].labels[x], y: average});
           total = 0;
@@ -915,7 +1002,6 @@ function normalizeData(data){
 }
 
 //Finding Closest Curves ---------------------------------------------
-
 
 var currentCloseTarget = "";
 
@@ -1021,8 +1107,6 @@ function clickCloseCurve(targetCountry, other) {
 }
 
 
-
-
 function logAllData(data)
 {
   var dataValues = Object.values(data);
@@ -1124,3 +1208,37 @@ Object.size = function(obj) {
   }
   return size;
 };
+
+function parseDate(date)
+{
+  let dataParams = date.split("/");
+  let formattedDate = "20" + dataParams[2] + "-" + dataParams[0] + "-" + dataParams[1];
+  return Date.parse(formattedDate) + 43200000;
+}
+
+function updateMinAndMaxValues(graphData){
+  let newMaxValue = 0;
+
+  for (let i = 0; i < graphData.length; i++) {
+    let dataValues = graphData[i].values;
+    
+    for (let x = 0; x < dataValues.length; x++) {
+      if(dataValues[x] > newMaxValue)
+      newMaxValue = dataValues[x];
+    }
+  }
+
+  let newMinValue = newMaxValue;
+
+  for (let i = 0; i < graphData.length; i++) {
+    let dataValues = graphData[i].values;
+    
+    for (let x = 0; x < dataValues.length; x++) {
+      if(dataValues[x] < newMinValue)
+      newMinValue = dataValues[x];
+    }
+  }
+
+  maxValue = newMaxValue;
+  minValue = newMinValue;
+}

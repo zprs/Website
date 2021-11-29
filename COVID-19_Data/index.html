@@ -15,12 +15,13 @@
 
     <link rel="manifest" href="manifest.json">
 
-    <!-- <script data-ad-client="ca-pub-8311935788123693" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script> -->
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.10.2/themes/smoothness/jquery-ui.css" />
+
 </head>   
 <body style="display: none">    
     <div id="chartContainer">
 
-        <h1 id="header">COVID-19 Data</h1>
+        <h1 id="header">COVID-19 Data 🦠</h1>
 
         <button id="lineTab" class="tabs activeTab" onclick="clickTab(event, 'line')">Total Cases<sub>&nbsp</sub></button>
         <button id="logLineTab" class="tabs" onclick="clickTab(event, 'logline')">Log<sub>10</sub> Total Cases</button>
@@ -30,15 +31,30 @@
         <div class="rightContainer" id="charts">
             <canvas id="myChart"></canvas>
             <canvas id="myBarChart"></canvas>
-            <label for="clipCheck" class="sliderLabel">Stretch plot to start at <p class="sliderValue" id="clipSliderValue">0</p> cases for greatest curve</label>
-            <input type="checkbox" id="clipCheck" checked="true" class="graphCheckbox" onclick="toggleClipping()">
-            <label for="clipSlider" style="display: none;">clipping slider</label>
-            <input type="range" min="0" max="100" value="0" id="clipSlider" class="slider">
+
+
+            <p>
+                <!-- <label for="amount">Date range:</label> -->
+                <p id="dateRangeDisplay" class="sliderLabel"></p>
+            </p>
+
+            
+            <div id="slider-range" class="slider">
+                <!-- <div id="slider-range-handle" class="ui-slider-handle"></div>
+                <div id="slider-range-handle" class="ui-slider-handle"></div> -->
+            </div>
+
+            <!-- <label for="clipCheck" class="sliderLabel">Stretch plot to start at <p class="sliderValue" id="clipSliderValue">0</p> cases for greatest curve</label> -->
+            <!-- <input type="checkbox" id="clipCheck" checked="true" class="graphCheckbox" onclick="toggleClipping()"> -->
+            <!-- <label for="clipSlider" style="display: none;">clipping slider</label> -->
+            <!-- <input type="range" min="0" max="100" value="0" id="clipSlider" class="slider"> -->
             <br>
             <label for="normalizeCheck" class="sliderLabel">Shift plot to start at <p class="sliderValue" id="normalizeSliderValue">0</p> cases for all curves</label>
-            <input type="checkbox" id="normalizeCheck" checked="true" class="graphCheckbox" onclick="switchNormalize()">
+            <input type="checkbox" id="normalizeCheck" checked="false" class="graphCheckbox" onclick="switchNormalize()">
             <label for="normalizeSlider" style="display: none;">normalize slider</label>
-            <input type="range" min="0" max="100" value="0" id="normalizeSlider" class="slider">
+            <div id="normalizeSlider" class="slider">
+                <!-- <div id="slider-range-handle" class="ui-slider-handle"></div> -->
+            </div>
             
             <div id="closestCurveDiv">
                 <p style="width: 100%; border-bottom: 1px solid #dedede; margin-top: 3vh"></p>
@@ -80,13 +96,19 @@
     </div> -->
     
     <div id="treeContainer">
+
+        
+
         <button id="clearSelection" onclick="clearTree()">Clear Selection</button>
         <button id="closeNav" onclick="closeNav()">X</button>
         <label for="searchBar" style="display: none;">search bar</label>
         <input type="text" placeholder="Search" id="searchBar">
         
         <div id="selectionsTree" style="display: none;"></div>
-        <div id="tree"></div>
+        <div id="tree">
+            <span class="loader"></span>
+
+        </div>
         <div id="sortedTree" style="display: none;"></div>
     </div>
 
@@ -96,5 +118,6 @@
     <script src="scripts/Chartjs/Chart.js"></script>
     <script src="scripts/PapaParse/papaparse.js"></script>
     <script src="https://code.jquery.com/jquery-3.5.0.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.10.2/jquery-ui.js"></script>
     <script src="script.js"></script>
 </html>
