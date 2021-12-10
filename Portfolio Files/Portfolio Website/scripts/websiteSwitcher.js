@@ -3,7 +3,7 @@ var websiteIndex = 0;
 function nextWebsite(direction){
     
     $("#websiteStatic").show();
-    websiteIndex = nextContent("webContent", "websiteCaptions", websiteIndex, 3, direction);
+    websiteIndex = nextContent("webContent", "websiteCaptions", websiteIndex, 4, direction);
     $(".slideShowSwitchers").prop('disabled', true);
     
     //Space Base Image

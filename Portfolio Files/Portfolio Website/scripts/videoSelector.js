@@ -48,8 +48,11 @@ function spawnVideoSelector()
 
 function nextSVG(dir)
 {
-    //dir == true -> to the right
-    //dir == false -> to the left
+    //dir == false -> to the right
+    //dir == true -> to the left
+
+
+    dir = !dir;
 
     var svgSlides = $(".svgSelectorContainer").children();
     

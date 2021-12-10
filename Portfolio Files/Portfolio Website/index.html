@@ -34,29 +34,6 @@
     <body>
     <div id="siteWrapper">
 
-        <!-- <svg style="width: 100%; height: 200vh; position: absolute; top: 100vh">
-            <path style="width: 100%; position: absolute; top: 20px" id="curvePath1" fill="#0099ff" fill-opacity=".5"></path>
-        </svg> -->
-    
-        <!-- <svg style="width: 100%; height: 100vh; position: absolute; top: 120px" xmlns="http://www.w3.org/2000/svg">
-            <path style="width: 100%;" id="curvePath2" fill="#ffe733" fill-opacity=".5"></path>
-        </svg> -->
-    
-        <!-- <svg style="width: 100%; height: 100vh; position: absolute; top: 150vh">
-            <path style="width: 100%;" id="curvePath3" fill="#ff3300" fill-opacity=".5"></path>
-        </svg> -->
-    
-        <!-- <svg style="width: 300px; height: 100vh; position: absolute; top: 150vh; right: 0px;">
-            <path style="width: 100%;" id="curvePath1R" fill="#0099ff" fill-opacity=".5"></path>
-        </svg> -->
-    
-        <!-- <svg style="width: 150px; height: 100vh; position: absolute; top: 120; right: 0px;" xmlns="http://www.w3.org/2000/svg">
-            <path style="width: 100%;" id="curvePath2R" fill="#ffe733" fill-opacity=".5"></path>
-        </svg> -->
-    
-        <!-- <svg style="width: 150px; height: 100vh; position: absolute; top: 350px; right: 0px;" xmlns="http://www.w3.org/2000/svg">
-            <path style="width: 100%;" id="curvePath3R" fill="#ff3300" fill-opacity=".5"></path>
-        </svg> -->
 
         <div class="constrainedWidth">
 
@@ -93,8 +70,8 @@
                 <div class="svgSelectorImg" id="OneGame">
                     <div id="gamesContainer">
                         <div id="unityGames">
-                            <video width="100%" height="100%" controls>
-                                <source src="videos/Ludum Dare 47 Game Jam Submission.mp4" type="video/mp4">
+                            <video width="100%" height="100%" controls preload="auto">
+                                <source src="videos/Unity Stick Fighting Game.mp4" type="video/mp4">
                             Your browser does not support the video tag.
                             </video>
                         </div> 
@@ -104,13 +81,14 @@
                 <div class="svgSelectorImg" id="OneGame">
                     <div id="gamesContainer">
                         <div id="unityGames">
-                            <video width="100%" height="100%" controls preload="auto">
-                                <source src="videos/Unity Stick Fighting Game.mp4" type="video/mp4">
+                            <video width="100%" height="100%" controls>
+                                <source src="videos/Ludum Dare 47 Game Jam Submission.mp4" type="video/mp4">
                             Your browser does not support the video tag.
                             </video>
                         </div> 
                     </div>
                 </div>
+
             </div>
         </div>
         
@@ -121,15 +99,15 @@
             
             <div style="display: none;">
                 <h2 class="websiteTitle">Other Games Developed Using Unity</h2>
-                <p class="websiteDescription">For the past five years, I have been designing and developing games in Unity. Over this time, I have taught myself to program, design three-dimensional models, create digital art, and market and distribute the games I create.</p>
+                <p class="websiteDescription">For the past little bit, I have been designing and developing games in Unity. Over this time, I have taught myself to program, design three-dimensional models, create digital art, and market and distribute the games I create.</p>
+            </div>
+            <div style="display: none;">
+                <h2 class="websiteTitle">Sticks</h2>
+                <p class="websiteDescription">All of the 3D models were created in Blender, and the visual effects and shaders were made in Unity. Cross network multiplayer is done using the Steamworks API. Reducing latency to an acceptable range while keeping the game synced between the clients was a major accomplishment of this project.</p>
             </div>
             <div>
                 <h2 class="websiteTitle">Ludum Dare 47 Game Entry</h2>
                 <p class="websiteDescription">In the Ludum Dare 47 2020 game jam we had 72 hours to create a game from scratch with the theme of, "stuck in a loop". I created all of the assets, code, and visual effects for <a href="https://zpr.itch.io/convolooption">my submission</a> during the 72 hours.</p>
-            </div>
-            <div style="display: none;">
-                <h2 class="websiteTitle">Sticks</h2>
-                <p class="websiteDescription">Planned to launch on Steam. All of the 3D models were created in Blender, and the visual effects and shaders were made in Unity. Cross network multiplayer is done using the Steamworks API. Reducing latency to an acceptable range while keeping the game synced between the clients was a major accomplishment of this project.</p>
             </div>
         </div>        
 
@@ -215,10 +193,10 @@
                 </video>
 
                 <div id="webContent">
-                    <!-- <img id="spacebaseimg" src="images/space-baseio.jpg"  alt="space-base.io screenshot"> -->
                     <iframe id="spacebaseimg" title="space-base.io" class="webWindowContent" src="https://space-base.glitch.me" frameBorder="0"></iframe>
                     <iframe id="tetris99Iframe" title="tetris99 web remake" class="webWindowContent" src="about:blank" frameBorder="0" loading="lazy"></iframe>
                     <iframe id="covidVisualization" title="covid 19 data visualization" class="webWindowContent" src="about:blank" frameBorder="0" loading="lazy"></iframe>
+                    <img id="spacebaseimg" src="images/GeoGame.gif"  alt="Geography guesser game gif">
                 </div>
             </div>
     
@@ -237,6 +215,10 @@
             <div style="display: none;">
                 <h2 class="websiteTitle"><a href="https://zacharyrichards.com/COVID-19_Data/index.html">COVID-19 Case Tracker</a></h2>
                 <p class="websiteDescription">This is an online data representation and prediction tool I wrote to interface with a COVID-19 dataset provided by Johns Hopkins University. It shows track the confirmed cases in a region over time and compares this data with other regions. My program also suggests to the user possible future outcomes by using the data from other regions. With a region selected, the user is able to click a button that finds similar curves to this region on a log base 10 scale. With this tool, it is possible to find the closest graph of cases and predict where a region may end in the future. </p>
+            </div>
+            <div style="display: none;">
+                <h2 class="websiteTitle">Country Guesser Game</h2>
+                <p class="websiteDescription">This project sprouted from my interest in learning more countries and capitals of the world. I could not find any free applications for this, so I decided to create my own. Sadly, due to Google Fusion Tables being shut down as of December 3rd, 2019, this game is not currently working.</p>
             </div>
         </div>
 
@@ -290,6 +272,10 @@
                 <span style="color:rgb(146, 51, 255)" class="logoCaption">C#</span>
             </div>
             <div class="appLogo"> 
+                <img class="logoIcon" src="logos/cpp.jpg" alt="C++ logo">
+                <span style="color:rgb(72, 128, 185)" class="logoCaption">C++</span>
+            </div>
+            <div class="appLogo"> 
                 <img class="logoIcon" src="logos/java.svg" alt="Java logo">
                 <span style="color:rgb(255, 51, 51)" class="logoCaption">Java</span>
             </div>
@@ -310,8 +296,8 @@
                 <span style="color:rgb(0, 0, 0)" class="logoCaption">jQuery</span>
             </div>
             <div class="appLogo"> 
-                <img class="logoIcon" src="logos/npm.svg" alt="NPM logo">
-                <span style="color:rgb(235, 72, 72)" class="logoCaption">NPM</span>
+                <img class="logoIcon" src="logos/nodejs.jpg" alt="Node.JS logo">
+                <span style="color:rgb(95, 182, 97)" class="logoCaption">Node.js</span>
             </div>
             <div class="appLogo"> 
                 <img class="logoIcon" src="logos/socketio.svg" alt="Socket.io logo">
