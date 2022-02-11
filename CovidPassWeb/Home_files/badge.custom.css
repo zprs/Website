@@ -1,0 +1,50 @@
+.badge-mask-language {
+    font-size: 1.2em;
+}
+
+#quarantineBadge.badge-Green {
+    /* background-color: #09847A !important; */
+}
+
+#quarantineBadge.badge-Yellow {
+    /* background-color: #FEBC11 !important; */
+}
+
+#quarantineBadge > h1 {
+    font-size: 2.25em !important;
+}
+
+.badgeStatusReason {
+    font-size: 1.5em;
+    background-color:yellow;
+    color:black
+}
+
+.studentStatus {
+    font-size: 1.9em;
+    background-color: #003660;
+    color: #FFFFFF;
+    padding: 2px 0px;
+    margiN: 2px 0px;
+}
+
+.last-tested-message
+{
+    font-size: 1.2em;
+    margin: 0.5em 0;
+}
+
+.badge-banner-sea-green {
+    background-color: #09847A;
+}
+
+.badge-banner-gold {
+    background-color: #C43424;
+}
+
+#quarantineBadge #now {
+    font-size: 2em !important;
+    color: #003660 !important; 
+    background-color: #FEBC11 !important;
+    margin-bottom: 18px !important;  
+}
