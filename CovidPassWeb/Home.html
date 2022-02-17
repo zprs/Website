@@ -16,15 +16,42 @@
     
 
     <link href="./Home_files/responsive.css" rel="stylesheet">
+    <link href="./Home_files/styles.css" rel="stylesheet">
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
 
 
 <body class="home yui-skin-sam has-badge"><div class="yui-panel-container yui-dialog yui-overlay-hidden shadow" id="dlgFamilyHistory_c" style="visibility: hidden; left: 319px; top: 309px; z-index: 4;"><div id="dlgFamilyHistory" class="yui-module yui-overlay yui-panel" style="visibility: inherit; width: 30em;"><div class="hd" style="cursor: auto;">Please enter problem details</div><div class="bd"><form id="frmFamilyHistory" method="POST" action="https://studenthealthoc.sa.ucsb.edu/assets/post.php" aria-hidden="true">	<p id="fhd_label" style="font-weight:bold;color:#0033cc"></p>	<input type="hidden" id="fhd_id" name="fhd_id" style="display:none">	<input type="hidden" id="fhd_chkid" name="fhd_chkid" style="display:none">	<input type="hidden" id="fhd_problem" name="fhd_problem" style="display:none">	<label for="fhd_relative">Relative:</label>	<select id="fhd_relative" name="fhd_relative">		<option value="-Select-">-Select-</option>		<option value="Father|FTH">Father</option>		<option value="Mother|MTH">Mother</option>		<option value="Brother|BRO">Brother</option>		<option value="Sister|SIS">Sister</option>		<option value="Son|SONC">Son</option>		<option value="Daughter|DAUC">Daughter</option>		<option value="Paternal Grandfather|PGRFTH">Paternal Grandfather</option>		<option value="Paternal Grandmother|PGRMTH">Paternal Grandmother</option>		<option value="Maternal Grandfather|MGRFTH">Maternal Grandfather</option>		<option value="Maternal Grandmother|MGRMTH">Maternal Grandmother</option>		<option value="Paternal Uncle|PUNCLE">Paternal Uncle</option>		<option value="Maternal Uncle|MUNCLE">Maternal Uncle</option>		<option value="Paternal Aunt|PAUNT">Paternal Aunt</option>		<option value="Maternal Aunt|MAUNT">Maternal Aunt</option>		<option value="Paternal Cousin|PCOUSN">Paternal Cousin</option>		<option value="Maternal Cousin|MCOUSN">Maternal Cousin</option>	</select>	<div class="clear"></div>	<label for="fhd_onset_age">Approx Age at Onset</label>	<input type="text" id="fhd_onset_age" name="fhd_onset_age" maxlength="30" autocomplete="off">	<div class="clear"></div>	<label for="fhd_outcome">Outcome</label>	<input type="text" id="fhd_outcome" name="fhd_outcome" maxlength="200" autocomplete="off">	<div class="clear"></div></form><form name="frm_dlgFamilyHistory"></form></div><div class="ft"><span class="button-group"><span id="yui-gen2" class="yui-button yui-push-button default"><span class="first-child"><button type="button" id="yui-gen2-button">Add</button></span></span><span id="yui-gen3" class="yui-button yui-push-button"><span class="first-child"><button type="button" id="yui-gen3-button">Cancel</button></span></span></span></div></div></div><iframe id="_yuiResizeMonitor" title="Text Resize Monitor" style="position: absolute; visibility: visible; width: 2em; height: 2em; top: -29px; left: 0px; border-width: 0px;" src="./Home_files/saved_resource.html"></iframe><div class="yui-panel-container yui-dialog yui-overlay-hidden shadow" id="dlgPersonalProblem_c" style="visibility: hidden; left: 319px; top: 297px; z-index: 2;"><div id="dlgPersonalProblem" class="yui-module yui-overlay yui-panel" style="visibility: inherit; width: 30em;"><div class="hd" style="cursor: auto;">Please enter problem details</div><div class="bd"><form id="frmPersonalProblem" method="POST" action="https://studenthealthoc.sa.ucsb.edu/assets/post.php" aria-hidden="true">	<p id="prd_label" style="font-weight:bold;color:#0033cc">xyz</p>	<input type="hidden" id="prd_id" name="prd_id" style="display:none">	<input type="hidden" id="prd_chkid" name="prd_chkid" style="display:none">	<input type="hidden" id="prd_problem" name="prd_problem" style="display:none">	<label for="prd_onset_date">Approx Onset Date</label>	<span class="datefield">	      <input type="text" id="prd_onset_date" name="prd_onset_date" class="date-picker" value="" maxlength="10" autocomplete="off">	      <button type="button" id="prd_onset_date_calbtn" title="Show Calendar" aria-hidden="true">		<img src="./Home_files/calbtn.gif" width="18" height="18" alt="Calendar">	      </button>	</span>	<div class="clear"></div>	<label for="prd_onset_age">Approx Age at Onset</label>	<input type="text" id="prd_onset_age" name="prd_onset_age" maxlength="30" autocomplete="off">	<div class="clear"></div>	<label for="prd_comment">Comment</label>	<input type="text" id="prd_comment" name="prd_comment" maxlength="200" autocomplete="off">	<div class="clear"></div></form><form name="frm_dlgPersonalProblem"></form></div><div class="ft"><span class="button-group"><span id="yui-gen0" class="yui-button yui-push-button default"><span class="first-child"><button type="button" id="yui-gen0-button">Add</button></span></span><span id="yui-gen1" class="yui-button yui-push-button"><span class="first-child"><button type="button" id="yui-gen1-button">Cancel</button></span></span></span></div></div></div>
   
 <link rel="stylesheet" href="./Home_files/badge.custom.css"><script>var pncIdlePeriodSec=1800;</script><script src="./Home_files/home.js"></script><!-- SCRIPTS -->
 
+<div>
+    <label>Choose ID Photo</label>
+    <input type="file" id="inputImage" name="img" accept="image/*">
+    <br>
+   
+    <label>First Name</label>
+    <input type="text" id="firstName">
+    <br>
 
+    <label>Last Name</label>
+    <input type="text" id="lastName">
 
+    <br>
 
+    <label>Pronouns</label>
+    <select name="pronouns" id="pronouns">
+        <option value="SHE/HER/HERS">SHE/HER/HERS</option>
+        <option value="HE/HIM/HIS">HE/HIM/HIS</option>
+        <option value="THEY/THEM">THEY/THEM</option>
+      </select>
+
+      <br>
+      <br>
+
+      <button onclick="genBadge()">Generate Badge</button>    
+</div>
 
 <div id="quarantineBadge" class="badge-Green">
     <div style="position: fixed; top: 0; left: 0; width: 100vw; z-index: 9999;">
@@ -40,14 +67,14 @@
             </div>
         <div class="col-xs-12">
             <h3 id="badgename" class="mb-0" style="margin-top: 4px;">
-                    <strong>RACHEL - SHE/HER/HERS FADEL</strong>
+                    <strong id="nameandpro">RACHEL - SHE/HER/HERS FADEL</strong>
             </h3>
         </div>
         <div class="col-xs-12">
             
         </div>
         <div class="col-xs-12">
-                <span>#479046</span>                
+                <span>#796943</span>                
         </div>
     </div>
     
@@ -56,24 +83,67 @@
 </div>
 
 <script>
-  var dateObj = new Date();
 
-  var hours = dateObj.getHours() % 12;
-  var mins = dateObj.getMinutes()
-  let ampm = dateObj.getHours() >= 12 ? 'PM' : 'AM';
+    $("#quarantineBadge").hide();
+    
+    function genBadge()
+    {
 
-  var month = dateObj.getUTCMonth() + 1; //months from 1-12
-  var day = dateObj.getUTCDate();
-  var year = dateObj.getUTCFullYear();
+        var pronoun = $('#pronouns').find(":selected").text();
+
+        var lastName = $("#lastName").val();
+        var firstName = $("#firstName").val();
+
+        console.log(lastName);
+
+        if(lastName != null)
+            lastName = lastName.toUpperCase();    
+        if(lastName != null)
+            firstName = firstName.toUpperCase();    
+
+        $("#nameandpro").html(firstName + " - " + pronoun + " " + lastName);
+
+        // $("#patImage").attr("src", $("#inputImage").val());
+
+        var dateObj = new Date();
+
+        var hours = dateObj.getHours() % 12;
+        var mins = dateObj.getMinutes()
+        let ampm = dateObj.getHours() >= 12 ? 'PM' : 'AM';
+
+        if(hours == 0)
+            hours = 12;
+
+        if(mins < 10)
+            mins = "0" + mins;
+
+        var month = dateObj.getUTCMonth() + 1; //months from 1-12
+        var day = dateObj.getUTCDate();
+        var year = dateObj.getUTCFullYear();
 
 
-  var nowDate = month + "/" + day + "/" + year; 
-  var tomorrowDate = month + "/" + (day + 1) + "/" + year; 
+        var nowDate = month + "/" + day + "/" + year; 
+        var tomorrowDate = month + "/" + (day + 1) + "/" + year; 
 
-  var nextDue = document.getElementById("nextDue");
+        var nextDue = document.getElementById("nextDue");
 
-  document.getElementById("now").innerHTML = nowDate + " " + hours +":" + mins + " " + ampm;
-  nextDue.innerHTML = "Next Survey Due: " + tomorrowDate + " 1:00 AM"
+        document.getElementById("now").innerHTML = nowDate + " " + hours +":" + mins + " " + ampm;
+        nextDue.innerHTML = "Next Survey Due: " + tomorrowDate + " 1:00 AM";
+        $("#quarantineBadge").show();
+    }
+
+    $('document').ready(function () {
+    $("#inputImage").change(function () {
+        if (this.files && this.files[0]) {
+            var reader = new FileReader();
+            reader.onload = function (e) {
+                $('#patImage').attr('src', e.target.result);
+            }
+            reader.readAsDataURL(this.files[0]);
+        }
+    });
+});
+
 </script>
 
 
