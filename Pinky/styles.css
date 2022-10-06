@@ -22,9 +22,10 @@ body {
     width: 50vw;
     margin: auto;
     margin-left: 25vw;
-    margin-top: 30vh;
+    margin-top: 10vh;
     filter: drop-shadow(0 10px 0.75rem rgba(0, 0, 0, 0.394));
 }
+
 
 #siteSelectorContainer
 {
