@@ -1,0 +1,117 @@
+#preheader
+{
+    margin-top: 40px;
+    width: 100%;
+    font-size: 20px;
+    text-align: center;
+    font-family: 'Work Sans', sans-serif;
+    font-weight: 400;
+    color: #696969;
+}
+
+body {
+    /* background-color: rgb(255, 194, 213); */
+    background-image: url("images/paperTexture.png");
+    overflow-y: hidden;
+    background-size: 150px 150px;
+
+}
+
+#logoTitle
+{
+    width: 50vw;
+    margin: auto;
+    margin-left: 25vw;
+    margin-top: 30vh;
+    filter: drop-shadow(0 10px 0.75rem rgba(0, 0, 0, 0.394));
+}
+
+#siteSelectorContainer
+{
+    margin-left: 10%;
+    width: 80%;
+    display: flex;
+    justify-content: space-around;
+    padding-top: 30px;
+
+}
+
+.siteSelector
+{
+    text-align: center;
+    font-family: 'Work Sans', sans-serif;
+    color: black;
+    font-weight: 500;
+}
+
+.siteSelectorImage
+{
+    height: 100px;
+    display: block;
+    filter: drop-shadow(0 0px 0.4rem rgba(0, 0, 0, 0.294));
+    padding-bottom: 20px;
+}
+
+
+.siteSelectorImage:hover
+{
+    /* padding-top: 20px; */
+    cursor: pointer;
+    scale: 1.05;
+    transition: scale 0.1s;
+
+}
+
+.siteSelectorImageContainer
+{
+    height: 120px;
+}
+
+#paperLines
+{
+    z-index: -1;
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;;
+}
+
+#paperRedLine
+{
+    width: 3px;
+    background-color: rgba(255, 0, 0, 0.361);
+    position: absolute;
+    height: calc(100% + 120px);
+    top: 0px;
+    left: 10vw;
+}
+
+#paperBlueLines
+{
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 120px;
+    left: 0;
+    background: repeating-linear-gradient(
+    to bottom,
+    #039ae55f 0px,
+    #039ae55f 3px,
+    #90caf900 3px,
+    #90caf900 40px
+  );
+}
+
+a {
+    all: unset;
+}
+
+.siteSelectorText
+{
+    background-color: white;
+    border-radius: 10px;
+    padding: 5px;
+    filter: drop-shadow(0 0px 0.2rem rgba(0, 0, 0, 0.294));
+
+}
