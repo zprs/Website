@@ -2,15 +2,18 @@ body
 {
     margin: 0px;
 
+
+
     background-size: 40px 40px;
     background-image:
-      linear-gradient(to right, rgba(128, 128, 128, 0.481) 1px, transparent 1px),
-      linear-gradient(to bottom, rgba(128, 128, 128, 0.481) 1px, transparent 1px);
+      linear-gradient(to right, #b1c9de 1px, transparent 1px),
+      linear-gradient(to bottom, #b1c9de 1px, transparent 1px);
 }
+
 
 #logoHeader
 {
-    margin-top: 20px;
+    margin-top: 25px;
     margin-left: 20px;
     width: 100px;
     filter: drop-shadow(0 0px 0.1rem rgba(0, 0, 0, 0.294));
@@ -20,7 +23,7 @@ body
 {
     position: sticky;
     top: 0;
-    z-index: 1;
+    z-index: 10;
     width: 100%;
     background-color: white;
     box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.285);
@@ -40,7 +43,6 @@ body
     margin: auto;
     margin-left: calc((100vw - (20vw + 20vh)) / 2);
     filter: drop-shadow(0 10px 0.75rem rgba(0, 0, 0, 0.394));
-    animation: float 3s infinite ease-in-out;
     transition: 0.2s;
 }
 
@@ -54,16 +56,19 @@ body
 
 #colorChangeDiv
 {
-    z-index: 110;
+    pointer-events: none;
+    z-index: 50;
     position: sticky;
     float: top;
     height: 100px;
     top: 10px;
+    animation: float 3s infinite ease-in-out;
+
 }
 
 #colorChangeDiv *
 {
-    z-index: 110;
+    z-index: 50;
     animation: hue 10s infinite linear;
 }
 
@@ -79,15 +84,12 @@ body
 
  @keyframes float {
 	0% {
-		filter: drop-shadow(0 10px 0.75rem rgba(0, 0, 0, 0.394));
 		transform: translatey(0px);
 	}
 	50% {
-		filter: drop-shadow(0 10px 0.75rem rgba(0, 0, 0, 0.15));
 		transform: translatey(-10px);
 	}
 	100% {
-		filter: drop-shadow(0 10px 0.75rem rgba(0, 0, 0, 0.394));
 		transform: translatey(0px);
 	}
 }

@@ -31,10 +31,12 @@ $(function() {
         if (document.body.scrollTop > 150 || document.documentElement.scrollTop > 150) {
             $("#pageTitle").css("width", "150px");
             $("#pageTitle").css("margin-left", "calc((100vw - (150px)) / 2)");
-            
+            $("#colorChangeDiv").css("animation", "float 3s ease-in-out");
         } else {
             $("#pageTitle").css("width","calc(20vw + 20vh)");
             $("#pageTitle").css("margin-left", "calc((100vw - (20vw + 20vh)) / 2)");
+            $("#colorChangeDiv").css("animation", " float 3s infinite ease-in-out");
+
         }
     }
 
