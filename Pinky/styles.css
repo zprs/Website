@@ -10,15 +10,32 @@
 }
 
 body {
-    /* background-color: rgb(255, 194, 213); */
     background-image: url("images/paperTexture.png");
     overflow-y: hidden;
     background-size: 150px 150px;
 
 }
 
+
+.sketchImage
+{
+    position: absolute;
+    top: -1000px;
+    left: -300px;
+    width: 300px;
+    filter: grayscale() contrast(170%) blur(3px) drop-shadow(0 0px 0.2rem rgba(0, 0, 0, 0.294));
+    /* filter: drop-shadow(0 0px 0.2rem rgba(0, 0, 0, 0.294)); */
+}
+
+.sketchImage:hover
+{
+    transition: all 0.05s ease;
+    filter: grayscale(0%) blur(3px) drop-shadow(0 0px 0.2rem rgba(0, 0, 0, 0.294));
+}
+
 #logoTitle
 {
+    z-index: 3;
     position: relative;
     width: 50vw;
     margin: auto;
@@ -36,16 +53,19 @@ body {
     justify-content: center;
     padding-top: 30px;
     flex-wrap: wrap;
-
 }
 
 .siteSelector
 {
     text-align: center;
-    font-family: 'Work Sans', sans-serif;
+    font-family: 'Poppins', sans-serif;
     color: black;
     font-weight: 500;
     margin: calc(1vw + 1vh);
+    z-index: 5;
+    filter: grayscale(100%);
+    transition: all 0.05s ease;
+
 }
 
 .siteSelectorImage
@@ -62,8 +82,8 @@ body {
 {
     /* padding-top: 20px; */
     cursor: pointer;
-    scale: 1.05;
-    transition: scale 0.1s;
+    scale: 1.1;
+    filter: grayscale(0%)
 
 }
 
@@ -79,7 +99,8 @@ body {
     height: 100%;
     position: absolute;
     top: 0;
-    left: 0;;
+    left: 0;
+    filter: blur(3px);
 }
 
 #paperRedLine
@@ -108,6 +129,18 @@ body {
   );
 }
 
+#paperGradient
+{
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    background: linear-gradient(to bottom right, rgba(245, 246, 252, 0), rgba(0, 0, 0, 0.202));
+    z-index: 1;
+    pointer-events: none;
+}
+
 a {
     all: unset;
 }
@@ -120,4 +153,5 @@ a {
     filter: drop-shadow(0 0px 0.2rem rgba(0, 0, 0, 0.294));
     width: fit-content;
     margin: auto;
+    font-weight: 600;
 }
