@@ -10,3 +10,9 @@ body
     min-width: 100%;
     min-height: 100%;
   }
+
+  .frontimg{
+    display: block; 
+    width: 50vh; 
+    margin-top: 10vh
+  }

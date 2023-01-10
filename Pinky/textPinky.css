@@ -1,0 +1,37 @@
+#stickerButton
+{
+    position: absolute;
+    bottom: 3vh;
+    left: 3vh;
+    color: white;
+    font-weight: bold;
+    padding: 10px;
+    font-size: 4vh;
+    /* font-family: 'Abril Fatface', cursive; */
+    border: 1px solid white;
+    /* background-color: white; */
+    border-radius: 2px;
+
+}
+
+
+/* #stickerButton
+{
+    position: absolute;
+    bottom: 3vh;
+    left: 3vh;
+    color: white;
+    font-weight: bold;
+    padding: 10px;
+    font-size: 5vh;;
+    background-color: black;
+    border: 3px dashed white;
+    border-radius: 4px;
+
+} */
+
+#stickerButton:hover
+{
+    text-decoration: underline;
+    cursor: pointer;
+}
