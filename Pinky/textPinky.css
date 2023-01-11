@@ -2,20 +2,19 @@ body
 {
     background-color: #280000;
     text-shadow: 3px 3px 0px rgba(0, 0, 0, 1);
-    padding: 15px;
 }
 
 #pageBorder1
 {
-    border-width: 7vh;
+    border-width: 5vh;
     border-style: solid;
     border-image: url(images/bordertest1.png) 30% round;
     /* border: 1vh solid white; */
     position: fixed;
     top: 2vh;
     left: 2vh;
-    right: 2vh;
-    bottom: 2vh;
+    width: calc(100% - 14vh);
+    height: calc(100% - 14vh);
 }
 
 #pageBorder
@@ -43,7 +42,7 @@ pre
 
 #stickerButton1
 {
-    position: absolute;
+    position: fixed;
     bottom: 3vh;
     left: 3vh;
     color: white;
@@ -106,8 +105,17 @@ pre
     cursor: pointer;
 }
 
+#tiresult
+{
+    z-index: -1;
+    margin-top: 7vh;
+    position: fixed;
+    font-size: 1vh; 
+    font-weight: bold; 
+    margin-left: -20px;
+}
 
-@media screen and (max-width: 600px) {
+@media screen and (max-width: 500px) {
     .rightSide {
        display: none;
     }
