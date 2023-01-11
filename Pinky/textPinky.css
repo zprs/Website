@@ -8,7 +8,7 @@ body
 {
     border-width: 5vh;
     border-style: solid;
-    border-image: url(images/bordertest1.png) 30% round;
+    border-image: url(images/bordertest1.png) 30% repeat;
     /* border: 1vh solid white; */
     position: fixed;
     top: 2vh;
@@ -19,6 +19,8 @@ body
 
 #pageBorder
 {
+    border-style: solid;
+    border-width: 50px;
     border: 50px solid transparent;
     border-image: linear-gradient(rgb(159, 30, 30), rgb(255, 255, 255)) 30;
     /* border: 1vh solid white; */
