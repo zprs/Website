@@ -184,7 +184,7 @@ $(document).ready(() => {
 
     headerColor = randomColors[ Math.floor(Math.random() * randomColors.length)], 60;
 
-    // drawCircles(headerColor);
+    drawCircles(headerColor);
 
     let root = document.documentElement;
     
@@ -193,7 +193,7 @@ $(document).ready(() => {
     $("#header").css("text-shadow", "4px 4px " + headerColor);
     $("#subHeader").css("opacity", 1);
 
-    // spawSVGCurves();
+    spawSVGCurves();
 
     setTimeout(function(){ loadIframes(); }, 1500);
 });
