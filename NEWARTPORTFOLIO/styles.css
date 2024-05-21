@@ -1,0 +1,259 @@
+body {
+    margin: 0px;
+    background-color: white;
+    font-family: "Montserrat", sans-serif;
+    padding: 0px;
+}
+
+.material-symbols-outlined {
+  font-variation-settings:
+  'FILL' 0,
+  'wght' 400,
+  'GRAD' 0,
+  'opsz' 24
+}
+
+.header
+{
+
+    font-optical-sizing: auto;
+    font-style: normal;
+    padding-left: 30px;
+    padding-right: 30px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    position: sticky;
+    width: calc(100vw - 60px);
+    padding-top: 15px;
+    top: 0px;
+    color: rgb(0, 0, 0);
+    z-index: 250;
+    background-color: white;
+}
+
+.headerTitle
+{
+    font-size: 20px;
+    font-weight: 600;
+    margin-right: 30px;
+}
+
+.headerLink
+{
+    font-size: 15px;
+    font-weight: 300;
+    margin-right: 20px;
+
+}
+
+.hamburgerButton
+{
+    transition: color .1s;
+    padding: 5px;
+    font-size: 20px;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+a{
+    cursor: pointer;
+    text-decoration: none; /* Remove underline */
+    color: inherit; /* Inherit color from parent */
+}
+
+/* .hamburgerButton:hover
+{
+    color: white;
+} */
+
+
+.headerImageContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+}
+
+.headerImageContainer img {
+    height: 70vh;
+    margin-top: 4vh;
+}
+
+.blackBackground
+{
+    width: 100vw;
+    margin: 0px;
+    background-color: black;
+    display: inline-block;
+    overflow: hidden;
+    white-space: nowrap;
+    border-right: 5px solid black;
+    padding-bottom: 10px;
+    position: relative;
+}
+
+.noise
+{
+    position: absolute;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+.mf-cursor
+{
+    mix-blend-mode: difference;
+    color: white;
+}
+
+
+canvas {
+    position: fixed;
+    top: 0px;
+    left: 0px;
+    display: block;
+    width: 100%;
+    height: 100%;
+    mix-blend-mode: difference;
+}
+
+
+/* Falling Section */
+
+.falling
+{
+    position: relative;
+    width: 50vw;
+    margin: 0px;
+    margin-left: 25vw;
+    margin-top: 0px;
+    margin-bottom: 0px;
+    display: inline;
+}
+
+.drips
+{
+    position: relative;
+    margin-top: -10px;
+    margin-right: -5px;
+}
+
+
+/* Portfolio Images */
+
+.portfolio-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 20px;
+}
+.portfolio-item {
+    display: flex;
+    width: 80%;
+    margin: 20px 0;
+    padding-bottom: 20px;
+}
+.portfolio-item:nth-child(odd) {
+    flex-direction: row-reverse;
+}
+.portfolio-image {
+    flex: 1;
+    padding: 10px;
+    filter: grayscale();
+    transition: filter .25s;
+
+}
+
+.portfolio-image img {
+    width: calc(100% - 80px);
+    height: auto;
+    display: block;
+    border-radius: 10px;
+    margin-left: 40px;
+    margin-right: 40px;
+}
+
+.portfolio-image:hover
+{
+    filter: none;
+}
+
+.portfolio-details {
+    flex: 1;
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.portfolio-title {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 1.8em;
+    margin: 10px 0;
+}
+
+.portfolio-subtitle {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 1em;
+    margin: 5px 0;
+    color: #555555;
+}
+
+.portfolio-description {
+    font-size: 1em;
+    margin: 10px 0;
+    line-height: 1.5;
+}
+
+#profilePicture
+{
+    width: 40vh;
+    height: 40vh;
+    border-radius: calc(25vh + 10px);
+    border: 20px solid white;
+    margin-left: calc(50% - 20vh - 10px );
+    margin-bottom: 5vh;
+    outline-offset: -22px;
+    outline: 5px solid white;
+}
+
+.centered-div {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    width: 100vw; /* Full width of the viewport */
+}
+
+footer {
+    background-color: #000000;
+    color: white;
+    padding: 10px 0;
+    text-align: center;
+}
+
+.checkerboard {
+    width: 100%;
+    height: 100%;
+    background-image: 
+        linear-gradient(45deg, #000 25%, transparent 25%, transparent 75%, #000 75%, #000),
+        linear-gradient(45deg, #000 25%, transparent 25%, transparent 75%, #000 75%, #000);
+    background-size: 150px 150px;
+    background-position: 0 0, 75px 75px;
+}
+
+.socialButtons
+{
+    width: 60px;
+    height: 60px;
+    border-radius: 40px;
+    background-color: white;
+    overflow: hidden;
+}
+
+.socialButtons img
+{
+    margin: 10px;
+    width: 40px;
+}

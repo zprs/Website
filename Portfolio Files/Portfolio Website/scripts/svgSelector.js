@@ -1,61 +1,49 @@
 // var svgLocations = ["VectorArt/bonsai.svg", "VectorArt/sword1.svg","VectorArt/Scroll.svg", "VectorArt/potion.svg","VectorArt/axe.svg"];
+var slidePositions = [];
+var slideScales = [];
 
-var svgPositions = [];
-var svgScales = [];
-
-function destroySVgSelector() {
+function destroySlideSelector() {
     // $(".svgSelectorContainer").html("");
 }
 
-function spawnSvgSelector()
+function spawnSlideSelector()
 {
-    svgPositions = [];
-    svgScales = [];
+    slidePositions = [];
+    slideScales = [];
 
-    var imagesOnScreen = 3;
-
-    // var slidesHTML = "";
-
-    // for (let i = 0; i < imagesOnScreen + 2; i++) {
-    //     slidesHTML += `<img class="svgSelectorImg" src="${svgLocations[i]}" alt="vector art image ${i}">`
-    // }
-
-    // $(".svgSelectorContainer").html(slidesHTML);
-
-    var svgSlides = $(".svgSelectorContainer").children();
-
-    var width =  $(".svgSelectorContainer").width();
-    var seperationFactor = width / (imagesOnScreen + 1);
-    var imageWidth = $(svgSlides[0]).width();
+    var slidesOnScreen = 3;
+    var slides = $(".slideSelectorContainer").children();
+    var width =  $(".slideSelectorContainer").width();
+    var seperationFactor = width / (slidesOnScreen + 1);
+    var slideWidth = $(slides[0]).width();
 
     var edgePadding = 20;
 
     
-    for (let i = 0; i < imagesOnScreen + 2; i++) {
-
-        var posX = -imageWidth - edgePadding;
+    for (let i = 0; i < slidesOnScreen + 2; i++) {
+        var posX = -slideWidth - edgePadding;
 
         if(i == 0)
-            posX = -imageWidth - edgePadding;
+            posX = -slideWidth - edgePadding;
 
         if( i == 0)
-            posX = -imageWidth - edgePadding;
-        else if(i > 0 && i < imagesOnScreen + 1)
-            posX = seperationFactor * i - (imageWidth / 2);
+            posX = -slideWidth - edgePadding;
+        else if(i > 0 && i < slidesOnScreen + 1)
+            posX = seperationFactor * i - (slideWidth / 2);
         else
             posX = width + edgePadding;
 
-        svgPositions.push(posX);
+        slidePositions.push(posX);
 
-        var centerX = posX + imageWidth / 2;
+        var centerX = posX + slideWidth / 2;
         var ceterPos = width / 2;
         var distanceToCenter = Math.abs(ceterPos - centerX)
-        var furthestDistance = width / 2 + imageWidth + edgePadding;
+        var furthestDistance = width / 2 + slideWidth + edgePadding;
         var scale = (furthestDistance - distanceToCenter) / furthestDistance * 1.2;
-        svgScales.push(scale);
+        slideScales.push(scale);
 
-        $(svgSlides[i]).css("transform", `scale(${scale}, ${scale})`);
-        $(svgSlides[i]).css("left", posX + "px");
+        $(slides[i]).css("transform", `scale(${scale}, ${scale})`);
+        $(slides[i]).css("left", posX + "px");
     }
 }
 
@@ -64,29 +52,29 @@ function nextSVG(dir)
     //dir == true -> to the right
     //dir == false -> to the left
 
-    var svgSlides = $(".svgSelectorContainer").children();
+    var slides = $(".svgSelectorContainer").children();
     
-    for (let i = 0; i < svgSlides.length; i++) {
-        const slide = svgSlides[i];
+    for (let i = 0; i < slides.length; i++) {
+        const slide = slides[i];
 
         var nextPosition;
         
         if(dir)
-            nextPosition = (i + 1) % svgPositions.length;
+            nextPosition = (i + 1) % slidePositions.length;
         else
         {
             if(i == 0)
-                nextPosition = svgPositions.length - 1;
+                nextPosition = slidePositions.length - 1;
             else
                 nextPosition = i - 1;
         }
 
-        $(slide).css("left", svgPositions[nextPosition] + "px");
-        $(slide).css("transform", `scale(${svgScales[nextPosition]}, ${svgScales[nextPosition]})`);
+        $(slide).css("left", slidePositions[nextPosition] + "px");
+        $(slide).css("transform", `scale(${slideScales[nextPosition]}, ${slideScales[nextPosition]})`);
     }
 
     if(dir)
-        $(svgSlides[svgSlides.length - 1]).prependTo(".svgSelectorContainer");
+        $(slides[slides.length - 1]).prependTo(".svgSelectorContainer");
     else
-        $(svgSlides[0]).appendTo(".svgSelectorContainer");
+        $(slides[0]).appendTo(".svgSelectorContainer");
 }

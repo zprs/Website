@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portfolio</title>
+    <link rel="stylesheet" href="styles.css">
+    
+    <link rel="stylesheet" href="https://unpkg.com/mouse-follower@1/dist/mouse-follower.min.css">
+    <script src="https://unpkg.com/mouse-follower@1/dist/mouse-follower.min.js"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.10.4/gsap.min.js"></script>
+    <script src="https://unpkg.com/mouse-follower@1/dist/mouse-follower.min.js"></script>
+
+    <script src="https://code.jquery.com/jquery-3.7.1.slim.min.js" integrity="sha256-kmHvs0B+OpCW5GVHUNjv9rOmY0IvSIRcf7zGUDTDQM8=" crossorigin="anonymous"></script>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+
+</head>
+<body>
+
+    <div style="height: 10px"></div>
+    <div class="header">
+        <div>
+            <a class="headerTitle">Portfolio</a>
+            <a data-cursor-stick data-cursor-icon="arrow" class="headerLink" style="text-decoration: underline" href="index.html">Art</a>
+            <a data-cursor-stick data-cursor-icon="arrow" class="headerLink">Development</a>
+            <a data-cursor-stick data-cursor-icon="arrow" class="headerLink" href="aboutme.html">About</a>
+        </div>
+
+        <div data-cursor-stick data-cursor-icon="arrow" class="hamburgerButton"><span class="material-symbols-outlined">menu</span></div>
+    </div>
+
+    <!-- <div style="width: 100%; height: 2px; position: sticky; top: 53px; mix-blend-mode: difference;"></div> -->
+
+    <!-- <canvas id="canvas"></canvas> -->
+
+    <div style="position: absolute; width: 100%; top: 35vh;" class="centered-div">
+        <img src="images/logotrans.png" style="position: absolute; top: 0px; width: 80vw; mix-blend-mode: difference; z-index: 200; filter: invert();">
+
+        <!-- <img src="images/logotrans.png" style="position: absolute; top: 0px; width: 80vw; mix-blend-mode: difference; z-index: 200; filter: invert(); border: 20px solid white;"> -->
+        <!-- <img src="images/logotrans.png" style="position: absolute; width: 80vw; left: 10vw; top: 35vh; mix-blend-mode: difference; z-index: 200; filter: invert(); border: 20px solid white"> -->
+        <!-- <img src="images/logotrans.png" style="position: absolute; width: 80vw; left: 10vw; top: 35vh; mix-blend-mode: difference; z-index: 200; filter: invert(); border: 25px solid black"> -->
+        <!-- <img src="images/logotrans.png" style="position: absolute; width: 80vw; left: 10vw; top: 35vh; mix-blend-mode: difference; z-index: 200; filter: invert();"> -->
+    </div>
+
+
+    
+
+    <div class="headerImageContainer" style="margin-top: 50px; margin-bottom: -2px;">
+        <img src="images/suit.svg" class="suitLady">
+    </div>  
+    <!-- <div style="opacity: 0; margin-top: -24px; padding-bottom: 2px; line-height: 20px; padding-right: 20px; font-weight: 600; width: calc(100% - 3px); text-align: right;">🖤</div> -->
+    <div class="blackBackground">
+        <div style="margin-top: -50px; color: black; font-size: 15px; margin-left: 20px">
+            Zach Richard's Artist Portfolio
+            <!-- <br> -->
+            <!-- <img src="images/downArrow.png" style="width: 20px; filter: invert(); margin-top: 10px"> -->
+        </div>
+        <img class="falling" id="falling1" src="images/door.png" alt="Centered Image">
+        <img class="falling" id="falling2" src="images/falling.png" style="margin-left: -50vw">
+        <img class="noise" src="images/noise.png">
+        <div class="centered-div">
+            <div style="width: fit-content; text-align: center; color: white; margin-bottom: 50px; border: 1px solid white; padding: 20px; line-height: 40px; font-size: 1.5em; margin-top: -10vw; vertical-align: middle;">
+                Exodus
+                <br>
+                <p style="font-size: 50%;">10 - 12 - 23</p>
+            </div>
+        </div>
+        <!-- <p style="color: white">SOMETHING</p> -->
+    </div>
+    
+    <div class="drips">
+        <img src="images/drips.svg">
+    </div>
+    <!-- <img src="images/2color.jpeg" style="width: calc(100vw + 5px);"> -->
+
+
+    <!-- <div class="headerImageContainer" style="margin-top: 20px">
+        <img src="images/mouth.png" alt="Centered Image" style="height: 80vh">
+    </div> -->
+
+
+    <!-- <div style="width: 100%; text-align: center; font-weight: bold; margin-top: 50px; font-size: 150px;">Art Portfolio</div> -->
+
+    <div class="portfolio-container">
+        <div class="portfolio-item">
+            <div class="portfolio-image">
+                <img src="images/2color.jpeg" alt="Artwork 1">
+            </div>
+            <div class="portfolio-details">
+                <div class="portfolio-title">Artwork Title 1</div>
+                <div class="portfolio-subtitle">January 1, 2024</div>
+                <div class="portfolio-description">
+                    This is a brief description of Artwork 1. It explains the concept and the inspiration behind the work.
+                </div>
+            </div>
+        </div>
+        <div class="portfolio-item">
+            <div class="portfolio-image">
+                <img src="images/frame.png" alt="Artwork 2">
+            </div>
+            <div class="portfolio-details">
+                <div class="portfolio-title">Artwork Title 2</div>
+                <div class="portfolio-subtitle">February 1, 2024</div>
+                <div class="portfolio-description">
+                    This is a brief description of Artwork 2. It explains the concept and the inspiration behind the work.
+                </div>
+            </div>
+        </div>
+        <div class="portfolio-item">
+            <div class="portfolio-image">
+                <img src="images/mouth.png" alt="Artwork 2">
+            </div>
+            <div class="portfolio-details">
+                <div class="portfolio-title">Artwork Title 2</div>
+                <div class="portfolio-subtitle">February 1, 2024</div>
+                <div class="portfolio-description">
+                    This is a brief description of Artwork 2. It explains the concept and the inspiration behind the work.
+                </div>
+            </div>
+        </div>
+        <div class="portfolio-item">
+            <div class="portfolio-image">
+                <img src="images/peicesSquare.png" alt="Artwork 2">
+            </div>
+            <div class="portfolio-details">
+                <div class="portfolio-title">Artwork Title 2</div>
+                <div class="portfolio-subtitle">February 1, 2024</div>
+                <div class="portfolio-description">
+                    This is a brief description of Artwork 2. It explains the concept and the inspiration behind the work.
+                </div>
+            </div>
+        </div>
+        <div class="portfolio-item">
+            <div class="portfolio-image">
+                <img src="images/StopThinking.png" alt="Artwork 2">
+            </div>
+            <div class="portfolio-details">
+                <div class="portfolio-title">Artwork Title 2</div>
+                <div class="portfolio-subtitle">February 1, 2024</div>
+                <div class="portfolio-description">
+                    This is a brief description of Artwork 2. It explains the concept and the inspiration behind the work.
+                </div>
+            </div>
+        </div>
+
+        <div class="portfolio-item">
+            <div class="portfolio-image">
+                <img src="images/Hair.PNG" alt="Artwork 2">
+            </div>
+            <div class="portfolio-details">
+                <div class="portfolio-title">Artwork Title 2</div>
+                <div class="portfolio-subtitle">February 1, 2024</div>
+                <div class="portfolio-description">
+                    This is a brief description of Artwork 2. It explains the concept and the inspiration behind the work.
+                </div>
+            </div>
+        </div>
+
+        <div class="portfolio-item">
+            <div class="portfolio-image">
+                <img src="images/glitchgirl.png" alt="Artwork 2">
+            </div>
+            <div class="portfolio-details">
+                <div class="portfolio-title">Artwork Title 2</div>
+                <div class="portfolio-subtitle">February 1, 2024</div>
+                <div class="portfolio-description">
+                    This is a brief description of Artwork 2. It explains the concept and the inspiration behind the work.
+                </div>
+            </div>
+        </div>
+
+        <div class="portfolio-item">
+            <div class="portfolio-image">
+                <img src="images/keychain.png" alt="Artwork 2">
+            </div>
+            <div class="portfolio-details">
+                <div class="portfolio-title">Artwork Title 2</div>
+                <div class="portfolio-subtitle">February 1, 2024</div>
+                <div class="portfolio-description">
+                    This is a brief description of Artwork 2. It explains the concept and the inspiration behind the work.
+                </div>
+            </div>
+        </div>
+
+        <div class="portfolio-item">
+            <div class="portfolio-image">
+                <img src="images/skateboard.png" alt="Artwork 2">
+            </div>
+            <div class="portfolio-details">
+                <div class="portfolio-title">Artwork Title 2</div>
+                <div class="portfolio-subtitle">February 1, 2024</div>
+                <div class="portfolio-description">
+                    This is a brief description of Artwork 2. It explains the concept and the inspiration behind the work.
+                </div>
+            </div>
+        </div>
+
+        <!-- Add more portfolio items as needed -->
+        </div>
+
+
+
+        <footer>
+            <div class="centered-element">
+              <!-- Content inside this div will be centered within the footer -->
+              <a href="https://zacharyrichards.com">zacharyrichards.com</a>
+            </div>
+          </footer>
+
+    <script src="script.js"></script>
+
+    <!-- <script src="TestBoids/index.js"></script> -->
+</body>
+</html>
